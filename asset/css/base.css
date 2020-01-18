@@ -1,0 +1,21 @@
+* {
+  font-family:"IRAN-Sans-Light_0";
+}
+.tac{
+  text-align: center;
+}
+
+.ltr{direction: ltr;}
+@font-face {
+  font-family: "IRAN-Sans-Light_0";
+  src:url('../font/IRAN-Sans-Light_0.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
