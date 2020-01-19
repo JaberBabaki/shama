@@ -21,6 +21,8 @@ class UserCommonController {
     }
   }
 
+  
+
   public function register() {
     if (isset($_POST['email'])) {
       $this->registerCheck();

@@ -1,4 +1,38 @@
-<section id="loginForm" class="block-wrapper pt-0">
+<script src="/asset/js/sweetalert2/sweetalert2.js"></script>
+<script>
+  function checkEmail() {
+    var emailData = document.forms["myForm"]["email"].value;
+    var passwordData = document.forms["myForm"]["password"].value;
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (emailData.length <= 7 && emailData.length >= 1) {
+      $("#valid_email").css({"display": "block", "color": "red"});
+      $("#valid_email").text("ایمیل وارد شده صحیح نیست");
+      return false;
+    } else if (emailData.length == 0) {
+      $("#valid_email").css({"display": "block", "color": "red"});
+      $("#valid_email").text("لطفا ایمیل را وارد کنید");
+      return false;
+    } else {
+      if (reg.test(emailData) == false) {
+        $("#valid_email").css({"display": "block", "color": "red"});
+        $("#valid_email").text("ایمیل وارد شده صحیح نیست");
+        return false;
+      } else {
+        $("#valid_email").css({"display": "none"});
+        $("#valid_email").text("");
+        return true;
+      }
+    }
+  }
+
+ function loginfrm(){
+  return  Swal.mixin({       
+      html: $("#loginForm").html(),
+    });
+  }
+
+</script> 
+<section style="display: none;" id="loginForm" class="block-wrapper pt-0">
   <div class="container">
     <div class="wrap-login100">
       <div class="login100-pic js-tilt" data-tilt>
@@ -41,31 +75,4 @@
     </div>
   </div>
 </section>
-<script src="/asset/js/sweetalert2/sweetalert2.js"></script>
-<script>
-  function checkEmail() {
-    var emailData = document.forms["myForm"]["email"].value;
-    var passwordData = document.forms["myForm"]["password"].value;
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    if (emailData.length <= 7 && emailData.length >= 1) {
-      $("#valid_email").css({"display": "block", "color": "red"});
-      $("#valid_email").text("ایمیل وارد شده صحیح نیست");
-      return false;
-    } else if (emailData.length == 0) {
-      $("#valid_email").css({"display": "block", "color": "red"});
-      $("#valid_email").text("لطفا ایمیل را وارد کنید");
-      return false;
-    } else {
-      if (reg.test(emailData) == false) {
-        $("#valid_email").css({"display": "block", "color": "red"});
-        $("#valid_email").text("ایمیل وارد شده صحیح نیست");
-        return false;
-      } else {
-        $("#valid_email").css({"display": "none"});
-        $("#valid_email").text("");
-        return true;
-      }
-    }
-  }
 
-</script>
