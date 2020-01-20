@@ -22,7 +22,18 @@
   <script src="/asset/js/navigation.js"></script>
   <script src="/asset/js/bootstrap.min.js"></script>
 
-  
+
+
+<script src="asset/js/loginDialog/mdb.min.js"></script>
+<script src="asset/js/loginDialog/popper.min.js"></script>
+
+
+<script src="/home/ali/project/web/shama/shama/asset/js/loginDialog/mdb.min.js"></script>
+<script src="/home/ali/project/web/shama/shama/asset/js/loginDialog/popper.min.js"></script>
+<link rel="stylesheet" href="/home/ali/project/web/shama/shama/asset/css/loginDialog/mdb.min.css">
+<!-- Your custom styles (optional) -->
+<link rel="stylesheet" href="/home/ali/project/web/shama/shama/asset/css/loginDialog/style.css">
+<link rel="stylesheet" href="/home/ali/project/web/shama/shama/asset/css/loginDialog/all.css">
 
 </head>
 

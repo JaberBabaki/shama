@@ -41,7 +41,6 @@
     </div>
   </div>
 </section>
-<script src="/asset/js/sweetalert2/sweetalert2.js"></script>
 <script>
   function checkEmail() {
     var emailData = document.forms["myForm"]["email"].value;

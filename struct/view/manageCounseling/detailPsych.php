@@ -1,5 +1,10 @@
+
+
+
 <link rel="stylesheet" href="/asset/css/appointment.css">
 <link rel="stylesheet" href="/asset/css/sweetalert2/sweetalert2.css">
+
+    
 
 <div class="row" style="height: 514px">
   <div class="col-lg-4 ts-grid-box" style="margin:10px 63px 0 0">
@@ -20,7 +25,7 @@
                 <?php endif; ?>
                 <?php if($nextAvailable!=null): ?>
                   <span class="next-available-title">نزدیکترین نوبت قابل رزرو</span>
-                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>">
+                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>" href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">
                         
                         <span><?=$nextAvailable[1]?> </span>
                         
@@ -83,10 +88,7 @@
         </div>
     </div>
   </div>
-  <?php 
-  $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-  include "$doc_root/struct/view/user/loginDialog.php";
-  ?>
+
   
       <!-- /basic datatable -->
 <script>
@@ -127,4 +129,9 @@
   // }
 
 </script>
+
 </div>
+<?php 
+$doc_root = $_SERVER["DOCUMENT_ROOT"]; 
+include "$doc_root/struct/view/user/loginDialog.php";  
+?>
