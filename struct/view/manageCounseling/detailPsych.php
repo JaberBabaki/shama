@@ -25,7 +25,7 @@
                 <?php endif; ?>
                 <?php if($nextAvailable!=null): ?>
                   <span class="next-available-title">نزدیکترین نوبت قابل رزرو</span>
-                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>" href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">
+                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>" data-toggle="modal" data-target="#modalLRForm">
                         
                         <span><?=$nextAvailable[1]?> </span>
                         
