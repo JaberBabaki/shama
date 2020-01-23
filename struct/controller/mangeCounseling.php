@@ -67,7 +67,9 @@ class MangeCounselingController {
   
   function bookAppointment(){
     $calendar_id = $_POST['calendar_id'];
-    User3Model::bookAppointment($calendar_id);
+    $paymentMode = $_POST['paymentMode'];
+    $user_id = $_SESSION['user_id']; 
+    User3Model::bookAppointment($calendar_id, $paymentMode, $user_id);
     $response = [];
     $response['Status'] = true;
     $response['Error'] = [];
@@ -76,5 +78,13 @@ class MangeCounselingController {
     echo json_encode($response);
     exit;
 
+  }
+
+  function appointmentInfo(){
+    $calendar_id = $_POST['calendar_id'];
+    $result = User3Model::getCalendarId($calendar_id);
+    $result['Status'] = true;
+    echo json_encode($result);
+    exit;
   }
 }

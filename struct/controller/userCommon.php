@@ -24,9 +24,6 @@ class UserCommonController {
   public function loginDialog() {
     if (isset($_POST['email'])) {
       $this->loginCheckDialog();
-    } else {
-
-      $this->loginForm();
     }
   }
   
@@ -160,6 +157,7 @@ class UserCommonController {
     if ($record['password'] == $hashesPass) {
       $_SESSION['email'] = $email;
       $_SESSION['access'] = $record['access'];
+      $_SESSION['user_id'] = $record['user_id'];
       $data[] = array();
       echo json_encode($data);
       exit;

@@ -140,14 +140,50 @@ public static function listCalendarOfPsych($shenaseh, $conceil_id, $date, $time)
   return $record;
 }
 
-public static function bookAppointment($calendar_id){
+public static function bookAppointment($calendar_id, $paymentMode, $user_id){
   $db = Db::getInstance();
   $db->insert("
             UPDATE s_calender_psych
             SET 
-              appointment = 1
+              appointment = $paymentMode,
+              user_id = $user_id
             WHERE
               calender_id=$calendar_id
               ");
 }
+
+public static function getCalendarId($calendar_id){
+  $db = Db::getInstance();
+  $record = $db->query( "
+                        SELECT 
+                          *
+                        FROM
+                          s_calender_psych
+                        WHERE
+                          calender_id=$calendar_id
+  ");
+  $shenaseh = $record["psychShenaseh"];
+  $conselling_id = $record["conseling_id"];
+  $record = $db->query( "
+                        SELECT 
+                          *
+                        FROM
+                          s_counseling_center
+                        WHERE
+                          conceil_id=$conselling_id
+  ");
+  $result = [];
+  $result["consellingName"] = $record["consellingName"];
+  $record = $db->query( "
+                        SELECT 
+                          *
+                        FROM
+                          s_psych
+                        WHERE
+                          shenaseh=$shenaseh
+  ");
+  $result["psychName"] = $record["psychName"];
+  return $result;
+}
+
 }

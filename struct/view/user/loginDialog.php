@@ -141,7 +141,7 @@
     <div class="modal-content"> 
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs">
-      <div class="verify-title">شما برای دکتر علی زمانی در درمانگاه مدت از ساعت ۱۷:۰۰ تا ۱۸:۰۰ دخواست نوبت کرده اید</div>
+      <div class="verify-title" id="appointmentText"></div>
       <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBtn">
         <li style="position: fixed; right: 65px">
           <div class="container-login100-form-btn" >
@@ -202,7 +202,27 @@
 <script>
 $(document).ready(function(){
   $("#next-available").click(function(){
+    var calendar_id = document.getElementById('next-available').getAttribute('value');
+    var formData = new FormData();
+    formData.append('calendar_id', calendar_id);
+    var baseURL = "<?php echo baseUrl(); ?>";
+    $.ajax({
+      url: baseURL+'/mangeCounseling/appointmentInfo',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+        var json = result;
+        if ((json.Status == true)) {
+            var consellingName = json.consellingName;
+            var psychName = json.psychName;
+        }
+      }
+    });
     $("#modalLogReg").modal("show");
+    $("#appointmentText").html('شما برای دکتر علی زمانی در درمانگاه مدت از ساعت ۱۷:۰۰ تا ۱۸:۰۰ دخواست نوبت کرده اید')
   });
 });
 </script>
@@ -235,11 +255,11 @@ $(document).ready(function(){
       }
     }
 
-    if (passData.length <= 8 && passData.length >= 1) {
+    if (passwordData.length <= 8 && passwordData.length >= 1) {
       $('#valid_pass').css({'display': 'block', 'color': 'red'});
       $('#valid_pass').text('رمز عبور وارد شده باید بیش از ۸ کاراکتر باشد');
       status = false;
-    } else if (passData.length == 0) {
+    } else if (passwordData.length == 0) {
       $('#valid_pass').css({'display': 'block', 'color': 'red'});
       $('#valid_pass').text('لطفا رمز عبور را وارد کنید');
       status = false;
@@ -263,7 +283,6 @@ $(document).ready(function(){
         success: function (result) {
           var json = result;
           if ((json.status == true)) {
-           // alert('ali3333');
               $("#modalLRForm").modal("hide");
               Swal.fire(
              'Good job!',
@@ -309,6 +328,7 @@ $(document).ready(function(){
                 var formData = new FormData();
                 var calendar_id = document.getElementById('next-available').getAttribute('value');
                 formData.append('calendar_id', calendar_id);
+                formData.append('paymentMode', 1);
                 $.ajax({
                   url: baseURL+'/mangeCounseling/bookAppointment',
                   type: 'POST',
@@ -336,6 +356,7 @@ $(document).ready(function(){
                 var formData = new FormData();
                 var calendar_id = document.getElementById('next-available').getAttribute('value');
                 formData.append('calendar_id', calendar_id);
+                formData.append('paymentMode', 2);
                 $.ajax({
                   url: baseURL+'/mangeCounseling/bookAppointment',
                   type: 'POST',
@@ -349,7 +370,7 @@ $(document).ready(function(){
                       Swal.fire({
                         type: 'success',
                         position: 'top',
-                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="onlinePay">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="offlinePay">رزور مجدد</button></div></li></ul></div>',
+                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="loginPanel">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="bookAgain">رزور مجدد</button></div></li></ul></div>',
                         showConfirmButton: false,
                       })
                     }
@@ -357,7 +378,6 @@ $(document).ready(function(){
                 });
 
               });
-
           
           } 
         }
@@ -440,8 +460,9 @@ $(document).ready(function(){
                 position: 'top',
                 html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">شما با موفقیت در سامانه ثبت نام شدید</div><div style="font-size: 15px">از قسمت ورود وارد حساب خود شوید</div>',
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 3000,
               });
+
               //$("#modalLogReg").show();
             }else{
               if(json.Error.code==100){
