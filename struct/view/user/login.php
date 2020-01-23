@@ -1,6 +1,5 @@
-
-<section class='block-wrapper pt-0'>
-  <div class='container'>
+<section id="loginForm" class="block-wrapper pt-0">
+  <div class="container">
     <div class="wrap-login100">
       <div class="login100-pic js-tilt" data-tilt>
         <img src="/asset/image/logo/login.png" alt="IMG">
@@ -14,8 +13,7 @@
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 							</span>
         </div>
-        <sapn style="display: none" class="form-validation" id="valid_email"
-        "></sapn>
+        <sapn style="display: none" class="form-validation" id="valid_email"></sapn>
         <div class="wrap-input100 validate-input" data-validate="لطفا رمز عبور را وارد کنید!">
           <input class="input100" type="password" name="password" placeholder="رمز عبور">
           <span class="focus-input100"></span>
@@ -48,23 +46,24 @@
     var passwordData = document.forms["myForm"]["password"].value;
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     if (emailData.length <= 7 && emailData.length >= 1) {
-      $('#valid_email').css({'display': 'block', 'color': 'red'});
-      $('#valid_email').text('ایمیل وارد شده صحیح نیست');
+      $("#valid_email").css({"display": "block", "color": "red"});
+      $("#valid_email").text("ایمیل وارد شده صحیح نیست");
       return false;
     } else if (emailData.length == 0) {
-      $('#valid_email').css({'display': 'block', 'color': 'red'});
-      $('#valid_email').text('لطفا ایمیل را وارد کنید');
+      $("#valid_email").css({"display": "block", "color": "red"});
+      $("#valid_email").text("لطفا ایمیل را وارد کنید");
       return false;
     } else {
       if (reg.test(emailData) == false) {
-        $('#valid_email').css({'display': 'block', 'color': 'red'});
-        $('#valid_email').text('ایمیل وارد شده صحیح نیست');
+        $("#valid_email").css({"display": "block", "color": "red"});
+        $("#valid_email").text("ایمیل وارد شده صحیح نیست");
         return false;
       } else {
-        $('#valid_email').css({'display': 'none'});
-        $('#valid_email').text('');
+        $("#valid_email").css({"display": "none"});
+        $("#valid_email").text("");
         return true;
       }
     }
   }
+
 </script>

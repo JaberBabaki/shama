@@ -21,6 +21,16 @@ class UserCommonController {
     }
   }
 
+  public function loginDialog() {
+    if (isset($_POST['email'])) {
+      $this->loginCheckDialog();
+    } else {
+
+      $this->loginForm();
+    }
+  }
+  
+
   public function register() {
     if (isset($_POST['email'])) {
       $this->registerCheck();
@@ -128,6 +138,43 @@ class UserCommonController {
     $data['btnLable'] = 'ورود';
     message('success', $data, true);
     //View::render('message/success.php', $data);
+  }
+
+  private function loginCheckDialog() {
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $record = UserCommonModel::checkExist($email);
+    if ($record == null) {
+      $data[] = array();
+      $data['status'] = false;  
+      $data['text1'] = 'خطا';
+      $data['text2'] = 'ایمیل شما در سامانه ثبت نشده است';
+      $data['text3'] = 'لطفا دوباره تلاش کنید';
+      $data['link'] = 'login';
+      $data['btnLable'] = 'تلاش مجدد';
+      echo json_encode($data);
+      exit;
+    }
+
+    $hashesPass = encryptPassword($pass);
+    if ($record['password'] == $hashesPass) {
+      $_SESSION['email'] = $email;
+      $_SESSION['access'] = $record['access'];
+      $data[] = array();
+      echo json_encode($data);
+      exit;
+    }
+
+    $data[] = array();
+    $data['status'] = 'false';
+    $data['text1'] = 'خطا';
+    $data['text2'] = 'رمز عبور وارد شده اشتباه است';
+    $data['text3'] = 'لطفا دوباره وارد شوید';
+    $data['link'] = 'login';
+    $data['btnLable'] = 'تلاش مجدد';
+    echo json_encode($data);
+    exit;
+
   }
 
   private function loginCheck() {

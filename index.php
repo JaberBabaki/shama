@@ -1,7 +1,7 @@
 <?php
 define('test',true);
 require_once("system/loader.php");
-
+//////////////////////// ali feature ///////////////////////////
 $uri=getRequestURL();
 $parts=explode('/',$uri);
 

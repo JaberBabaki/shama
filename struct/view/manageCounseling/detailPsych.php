@@ -1,4 +1,11 @@
+
+
+
 <link rel="stylesheet" href="/asset/css/appointment.css">
+<link rel="stylesheet" href="/asset/css/sweetalert2/sweetalert2.css">
+
+    
+
 <div class="row" style="height: 514px">
   <div class="col-lg-4 ts-grid-box" style="margin:10px 63px 0 0">
     <div id="floating-appts-area" class="practitioner-profile stick" style="">
@@ -18,10 +25,14 @@
                 <?php endif; ?>
                 <?php if($nextAvailable!=null): ?>
                   <span class="next-available-title">نزدیکترین نوبت قابل رزرو</span>
-                  <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>" onclick="bookAppointment()">
-                  <span><?=$nextAvailable[1]?> </span>
-                  </a>
+                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>">
+                        
+                        <span><?=$nextAvailable[1]?> </span>
+                        
+                      </a>
                 <?php endif;?>
+
+
               </div>
               <?php if($firstAvailableArray!=null):?>
                 <div class="day-row">
@@ -56,7 +67,7 @@
     </div>
   </div>
 
-  <div class="col-lg-7 ts-grid-box" style="margin:10px 10px 0 0">
+  <div id="mm" class="col-lg-7 ts-grid-box" style="margin:10px 10px 0 0">
     <div class="row">
       <div class="col-lg-8">
         <h2 style="text-align: right;  margin-bottom: 30px;">دکتر علی زمانی</h1>
@@ -77,53 +88,50 @@
         </div>
     </div>
   </div>
+
       <!-- /basic datatable -->
+
 <script>
-  function bookAppointment(){
-    var formData = new FormData();
-    var calendar_id = document.getElementById('next-available').getAttribute('value');
-    formData.append('calendar_id', calendar_id);
-    $.ajax({
-      url: '/mangeCounseling/bookAppointment',
-      type: 'POST',
-      dataType: 'JSON',
-      data: formData,
-      contentType: false,
-      processData: false,
-      success: function (result) {
-        var json = result;
-        if ((json.Status == true)) {
-          var msg = json.ResultData.message;
-          alert(msg);
-          location.reload();
-        } 
-      }
-    });
-  }
 
-  
-(function() {
-    var allApptsLink = '/public/practitioner/appointments.php?id=89011';
 
-    // Change show all appointments link according to user selection
-    $(document).on('change_show_times_for', function() {
-        var params = '';
-        var specialty = $('select#he-appt-specialty-page').val();
-        var practice = $('select#he-appt-practitioner-page').val();
-        if (specialty) params += '&specialty=' + encodeURIComponent(specialty);
-        if (practice) params += '&location=' + encodeURIComponent(practice);
-        $('.appointments-preview .book-now').attr('href', allApptsLink + params);
-    });
 
-    $('select#he-appt-specialty-page').change(function() {
-        $(document).trigger('change_show_times_for');
-    });
+  // $('#next-available').click(function(event){
+  //   alert('ali');
+  // });
+ 
+  // function bookAppointment(){
+  //   //var formData = new FormData();
+  //   nextAvailable = document.getElementById('next-available');
+  //   nextAvailableDialog = document.getElementById('dialog-next-available');
+  //   if (typeof nextAvailableDialog.showModal === "function") {
+  //           nextAvailableDialog.showModal();
+  //       } else {
+  //           alert("The dialog API is not supported by this browser");
+  //       }    
+        //var calendar_id = document.getElementById('next-available').getAttribute('value');
+    //formData.append('calendar_id', calendar_id);
+    //$.ajax({
+    //   url: '/mangeCounseling/bookAppointment',
+    //   type: 'POST',
+    //   dataType: 'JSON',
+    //   data: formData,
+    //   contentType: false,
+    //   processData: false,
+    //   success: function (result) {
+    //     var json = result;
+    //     if ((json.Status == true)) {
+    //       var msg = json.ResultData.message;
+    //       alert(msg);
+    //       location.reload();
+    //     } 
+    //   }
+    // });
+  // }
 
-    $('select#he-appt-practitioner-page').change(function() {
-        $(document).trigger('change_show_times_for');
-    });
-
-    $(document).trigger('change_show_times_for');
-})();
 </script>
+
 </div>
+<?php 
+$doc_root = $_SERVER["DOCUMENT_ROOT"]; 
+include "$doc_root/struct/view/user/loginDialog.php";  
+?>
