@@ -512,3 +512,53 @@ Dialog*/
     -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
 }
+
+.verify-title {
+    font-size: 20px;
+    margin: 10px 5px 5px 10px;
+    text-align: center;
+}
+
+.check-payment {
+    font-size: 20px;
+    margin: 10px 5px 5px 10px;
+    text-align: right;
+    margin-right: 25px;
+}
+
+.check-payment-btn {
+    width: 180px;
+    border: 2px solid black;
+    font-family: 'Vazir';
+    font-size: 15px;
+    line-height: 1.5;
+    color: #000;
+    text-transform: uppercase;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: #6f6b6b54;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.payment-btn {
+    position: fixed;
+    width: 188px;
+    height: 45px;
+    margin-top: 94px;
+    right: 31%;
+    border-radius: 25px;
+    color: white;
+    background-color: green;
+}

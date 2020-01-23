@@ -13,8 +13,7 @@
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 							</span>
         </div>
-        <sapn style="display: none" class="form-validation" id="valid_email"
-        "></sapn>
+        <sapn style="display: none" class="form-validation" id="valid_email"></sapn>
         <div class="wrap-input100 validate-input" data-validate="لطفا رمز عبور را وارد کنید!">
           <input class="input100" type="password" name="password" placeholder="رمز عبور">
           <span class="focus-input100"></span>
