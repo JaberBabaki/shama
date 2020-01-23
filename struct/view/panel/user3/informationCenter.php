@@ -1131,12 +1131,17 @@
     okAdddress = 1;
     okPhoneNumber = 1;
     okMoreExplain = 1;
+
+    status=1;
+
     if (edtCounselingName.length <= 2 && edtCounselingName.length >= 30) {
       printError('#lblCenterName', 'نام وارد شده صحیح نیست');
       okCenterName = 1;
+      status=0;
     } else if (edtCounselingName.length == 0) {
       printError('#lblCenterName', 'لطفا نام مرکز را وارد کنید');
       okCenterName = 1;
+      status=0;
     } else {
       printOk('#lblCenterName', '');
       okCenterName = 0;
@@ -1223,6 +1228,7 @@
     if (imageFileBrand == null) {
       printError("#lblSelectPicBrand", "لطفا عکس پرسنلی را وارد کنید");
     }
+
 
     if (okCenterName == 0 && okCity == 0 && okOstan == 0 && okEstablishDate == 0 && okExpairDateCenter == 0 && okPsychology == 0 && okAccountNumber == 0 && okAdddress == 0 && okPhoneNumber == 0 && okPicBrand == 0) {
       formDataFounder.append('imageBrand', imageFileBrand);

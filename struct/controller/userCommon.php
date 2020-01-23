@@ -1,5 +1,6 @@
 <?php
 
+
 class UserCommonController {
   public function __construct() {
     require_once("user-base.php");
