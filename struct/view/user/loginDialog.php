@@ -342,7 +342,7 @@ $(document).ready(function(){
                       Swal.fire({
                         type: 'success',
                         position: 'top',
-                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="onlinePay">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="offlinePay">رزور مجدد</button></div></li></ul></div>',
+                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="onlinePay" href="http://shama.local/user1/showReserved">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="offlinePay">رزور مجدد</button></div></li></ul></div>',
                         showConfirmButton: false,
                       })
                     }
