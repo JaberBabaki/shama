@@ -5,7 +5,6 @@
 <script src="/asset/js/sweetalert2/sweetalert2.js"></script>
   
 <!--Modal: Login / Register Form-->
-
 <div class="modal fade" id="modalLogReg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
   <!--Content-->
@@ -134,7 +133,6 @@
 </div>  
 
 
-
 <div class="modal fade" id="modalVerify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" style="margin-top: 12px" role="document">
   <!--Content-->
@@ -215,14 +213,27 @@ $(document).ready(function(){
       processData: false,
       success: function (result) {
         var json = result;
-        if ((json.Status == true)) {
+        if (json.Status == true) {
+          if (json.register == true){
             var consellingName = json.consellingName;
             var psychName = json.psychName;
+            var email = json.email;
+            $("#modalVerify").modal("show");
+            $("#appointmentText").html("<div>"+'کاربر    '+email+"</div>"+"<div>"+"شما برای دکتر"+psychName+"</div>");
+          }else{
+            $("#modalLogReg").modal("show");
+          }
+            // var user_id = json.user_id;
         }
       }
     });
-    $("#modalLogReg").modal("show");
-    $("#appointmentText").html('شما برای دکتر علی زمانی در درمانگاه مدت از ساعت ۱۷:۰۰ تا ۱۸:۰۰ دخواست نوبت کرده اید')
+
+    // if (user_id == null) 
+    
+    // else {
+
+    // }
+    
   });
 });
 </script>
