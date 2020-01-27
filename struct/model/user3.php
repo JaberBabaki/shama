@@ -152,38 +152,17 @@ public static function bookAppointment($calendar_id, $paymentMode, $user_id){
               ");
 }
 
-public static function getCalendarId($calendar_id){
+public static function getPsychAndCounsellingByCalendarId($calendar_id){
   $db = Db::getInstance();
-  $record = $db->query( "
-                        SELECT 
-                          *
-                        FROM
-                          s_calender_psych
-                        WHERE
-                          calender_id=$calendar_id
-  ");
-  $shenaseh = $record["psychShenaseh"];
-  $conselling_id = $record["conseling_id"];
-  $record = $db->query( "
-                        SELECT 
-                          *
-                        FROM
-                          s_counseling_center
-                        WHERE
-                          conceil_id=$conselling_id
-  ");
-  $result = [];
-  $result["consellingName"] = $record["consellingName"];
-  $record = $db->query( "
-                        SELECT 
-                          *
-                        FROM
-                          s_psych
-                        WHERE
-                          shenaseh=$shenaseh
-  ");
-  $result["psychName"] = $record["psychName"];
-  return $result;
+  $record = $db->query("
+                        SELECT psych.psychName, center.counselingName
+                        FROM s_calender_psych cPsych 
+                        INNER JOIN s_psych psych on psych.shenaseh=cPsych.psychShenaseh 
+                        LEFT OUTER JOIN s_counseling_center center on center.conceil_id=cPsych.counseling_id 
+                        WHERE cPsych.calender_id=$calendar_id                 
+                      ");
+  
+  return $record;
 }
 
 }
