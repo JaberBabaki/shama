@@ -43,6 +43,8 @@ class MangeCounselingController {
 
 
   function detailPsych($shenaseh, $conceil_id) {
+    $_SESSION['psychShenaseh'] = $shenaseh;
+    $_SESSION['conceilling_id'] = $conceil_id;
     $data[] = array();
     RQO('struct/controller/algorithms/user3.php');
     $appointment = new Appointment($shenaseh, $conceil_id);
@@ -82,9 +84,17 @@ class MangeCounselingController {
   }
 
   function appointmentInfo(){
-    $calendar_id = $_POST['calendar_id'];
-    $result = User3Model::getCalendarId($calendar_id);
-    $result['Status'] = true;
+    $result = [];
+    if (array_key_exists("user_id", $_SESSION)){
+      $calendar_id = $_POST['calendar_id'];
+      $result = User3Model::getCalendarId($calendar_id);
+      $result['Status'] = true;
+      $result['register'] = true;  
+      $result['email'] = $_SESSION['email'];
+    }else{
+      $result['Status'] = true;
+      $result['register'] = false;
+    }
     echo json_encode($result);
     exit;
   }
