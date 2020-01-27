@@ -110,7 +110,7 @@
 
                 </li>
                 <li>
-                  <?php echo "<a href=".baseURL().'/mangeCounseling/turns/>'.'نوبت دهی'.'</a>';?>
+                  <?php echo "<a href=".baseURL().'/mangeCounseling/turns/'.$params.'>'.'نوبت دهی'.'</a>';?>
                 </li>
                 <li>
                   <?php echo "<a href=".baseURL().'/mangeCounseling/homePageCounseling/>'.'کارگاه های آموزشی'.'</a>';?>

@@ -61,6 +61,7 @@ class MangeCounselingController {
     // $data['registerTime'] = $recordPsych['registerTime'];
     // $data['lastUpdate'] = $recordPsych['lastUpdate'];
     $data['conselling_id'] = $conceil_id;
+    $data['params'] = $conceil_id;
     view::renderCounselingPage('manageCounseling/detailPsych.php', $data);
   }
 
