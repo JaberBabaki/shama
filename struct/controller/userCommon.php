@@ -155,6 +155,7 @@ class UserCommonController {
 
     $hashesPass = encryptPassword($pass);
     if ($record['password'] == $hashesPass) {
+      $data['status'] = true;  
       $_SESSION['email'] = $email;
       $_SESSION['access'] = $record['access'];
       $_SESSION['user_id'] = $record['user_id'];
@@ -164,7 +165,7 @@ class UserCommonController {
     }
 
     $data[] = array();
-    $data['status'] = 'false';
+    $data['status'] = false;
     $data['text1'] = 'خطا';
     $data['text2'] = 'رمز عبور وارد شده اشتباه است';
     $data['text3'] = 'لطفا دوباره وارد شوید';
@@ -192,6 +193,7 @@ class UserCommonController {
     $hashesPass = encryptPassword($pass);
     if ($record['password'] == $hashesPass) {
       $_SESSION['email'] = $email;
+      $_SESSION['user_id'] = $record['user_id'];
       $_SESSION['access'] = $record['access'];
       $data[] = array();
       homePage(true);
