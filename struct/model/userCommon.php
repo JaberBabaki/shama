@@ -39,6 +39,6 @@ class UserCommonModel {
     $record=$db->query("SELECT * FROM s_counseling_center WHERE location=$location");
     return $record;
   }
-
+  
 }
 ?>
