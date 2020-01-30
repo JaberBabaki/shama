@@ -71,7 +71,7 @@ class MangeCounselingController {
   function bookAppointment(){
     $calendar_id = $_POST['calendar_id'];
     $paymentMode = $_POST['paymentMode'];
-    $user_id = $_SESSION['user_id']; 
+    $user_id = $_SESSION['user_id'];
     User3Model::bookAppointment($calendar_id, $paymentMode, $user_id);
     $response = [];
     $response['Status'] = true;
@@ -85,9 +85,7 @@ class MangeCounselingController {
 
   function appointmentInfo(){
     $result = [];
-    if (array_key_exists("user_id", $_SESSION)){
-      $calendar_id = $_POST['calendar_id'];
-      $result = User3Model::getCalendarId($calendar_id);
+    if (!isGuest()){
       $result['Status'] = true;
       $result['register'] = true;  
       $result['email'] = $_SESSION['email'];
@@ -95,6 +93,14 @@ class MangeCounselingController {
       $result['Status'] = true;
       $result['register'] = false;
     }
+    $calendar_id = $_POST['calendar_id'];
+    $response = User3Model::getPsychAndCounsellingByCalendarId($calendar_id);
+    $result['psychName'] = $response[0]['psychName'];
+    $result['counselingName'] = $response[0]['counselingName'];
+    $result['date'] = dateConverter($response[0]['date'], 'enToFa');
+    $result['startTime'] = stringConverter($response[0]['startTime'], $type='enToFa');
+    $result['endTime'] = stringConverter($response[0]['endTime'], $type='enToFa');
+    $result['day'] = $response[0]['day'];
     echo json_encode($result);
     exit;
   }
