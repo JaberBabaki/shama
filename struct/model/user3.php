@@ -155,7 +155,7 @@ public static function bookAppointment($calendar_id, $paymentMode, $user_id){
 public static function getPsychAndCounsellingByCalendarId($calendar_id){
   $db = Db::getInstance();
   $record = $db->query("
-                        SELECT psych.psychName, center.counselingName
+                        SELECT psych.psychName, center.counselingName, cPsych.startTime, cPsych.endTime, cPsych.day, cPsych.date
                         FROM s_calender_psych cPsych 
                         INNER JOIN s_psych psych on psych.shenaseh=cPsych.psychShenaseh 
                         LEFT OUTER JOIN s_counseling_center center on center.conceil_id=cPsych.counseling_id 
