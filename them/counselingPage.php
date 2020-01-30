@@ -38,7 +38,7 @@
 
 <body class="body-color">
 <div class="body-inner-content">
-  <header class="navbar-standerd">
+  <header class="navbar-standerd" style="height: 84px;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -78,6 +78,17 @@
               </ul>
               <!-- social-->
 
+              <div class='col-md-6' style="text-align: right; color: #8a8a8a; font-size: 14px;">
+                <div class='ts-date'>
+                  <i class='fa fa-clock-o'></i>
+                  <span><?php echo jdate(date('Y-m-d'), "d M Y", date("l"));
+                  if (!isGuest()) {
+                    echo "<span class='p-3'><i class='fa fa-user ml-2'></i>کاربر </span>";
+                    echo $_SESSION['email'];
+                    echo " خوش آمدید";
+                  } ?> </span>
+                </div>
+              </div>
 
               <!--nav right menu start-->
               <ul class="right-menu align-to-right">
@@ -134,6 +145,7 @@
         </div>
       </div>
     </div>
+    
   </header>
 
   <?php echo $content ?>
@@ -207,6 +219,7 @@
         </div>
       </div>
     </div>
+
   </footer>
 
 
