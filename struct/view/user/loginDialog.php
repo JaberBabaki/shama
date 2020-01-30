@@ -51,7 +51,7 @@
                 </div>
                 <sapn style="display: none" class="form-validation" id="valid_pass"></sapn>
                 <div class="container-login100-form-btn" >
-                  <button class="login100-form-btn" onclick="checkEmail()">ورود</button>
+                  <button class="login100-form-btn" id="login">ورود</button>
                 </div>
                 <div class="text-center p-t-12">
                   <a class="txt2" href="#">
@@ -79,14 +79,6 @@
                 </div>
                 <form class="login100-form validate-form" >
                   <span class="login100-form-title">ثبت  نام در شبکه ملی ازدواج</span>
-                  <div class="wrap-input100 validate-input">
-                    <select class="input100-select" id="access">
-                      <option value="1" selected>شهروند</option>
-                      <option value="2">مربیان</option>
-                      <option value="3">مراکز مشاوره</option>
-                      <option value="4">درمانگر</option>
-                    </select>
-                  </div>
                   <div class="wrap-input100 validate-input" id="myForm">
                     <input class="input100" type="text" id="emailReg" placeholder="ایمیل یا شماره موبایل">
                     <span class="focus-input100"></span>
@@ -143,12 +135,12 @@
       <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBtn">
         <li style="position: fixed; right: 65px">
           <div class="container-login100-form-btn" >
-          <button class="login100-form-btn" style=" width: 180px" id="verifyAppointment"> تایید </button>
+          <button class="btn btn-pill btn-success" style=" width: 180px" id="verifyAppointment"> تایید </button>
           </div>
         </li>
         <li style="position: fixed; left: 65px">
           <div class="container-login100-form-btn" >
-          <button class="login100-form-btn" style="background-color: lightcoral; width: 180px"> انتخاب مجدد نوبت</button>
+          <button class="btn btn-pill btn-secondary"  id="bookAgain" style="background-color: lightcoral; width: 180px"> انتخاب مجدد نوبت</button>
           </div>
         </li>
       </ul>
@@ -180,30 +172,14 @@
   </div>
 </div>  
 
-
-<!-- <script>
-   $(function() {
-     $( "#modalLRForm" ).dialog({
-         autoOpen: false,  
-         modal: true,
-     });
-    $( "#next-available" ).click(function() {
-      $( "#modalLRForm" ).dialog( "open" );
-    });
-    var $dialog = $(".ui-dialog");
-    $dialog.addClass("modal-content");
-    $dialog.find(".ui-dialog-titlebar").addClass("modal-header").find(".ui-button").addClass("close").text("x");
-    $dialog.find(".ui-dialog-content").addClass("modal-body");
-    $dialog.addClass("fad modal modal-dialog cascading-modal modal-content modal-c-tabs nav nav-tabs md-tabs tabs-2 dark-blue darken-3 nav-item nav-link activ tab-content tab-pane fade in show active block-wrapper pt-0 container wrap-login100-dialo login100-pic-dialog js-tilt");
-   });
-</script> -->
 <script>
+var baseURL = "<?php echo baseUrl(); ?>";
 $(document).ready(function(){
   $("#next-available").click(function(){
     var calendar_id = document.getElementById('next-available').getAttribute('value');
     var formData = new FormData();
+    var jsonData;
     formData.append('calendar_id', calendar_id);
-    var baseURL = "<?php echo baseUrl(); ?>";
     $.ajax({
       url: baseURL+'/mangeCounseling/appointmentInfo',
       type: 'POST',
@@ -212,196 +188,222 @@ $(document).ready(function(){
       contentType: false,
       processData: false,
       success: function (result) {
-        var json = result;
-        if (json.Status == true) {
-          if (json.register == true){
-            var consellingName = json.consellingName;
-            var psychName = json.psychName;
-            var email = json.email;
-            $("#modalVerify").modal("show");
-            $("#appointmentText").html("<div>"+'کاربر    '+email+"</div>"+"<div>"+"شما برای دکتر"+psychName+"</div>");
-          }else{
-            $("#modalLogReg").modal("show");
+        jsonData = result;
+        if (jsonData.Status == true) {
+          if (jsonData.register == true){
+            paymentSteps(jsonData);
           }
-            // var user_id = json.user_id;
+          else{
+            $("#modalLogReg").modal("show");
+            $("#login").click(function(){
+              var emailData = document.getElementById("emailLogin").value;
+              var passwordData = document.getElementById("passwordLogin").value;
+              status = checkEmail(emailData, passwordData);
+              if (status){
+                var baseURL = "<?php echo baseUrl(); ?>";
+                var formData = new FormData();
+                formData.append('email', emailData);
+                formData.append('password', passwordData);
+                $.ajax({
+                  url: baseURL+'/userCommon/loginDialog',
+                  type: 'POST',
+                  dataType: 'JSON',
+                  data: formData,
+                  contentType: false,
+                  processData: false,
+                  success: function (result) {
+                    var json = result;
+                    if (json.status == false) {
+                      $("#modalLRForm").modal("hide");
+                      Swal.fire({
+                        type: 'error',
+                        position: 'top',
+                        html: '<div>'+json.text1+'</div>'+'<div>'+json.text2+'</div>'+'<div>'+json.text3+'</div>',
+                      });  
+                    }
+                    else{
+                      $("#modalLogReg").modal("hide");
+                      Swal.fire({
+                        type: 'success',
+                        position: 'top',
+                        html : '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">با موفقیت وارد حساب کاربری خود شدید</div>',
+                        showConfirmButton: false,
+                        timer: 2000,
+                      });
+                      paymentSteps(jsonData, email = emailData);
+                    }
+                  } 
+                });
+              }
+            });
+          }
         }
       }
     });
-
-    // if (user_id == null) 
-    
-    // else {
-
-    // }
-    
   });
 });
+
+function checkEmail(emailData, passwordData){
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  var status = true;
+  if (emailData.length <= 7 && emailData.length >= 1) {
+    $("#valid_email").css({"display": "block", "color": "red"});
+    $("#valid_email").text("ایمیل وارد شده صحیح نیست");
+    status = false;
+  } else if (emailData.length == 0) {
+    $("#valid_email").css({"display": "block", "color": "red"});
+    $("#valid_email").text("لطفا ایمیل را وارد کنید");
+    status = false;
+  } else {
+    if (reg.test(emailData) == false) {
+      $("#valid_email").css({"display": "block", "color": "red"});
+      $("#valid_email").text("ایمیل وارد شده صحیح نیست");
+      status = false;
+    } else {
+      $("#valid_email").css({"display": "none"});
+      $("#valid_email").text("");
+      status = true;
+    } 
+  }
+
+  if (passwordData.length <= 8 && passwordData.length >= 1) {
+    $('#valid_pass').css({'display': 'block', 'color': 'red'});
+    $('#valid_pass').text('رمز عبور وارد شده باید بیش از ۸ کاراکتر باشد');
+    status = false;
+  } else if (passwordData.length == 0) {
+    $('#valid_pass').css({'display': 'block', 'color': 'red'});
+    $('#valid_pass').text('لطفا رمز عبور را وارد کنید');
+    status = false;
+  } else {
+    $('#valid_pass').css({'display': 'none'});
+    $('#valid_pass').text('');
+  }
+  return status, emailData, passwordData;
+}
+
+function paymentSteps(json, email = null){
+  var counselingName = json.counselingName;
+  var psychName = json.psychName;
+  if (email == null) email = json.email;
+  var startTime = json.startTime;
+  var endTime = json.endTime;
+  var date = json.date;
+  var day = json.day;
+  var weekDay = new Array(7);
+  weekDay[0] = "یکشنبه";
+  weekDay[1] = "دوشنبه";
+  weekDay[2] = "سه شنبه";
+  weekDay[3] = "چهار شنبه";
+  weekDay[4] = "پنجشنبه";
+  weekDay[5] = "جمعه";
+  weekDay[6] = "شنبه";
+  $("#modalVerify").modal("show");
+  $("#appointmentText").html("<div>"+'کاربر    '+email+"</div>"+"<div>"+"شما برای دکتر "+psychName+" در درمانگاه "+counselingName+" از ساعت "+ startTime +" تا "+ endTime +"  در روز "+  weekDay[day]  +"  "+  date  +" درخواست نوبت کرده اید. "+"</div>");
+  $("#verifyAppointment").click(function(){
+    $('#verifyBtn').hide(500);
+    $('#checkPayment').show();
+  });
+  $("#onlinePay").click(function(){
+    $("#offlinePay").css('background-color', '#6f6b6b54');
+    $("#offlinePay").css('color', 'black');
+    $("#onlinePay").css('background-color', 'green');
+    $("#onlinePay").css('color', 'white');
+    $('#NotPayment').hide();
+    $('#payment').show();
+  });
+
+  $("#offlinePay").click(function(){
+    $("#onlinePay").css('background-color', '#6f6b6b54');
+    $("#onlinePay").css('color', 'black');
+    $("#offlinePay").css('background-color', 'green');
+    $("#offlinePay").css('color', 'white');
+    $('#payment').hide();
+    $('#NotPayment').show();
+  });
+
+  $('#bookAgain').click(function(){
+      $("#modalVerify").modal("hide");
+    });
+
+  $('#payment').click(function(){
+    $("#modalVerify").modal("hide");
+    var formData = new FormData();
+    var calendar_id = document.getElementById('next-available').getAttribute('value');
+    formData.append('calendar_id', calendar_id);
+    formData.append('paymentMode', 2);
+    $.ajax({
+      url: baseURL+'/mangeCounseling/bookAppointment',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      buttonsStyling: false,
+      success: function (result) {
+        var json = result;
+        if ((json.Status == true)) {
+          showConfrmAppointment();
+        }
+      }
+    });              
+  });
+
+  
+  $('#NotPayment').click(function(){
+    $("#modalVerify").modal("hide");
+    var formData = new FormData();
+    var calendar_id = document.getElementById('next-available').getAttribute('value');
+    formData.append('calendar_id', calendar_id);
+    formData.append('paymentMode', 1);
+    $.ajax({
+      url: baseURL+'/mangeCounseling/bookAppointment',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      buttonsStyling: false,
+      success: function (result) {
+        var json = result;
+        if ((json.Status == true)) {
+          showConfrmAppointment();
+        }
+      }
+    });
+  });
+}
+
+  function showConfrmAppointment(){
+    url = baseURL+'/user1/mainPage';
+          Swal.fire({
+            type: 'success',
+            position: 'top',
+            html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div>',
+            showCloseButton: false,
+            showCancelButton: true,
+            focusConfirm: false,
+            buttonsStyling: false,
+            confirmButtonText:
+              creatButton('ورود به پنل کاربری', url, 'class="btn btn-pill btn-danger"'),
+            cancelButtonText:
+              creatButton('رزرو مجدد', '', 'class="btn btn-pill btn-secondary"'),
+          });
+  }
+
+  function creatButton(text, link, style){
+    return ('<a'+' type="button"'+ style + ' href='+link+'>'+text+'</a>');
+  }
+
 </script>
 
 
 <script>
-
-  function checkEmail() {
-    var emailData = document.getElementById("emailLogin").value;
-    var passwordData = document.getElementById("passwordLogin").value;
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    var status = true;
-    if (emailData.length <= 7 && emailData.length >= 1) {
-      $("#valid_email").css({"display": "block", "color": "red"});
-      $("#valid_email").text("ایمیل وارد شده صحیح نیست");
-      status = false;
-    } else if (emailData.length == 0) {
-      $("#valid_email").css({"display": "block", "color": "red"});
-      $("#valid_email").text("لطفا ایمیل را وارد کنید");
-      status = false;
-    } else {
-      if (reg.test(emailData) == false) {
-        $("#valid_email").css({"display": "block", "color": "red"});
-        $("#valid_email").text("ایمیل وارد شده صحیح نیست");
-        status = false;
-      } else {
-        $("#valid_email").css({"display": "none"});
-        $("#valid_email").text("");
-        status = true;
-      }
-    }
-
-    if (passwordData.length <= 8 && passwordData.length >= 1) {
-      $('#valid_pass').css({'display': 'block', 'color': 'red'});
-      $('#valid_pass').text('رمز عبور وارد شده باید بیش از ۸ کاراکتر باشد');
-      status = false;
-    } else if (passwordData.length == 0) {
-      $('#valid_pass').css({'display': 'block', 'color': 'red'});
-      $('#valid_pass').text('لطفا رمز عبور را وارد کنید');
-      status = false;
-    } else {
-      $('#valid_pass').css({'display': 'none'});
-      $('#valid_pass').text('');
-    }
-    
-    if (status){
-      var baseURL = "<?php echo baseUrl(); ?>";
-      var formData = new FormData();
-      formData.append('email', emailData);
-      formData.append('password', passwordData);
-      $.ajax({
-        url: baseURL+'/userCommon/loginDialog',
-        type: 'POST',
-        dataType: 'JSON',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (result) {
-          var json = result;
-          if ((json.status == true)) {
-              $("#modalLRForm").modal("hide");
-              Swal.fire(
-             'Good job!',
-             'You clicked the button!',
-             'success'
-            )    
-            
-          }else{
-            $("#modalLogReg").modal("hide");
-              Swal.fire({
-                type: 'success',
-                position: 'top',
-                html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">با موفقیت وارد حساب کاربری خود شدید</div>',
-                showConfirmButton: false,
-                timer: 2000,
-              })
-              $("#modalVerify").modal("show");
-              $("#verifyAppointment").click(function(){
-                $('#verifyBtn').hide(500);
-                $('#checkPayment').show();
-              });
-              
-              $("#onlinePay").click(function(){
-                $("#offlinePay").css('background-color', '#6f6b6b54');
-                $("#offlinePay").css('color', 'black');
-                $("#onlinePay").css('background-color', 'green');
-                $("#onlinePay").css('color', 'white');
-                $('#NotPayment').hide();
-                $('#payment').show();
-              });
-
-              $("#offlinePay").click(function(){
-                $("#onlinePay").css('background-color', '#6f6b6b54');
-                $("#onlinePay").css('color', 'black');
-                $("#offlinePay").css('background-color', 'green');
-                $("#offlinePay").css('color', 'white');
-                $('#payment').hide();
-                $('#NotPayment').show();
-              });
-            
-              $('#NotPayment').click(function(){
-                $("#modalVerify").modal("hide");
-                var formData = new FormData();
-                var calendar_id = document.getElementById('next-available').getAttribute('value');
-                formData.append('calendar_id', calendar_id);
-                formData.append('paymentMode', 1);
-                $.ajax({
-                  url: baseURL+'/mangeCounseling/bookAppointment',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  data: formData,
-                  contentType: false,
-                  processData: false,
-                  success: function (result) {
-                    var json = result;
-                    if ((json.Status == true)) {
-                      Swal.fire({
-                        type: 'success',
-                        position: 'top',
-                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="onlinePay" href="http://shama.local/user1/showReserved">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="offlinePay">رزور مجدد</button></div></li></ul></div>',
-                        showConfirmButton: false,
-                      })
-                    }
-                  }
-                });
-
-              });
-
-              $('#payment').click(function(){
-                $("#modalVerify").modal("hide");
-                var formData = new FormData();
-                var calendar_id = document.getElementById('next-available').getAttribute('value');
-                formData.append('calendar_id', calendar_id);
-                formData.append('paymentMode', 2);
-                $.ajax({
-                  url: baseURL+'/mangeCounseling/bookAppointment',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  data: formData,
-                  contentType: false,
-                  processData: false,
-                  success: function (result) {
-                    var json = result;
-                    if ((json.Status == true)) {
-                      Swal.fire({
-                        type: 'success',
-                        position: 'top',
-                        html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div><div style="margin: -76px;padding: 124px;"><ul><li style="position: fixed; right: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="loginPanel">  ورود به پنل </button></div></li><li style="position: fixed; left: 566px"><div class="container-login100-form-btn" ><button class="check-payment-btn" id="bookAgain">رزور مجدد</button></div></li></ul></div>',
-                        showConfirmButton: false,
-                      })
-                    }
-                  }
-                });
-
-              });
-          
-          } 
-        }
-      });
-    }
-  }
-
   
     function formRegisterValidation() {
       var emailData = document.getElementById("emailReg").value;
       var passData = document.getElementById("passwordReg").value;      
       var confrmData = document.getElementById("confrmPasswordReg").value;
-      var access = document.getElementById("access").value;
+      var access = 1;
       var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
       var status = true;
     //alert(emailData.length)
