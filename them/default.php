@@ -9,6 +9,7 @@
   <title>مشاوره آنلاین</title>
 
   <link rel="stylesheet" href="/asset/css/base.css">
+  <link rel="stylesheet" href="/asset/css/bootstrap.css">
   <link rel="stylesheet" href="/asset/css/bootstrap.min.css">
   <link rel="stylesheet" href="/asset/css/font-awesome.min.css">
   <link rel="stylesheet" href="/asset/css/animate.css">
@@ -17,7 +18,9 @@
   <link rel="stylesheet" href="/asset/css/colors/color-9.css">
   <link rel="stylesheet" href="/asset/css/responsive.css">
   <link rel="stylesheet" href="/asset/css/style-login.css">
-  
+	<link href="/asset/css/components.css" rel="stylesheet" type="text/css">
+
+
   <script src="/asset/js/jquery.min.js"></script>
   <script src="/asset/js/navigation.js"></script>
   <script src="/asset/js/bootstrap.min.js"></script>
