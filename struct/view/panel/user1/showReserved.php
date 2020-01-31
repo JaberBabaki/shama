@@ -1,3 +1,4 @@
+
 <style>
   .navbar-inverse {
     background: #00796B;
@@ -13,10 +14,7 @@
     background: #4DB6AC;
   }
 
-  .nav-pills > li > a,
-  {
-    color: #303F9F;
-  }
+
 
   .nav > li > a:hover, .nav > li > a:focus {
     background-color: #EEEEEE;
@@ -43,7 +41,40 @@
         <a href="#" style="color: #d71c33"><strong><span class="fa fa-dashboard"></span> نوبت های رزرو شده </strong></a>
         <hr>
         <br>
-
+        <tbody>
+          <tr>
+            <td>
+              <div class="media-left media-middle">
+                <a href="#"><img src="assets/images/brands/youtube.png" class="img-circle img-xs" alt=""></a>
+              </div>
+              <div class="media-left">
+                <div class=""><a href="#" class="text-default text-semibold">Youtube videos</a></div>
+                <div class="text-muted text-size-small">
+                  <span class="status-mark border-danger position-left"></span>
+                    13:00 - 14:00
+                </div>
+              </div>
+            </td>
+            <td><span class="text-muted">CDsoft</span></td>
+            <td><span class="text-success-600"><i class="icon-stats-growth2 position-left"></i> 3.12%</span></td>
+            <td><h6 class="text-semibold">$2,592</h6></td>
+            <td><span class="label bg-danger">Closed</span></td>
+            <td class="text-center">
+            <ul class="icons-list">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
         <div class="row justify-content-center" style="margin-left: 0px;margin-right: 0px">
           <div class="col-sm-5 col-md-3" style="background-color: #6BBB6F; padding: 10px;margin-left: 5px;">
             <div class="panel panel-body bg-success-400 has-bg-image">

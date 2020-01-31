@@ -12,6 +12,7 @@ class User1Controller {
   }
   public function showReserved(){
     $response = [];
+    
     view::render('panel/user1/showReserved.php', $response);
   }
 
