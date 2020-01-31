@@ -149,7 +149,7 @@
                 </div>
 								</td>
               <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+              <td ><div id="nearest-appointment" value="422" class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
 												<!-- <td class="text-center">
 													<ul class="icons-list">
 														<li class="dropdown">
@@ -379,7 +379,62 @@
 		<!-- /page content -->
 
 	</div>
-	<!-- /page container -->
+  <!-- /page container -->
 
-</body>
-</html>
+
+  <div class="modal fade" id="cancelDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" style="margin-top: 12px" role="document">
+  <!--Content-->
+    <div class="modal-content"> 
+    <!--Modal cascading tabs-->
+    <div class="modal-c-tabs">
+      <div class="verify-title" id="appointmentText">dfzzz ffffffffffff  f f</div>
+      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBtn">
+        <li style="position: fixed; right: 65px">
+          <div class="container-login100-form-btn" >
+          <button class="btn btn-pill btn-success" style=" width: 180px" id="verifyAppointment"> تایید </button>
+          </div>
+        </li>
+        <li style="position: fixed; left: 65px">
+          <div class="container-login100-form-btn" >
+          <button class="btn btn-pill btn-secondary"  id="bookAgain" style="background-color: lightcoral; width: 180px"> انتخاب مجدد نوبت</button>
+          </div>
+        </li>
+      </ul>
+      <div style="display: none; margin-bottom: 184px" id="checkPayment">
+        <div class="check-payment">انتخاب نوع پرداخت:</div>
+        <div>
+          <ul>
+            <li style="position: fixed; right: 65px">
+              <div class="container-login100-form-btn" >
+                <button class="check-payment-btn" id="onlinePay">  آنلاین </button>
+              </div>
+            </li>
+            <li style="position: fixed; left: 65px">
+              <div class="container-login100-form-btn" >
+              <button class="check-payment-btn" id="offlinePay">حضوری</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div style="display: none" id="payment">
+          <button class="payment-btn" >  پرداخت </button>
+        </div>
+        <div style="display: none" id="NotPayment">
+          <button class="payment-btn" >  تایید </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>  
+
+
+  <script>
+    $(document).ready(function(){
+      $('#nearest-appointment').click(function(){
+      var calendar_id = document.getElementById('nearest-appointment').getAttribute('value');
+      $('#cancelDialog').modal('show');
+      });
+    });
+  </script>
