@@ -45,10 +45,9 @@
 </section> -->
 
 	<!-- Global stylesheets -->
-	<link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-	<link href="/asset/css/bootstrap.css" rel="stylesheet" type="text/css">
-	<link href="/asset/css/core.css" rel="stylesheet" type="text/css">
-	<link href="/asset/css/components.css" rel="stylesheet" type="text/css">
+	<!-- <link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="/asset/css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+	<!-- <link href="/asset/css/core.css" rel="stylesheet" type="text/css"> -->
 	<link href="/asset/css/colors.css" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 
@@ -66,7 +65,11 @@
 
 	<script type="text/javascript" src="/asset/js/plugins/ui/ripple.min.js"></script>
 	<!-- /theme JS files -->
-
+  <style>
+    .position{
+      padding: 23px;
+    }
+  </style>
 	<!-- Page container -->
 	<div class="page-container">
 
@@ -74,7 +77,7 @@
 		<div class="page-content">
 
 			<!-- Main sidebar -->
-			<div class="sidebar sidebar-main sidebar-default">
+			<div class="sidebar sidebar-main sidebar-default" style="right: 43px; top: -39px; background-color: #E9E9E9 ">
 				<div class="sidebar-content">
 
 					<!-- User menu -->
@@ -82,7 +85,7 @@
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
 								<a href="#"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
-								<h5 style="text-align: center">zamaniali1995@gmail.com</h5>
+								<h5 style="text-align: center; margin-top: 19px;">zamaniali1995@gmail.com</h5>
 							</div>
 														
 						</div>
@@ -113,476 +116,258 @@
 				
 
 				<!-- Content area -->
-				<div class="content">
+				<div class="content" style="padding: 0 93px 60px 123px">
 
-					<!-- Dropdown menu -->
-					<h6 class="content-group text-semibold media-right">
-            نوبت های آتی
-					</h6>
+          <!-- Dropdown menu -->
+          <div class="table-responsive">
+          <table class="table text-nowrap table-striped border table-hover table-condensed">
+          <tbody>
+            <tr class="active border-double">
+              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نزدیک ترین نوبت</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="media-right">
+                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                </div>
+                <div class="media-left position">
+                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
+                  <div class="text-muted text-size-small">
+                      ۰۲:۰۰ - ۰۳:۰۰
+                  </div>
+                </div>
+												</td>
+              <td>
+                <div class="text-default text-semibold position">درمانگاه مدت</div>
+              </td>
+              <td>
+                <div class="media-left position">
+                  <div class="text-default text-semibold text-center">دوشنبه</div>
+                  <div class="text-muted text-size-small">
+                      ۱۳۹۸/۱۱/۱۰
+                  </div>
+                </div>
+								</td>
+              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
+              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+												<!-- <td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+																<li class="divider"></li>
+																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td> -->
+                      </tr>
+                      
 
-					<div class="row">
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
+                     
+          
+          </tbody>
+          
+          </table>
+          
+          <table class="table text-nowrap table-striped border table-hover table-condensed">
+          <tbody>
+            <tr class="active border-double">
+              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های آتی </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="media-right">
+                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                </div>
+                <div class="media-left position">
+                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
+                  <div class="text-muted text-size-small">
+                      ۰۲:۰۰ - ۰۳:۰۰
+                  </div>
+                </div>
+												</td>
+              <td>
+                <div class="text-default text-semibold position">درمانگاه مدت</div>
+              </td>
+              <td>
+                <div class="media-left position">
+                  <div class="text-default text-semibold text-center">دوشنبه</div>
+                  <div class="text-muted text-size-small">
+                      ۱۳۹۸/۱۱/۱۰
+                  </div>
+                </div>
+								</td>
+              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
+              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+												<!-- <td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+																<li class="divider"></li>
+																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td> -->
+                      </tr>
+                      <tr>
+              <td>
+                <div class="media-right">
+                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                </div>
+                <div class="media-left position">
+                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
+                  <div class="text-muted text-size-small">
+                      ۰۲:۰۰ - ۰۳:۰۰
+                  </div>
+                </div>
+												</td>
+              <td>
+                <div class="text-default text-semibold position">درمانگاه مدت</div>
+              </td>
+              <td>
+                <div class="media-left position">
+                  <div class="text-default text-semibold text-center">دوشنبه</div>
+                  <div class="text-muted text-size-small">
+                      ۱۳۹۸/۱۱/۱۰
+                  </div>
+                </div>
+								</td>
+              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
+              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+												<!-- <td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+																<li class="divider"></li>
+																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td> -->
+                      </tr>
+                      
 
-									<div class="media-body">
-										<h6 class="media-heading">James Alexander</h6>
-										<span class="text-muted">Lead developer</span>
-									</div>
+                     
+          
+          </tbody>
+          <br>
+          <br>
+          </table>
+          
+          <br>
+          <br>
+          
+          <table class="table text-nowrap table-striped border table-hover table-condensed">
+          <tbody>
+            <tr class="active border-double">
+              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">کل نوبت های گرفته شده</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="media-right">
+                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                </div>
+                <div class="media-left position">
+                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
+                  <div class="text-muted text-size-small">
+                      ۰۲:۰۰ - ۰۳:۰۰
+                  </div>
+                </div>
+												</td>
+              <td>
+                <div class="text-default text-semibold position">درمانگاه مدت</div>
+              </td>
+              <td>
+                <div class="media-left position">
+                  <div class="text-default text-semibold text-center">دوشنبه</div>
+                  <div class="text-muted text-size-small">
+                      ۱۳۹۸/۱۱/۱۰
+                  </div>
+                </div>
+								</td>
+              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
+              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+												<!-- <td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+																<li class="divider"></li>
+																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td> -->
+                      </tr>
+                      <tr>
+              <td>
+                <div class="media-right">
+                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                </div>
+                <div class="media-left position">
+                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
+                  <div class="text-muted text-size-small">
+                      ۰۲:۰۰ - ۰۳:۰۰
+                  </div>
+                </div>
+												</td>
+              <td>
+                <div class="text-default text-semibold position">درمانگاه مدت</div>
+              </td>
+              <td>
+                <div class="media-left position">
+                  <div class="text-default text-semibold text-center">دوشنبه</div>
+                  <div class="text-muted text-size-small">
+                      ۱۳۹۸/۱۱/۱۰
+                  </div>
+                </div>
+								</td>
+              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
+              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+												<!-- <td class="text-center">
+													<ul class="icons-list">
+														<li class="dropdown">
+															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+															<ul class="dropdown-menu dropdown-menu-right">
+																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+																<li class="divider"></li>
+																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+															</ul>
+														</li>
+													</ul>
+												</td> -->
+                      </tr>
+                      
 
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Nathan Jacobson</h6>
-										<span class="text-muted">Lead UX designer</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Margo Baker</h6>
-										<span class="text-muted">Sales manager</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Barbara Walden</h6>
-										<span class="text-muted">SEO specialist</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Hanna Dorman</h6>
-										<span class="text-muted">UX/UI designer</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Benjamin Loretti</h6>
-										<span class="text-muted">Network engineer</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Vanessa Aurelius</h6>
-										<span class="text-muted">Front end guru</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" class="img-circle img-lg" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">William Brenson</h6>
-										<span class="text-muted">Chief officer</span>
-									</div>
-
-									<div class="media-right media-middle">
-										<ul class="icons-list">
-					                    	<li class="dropdown">
-						                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-						                    	<ul class="dropdown-menu dropdown-menu-right">
-													<li><a href="#"><i class="icon-comment-discussion pull-right"></i> Start chat</a></li>
-													<li><a href="#"><i class="icon-phone2 pull-right"></i> Make a call</a></li>
-													<li><a href="#"><i class="icon-mail5 pull-right"></i> Send mail</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="icon-statistics pull-right"></i> Statistics</a></li>
-												</ul>
-					                    	</li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                     
+          
+          </tbody>
+          
+          </table>
+        </div>
+          
 					<!-- /dropdown menu -->
 
 
-					<!-- Horizontal icons -->
-					<h6 class="content-group text-semibold">
-						Horizontal icons
-						<small class="display-block">Card with horizontal icons</small>
-					</h6>
 
-					<div class="row">
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">James Alexander</h6>
-										<p class="text-muted">Lead developer</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Nathan Jacobson</h6>
-										<p class="text-muted">Lead UX designer</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Margo Baker</h6>
-										<p class="text-muted">Sales manager</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Barbara Walden</h6>
-										<p class="text-muted">SEO specialist</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Hanna Dorman</h6>
-										<p class="text-muted">UX/UI designer</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Benjamin Loretti</h6>
-										<p class="text-muted">Network engineer</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">Vanessa Aurelius</h6>
-										<p class="text-muted">Front end guru</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6">
-							<div class="panel panel-body">
-								<div class="media">
-									<div class="media-right">
-										<a href="assets/images/placeholder.jpg" data-popup="lightbox">
-											<img src="assets/images/placeholder.jpg" style="width: 70px; height: 70px;" class="img-circle img-md" alt="">
-										</a>
-									</div>
-
-									<div class="media-body">
-										<h6 class="media-heading">William Brenson</h6>
-										<p class="text-muted">Chief officer</p>
-
-										<ul class="icons-list">
-					                    	<li><a href="#" data-popup="tooltip" title="Google Drive" data-container="body"><i class="icon-google-drive"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Twitter" data-container="body"><i class="icon-twitter"></i></a></li>
-					                    	<li><a href="#" data-popup="tooltip" title="Github" data-container="body"><i class="icon-github"></i></a></li>
-				                    	</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /horizontal icons -->
-
-
-					<!-- Footer -->
-					<div class="footer text-muted">
-						&copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-					</div>
-					<!-- /footer -->
 
 				</div>
 				<!-- /content area -->
