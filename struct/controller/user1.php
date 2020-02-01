@@ -12,8 +12,14 @@ class User1Controller {
   }
   public function showReserved(){
     $response = [];
-    
+
     view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function completePersonalData(){
+    $response = [];
+    
+    view::render('panel/user1/completePersonalData.php', $response);
   }
 
 }
