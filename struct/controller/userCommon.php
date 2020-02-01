@@ -297,5 +297,15 @@ class UserCommonController {
     exit;
   }
 
-
+  public static function cancelAppointmentByuser(){
+    $calendar_id = $_POST['calendar_id'];
+    $cardNum = $_POST['cardNum'];
+    $name = $_POST['name'];
+    $cardNum = stringConverter($cardNum, $type='faToEn');
+    User1Model::cancelAppointmentByuser($calendar_id, $cardNum, $name);
+    $result = [];
+    $result['Status'] = true;
+    echo json_encode($result);
+    exit;
+  }
 }
