@@ -7,7 +7,7 @@
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs" style="color: #000; line-height: 34px">
         <div class="verify-title">شما درخواست لغو نوبت به شرح زیر کرده اید:</div>
-        <div class="verify-title" id="appointmentText">دکتر علی زمانی در درمانگاه مدت در تاریخ دوشنیه ۲۲/۱۰/۱۳۹۸ ساعت ۱۰:۰۰ تا ۱۱:۰۰</div>
+        <div class="verify-title" id="appointmentText"></div>
       <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBox">
         <li style="position: fixed; right: 65px">
           <div class="container-login100-form-btn" >
@@ -61,18 +61,34 @@
 
   <script>
     $(document).ready(function(){
+      var baseURL = "<?php echo baseUrl(); ?>";
+      var calendar_id = document.getElementById('next-available').getAttribute('value');
       $('#nearest-appointment').click(function(){
-      var calendar_id = document.getElementById('nearest-appointment').getAttribute('value');
-      $('#cancelDialog').modal('show');
-      });
+        $('#cancelDialog').modal('show');
+        var formData = new FormData();
+        formData.append('calendar_id', calendar_id);
+        $.ajax({
+            url: baseURL+'/mangeCounseling/appointmentInfo',
+            type: 'POST',
+            dataType: 'JSON',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                var json = result;
+                if (json.Status == true) {
+                    paymentSteps(json);
+                }
+            }
+        });
       
       $('#cancel').click(function(){
         $('#cancelDialog').modal('hide');
       });
 
       $('#verify').click(function(){
-        $('#verifyBox').hide();
-        $('#payInfo').show();
+        $('#verifyBox').hide(400);
+        $('#payInfo').show(1000);
         
       });
 
@@ -86,22 +102,49 @@
         var name = document.getElementById("name").value;
         status1 = checkCardNum(cardNum);
         status2 = checkName(name);
-        // status1 = true;
-        // status2 = true;
         if (status1 == true && status2 == true){
-            $('#cancelDialog').modal('hide');
-                Swal.fire({
-                type: 'success',
-                position: 'top',
-                title: 'نوبت شما با موفقیت لغو شد',
-                text: 'مبلغ تا ۲۴ ساعت آینده به حساب شما انتقال داده می شود',
-                showConfirmButton: false,
-                timer: 6000,
-            });
+            var formData = new FormData();
+            formData.append('name', name);
+            formData.append('cardNum', cardNum);
+            formData.append('calendar_id', calendar_id);
+            var jsonData;
+            $.ajax({
+                url: baseURL+'/userCommon/cancelAppointmentByuser',
+                type: 'POST',
+                dataType: 'JSON',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    jsonData = result;
+                    if (jsonData.Status == true) {
+                        $('#cancelDialog').modal('hide');
 
+                        Swal.fire({
+                            type: 'success',
+                            position: 'top',
+                            title: 'نوبت شما با موفقیت لغو شد',
+                            text: 'مبلغ تا ۲۴ ساعت آینده به حساب شما انتقال داده می شود',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            onClose: () => {
+                                location.reload(true)
+                            } 
+                        });
+                    }else{
+                        Swal.fire({
+                            type: 'error',
+                            position: 'top',
+                            title: 'مجددا تلاش کنید',
+                            showConfirmButton: false,
+                            timer: 6000,
+                            onClose: location.reload(true), 
+                        });
+                    }
+                    
+                }
+            });
         }
-              });
-      
     });
 
 function checkCardNum(cardNum){
@@ -140,4 +183,24 @@ function checkCardNum(cardNum){
     return status;
   }
 
+
+function paymentSteps(json){
+  var counselingName = json.counselingName;
+  var psychName = json.psychName;
+  var startTime = json.startTime;
+  var endTime = json.endTime;
+  var date = json.date;
+  var day = json.day;
+  var weekDay = new Array(7);
+  weekDay[0] = "یکشنبه";
+  weekDay[1] = "دوشنبه";
+  weekDay[2] = "سه شنبه";
+  weekDay[3] = "چهار شنبه";
+  weekDay[4] = "پنجشنبه";
+  weekDay[5] = "جمعه";
+  weekDay[6] = "شنبه";
+  $("#appointmentText").html("<div>"+"شما برای دکتر "+psychName+" در درمانگاه "+counselingName+" از ساعت "+ startTime +" تا "+ endTime +"  در روز "+  weekDay[day]  +"  "+  date  +" درخواست لغو نوبت کرده اید. "+"</div>");
+}
+
+});
 </script>
