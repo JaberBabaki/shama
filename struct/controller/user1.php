@@ -21,5 +21,5 @@ class User1Controller {
     
     view::render('panel/user1/completePersonalData.php', $response);
   }
-
+  
 }
