@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/asset/css/responsive.css">
   <link rel="stylesheet" href="/asset/css/style-login.css">
 	<link href="/asset/css/components.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/asset/css/sweetalert2/sweetalert2.css">
 
 
   <script src="/asset/js/jquery.min.js"></script>
