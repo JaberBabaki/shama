@@ -84,7 +84,7 @@
 					<div class="sidebar-user-material">
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
-								<a href="#"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
+								<a href="<?php echo baseUrl(); ?>/user1/mainPage"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
 								<h5 style="text-align: center; margin-top: 19px;">zamaniali1995@gmail.com</h5>
 							</div>
 														
@@ -92,12 +92,12 @@
 						
 						<div class="navigation-wrapper" id="user-nav">
 							<ul class="navigation ">
-								<li><a href="#"><i class="icon-user-plus"></i> <span>پروفایل من</span></a></li>
-								<li><a href="#"><i class="icon-coins"></i> <span>نوبت های رزرو شده</span></a></li>
-								<li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li>
-								<li class="divider"></li>
-								<li><a href="#"><i class="icon-cog5"></i> <span>تکمیل اطلاعات کاربری</span></a></li>
-								<li><a href="#"><i class="icon-switch2"></i> <span>خروج</span></a></li>
+              <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="active text-right"><span>پروفایل من</span></a></li>
+								<li><a href="<?php echo baseUrl(); ?>/user1/showReserved" class="text-right"><span>نوبت های رزرو شده</span></a></li>
+								<!-- <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li> -->
+								<!-- <li class="divider"></li> -->
+								<li><a href="<?php echo baseUrl(); ?>/user1/completePersonalData" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
+								<li><a href="#" class="text-right"></i> <span>خروج</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -381,54 +381,10 @@
 	</div>
   <!-- /page container -->
 
-
-  <div class="modal fade" id="cancelDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog cascading-modal" style="margin-top: 12px" role="document">
-  <!--Content-->
-    <div class="modal-content"> 
-    <!--Modal cascading tabs-->
-    <div class="modal-c-tabs">
-      <div class="verify-title" id="appointmentText">dfzzz ffffffffffff  f f</div>
-      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBtn">
-        <li style="position: fixed; right: 65px">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-success" style=" width: 180px" id="verifyAppointment"> تایید </button>
-          </div>
-        </li>
-        <li style="position: fixed; left: 65px">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-secondary"  id="bookAgain" style="background-color: lightcoral; width: 180px"> انتخاب مجدد نوبت</button>
-          </div>
-        </li>
-      </ul>
-      <div style="display: none; margin-bottom: 184px" id="checkPayment">
-        <div class="check-payment">انتخاب نوع پرداخت:</div>
-        <div>
-          <ul>
-            <li style="position: fixed; right: 65px">
-              <div class="container-login100-form-btn" >
-                <button class="check-payment-btn" id="onlinePay">  آنلاین </button>
-              </div>
-            </li>
-            <li style="position: fixed; left: 65px">
-              <div class="container-login100-form-btn" >
-              <button class="check-payment-btn" id="offlinePay">حضوری</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div style="display: none" id="payment">
-          <button class="payment-btn" >  پرداخت </button>
-        </div>
-        <div style="display: none" id="NotPayment">
-          <button class="payment-btn" >  تایید </button>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>  
-
+<?php
+$doc_root = $_SERVER["DOCUMENT_ROOT"]; 
+include "$doc_root/struct/view/panel/user1/dialog.php";  
+?>
 
   <script>
     $(document).ready(function(){
