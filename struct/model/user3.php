@@ -123,32 +123,30 @@ public static function getPsychInfoByShenas($psychShenas){
   return $record;
 }
 
-public static function listCalendarOfPsych($shenaseh, $conceil_id, $date, $time){
+public static function listAvailableCalendarByShenasehAndCounsellingId($shenaseh, $conceil_id, $date, $time){
   $db = Db::getInstance();
   $record = $db->query( "
                         SELECT 
                           *
                         FROM
-                          s_calender_psych
+                          s_calender_psych t1
                         WHERE
-                          psychShenaseh='$shenaseh' &&  counseling_id=$conceil_id && appointment=0 && date>='$date' && IF(date='$date', startTime>='$time', 1=1)
+                          psychShenaseh='$shenaseh' && counseling_id=$conceil_id && calender_id NOT IN (SELECT calendar_id FROM s_book_appointment) &&date>='$date' && IF(date='$date', startTime>='$time', 1=1) 
                         ORDER BY 
                           date ASC,
                           day ASC,
-                          startTime ASC;
-");
+                          startTime ASC
+                      ");
   return $record;
 }
 
 public static function bookAppointment($calendar_id, $paymentMode, $user_id){
   $db = Db::getInstance();
   $db->insert("
-            UPDATE s_book_appointment
-            SET 
-              appointmentMode = $paymentMode,
-              user_id = $user_id
-              calendar_id=$calendar_id
-              ");
+              INSERT INTO
+                s_book_appointment
+              (calendar_id, user_id, paymentMode) VALUES ($calendar_id, $user_id, $paymentMode)
+            ");
 }
 
 public static function getPsychAndCounsellingByCalendarId($calendar_id){
