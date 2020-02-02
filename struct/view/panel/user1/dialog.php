@@ -6,7 +6,6 @@
     <div class="modal-content"> 
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs" style="color: #000; line-height: 34px">
-        <div class="verify-title">شما درخواست لغو نوبت به شرح زیر کرده اید:</div>
         <div class="verify-title" id="appointmentText"></div>
       <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBox">
         <li style="position: fixed; right: 65px">
@@ -62,7 +61,7 @@
   <script>
     $(document).ready(function(){
       var baseURL = "<?php echo baseUrl(); ?>";
-      var calendar_id = document.getElementById('next-available').getAttribute('value');
+      var calendar_id = document.getElementById('nearest-appointment').getAttribute('value');
       $('#nearest-appointment').click(function(){
         $('#cancelDialog').modal('show');
         var formData = new FormData();
@@ -81,6 +80,7 @@
                 }
             }
         });
+    });
       
       $('#cancel').click(function(){
         $('#cancelDialog').modal('hide');
@@ -203,4 +203,5 @@ function paymentSteps(json){
 }
 
 });
+
 </script>
