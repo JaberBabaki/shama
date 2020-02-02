@@ -143,12 +143,11 @@ public static function listCalendarOfPsych($shenaseh, $conceil_id, $date, $time)
 public static function bookAppointment($calendar_id, $paymentMode, $user_id){
   $db = Db::getInstance();
   $db->insert("
-            UPDATE s_calender_psych
+            UPDATE s_book_appointment
             SET 
-              appointment = $paymentMode,
+              appointmentMode = $paymentMode,
               user_id = $user_id
-            WHERE
-              calender_id=$calendar_id
+              calendar_id=$calendar_id
               ");
 }
 
