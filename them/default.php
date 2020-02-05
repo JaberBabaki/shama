@@ -124,13 +124,13 @@
                 <a href="<?php echo homePage(false); ?>" class="f"><span> صفحه اصلی</span></a>
               </li>
               <li >
-                <a href="<?php echo baseUrl(); ?>/UserCommon/selectCounsiling" class="f"><span> مراکز مشاوره </span></a>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchCounsiling" class="f"><span> مراکز مشاوره </span></a>
               </li>
               <li>
                 <a href="#" class="f"><span>مربیان ازدواج</span></a>
               </li>
               <li>
-                <a href="#" class="f"><span>درمانگران</span></a>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchPsych"  class="f"><span>درمانگران</span></a>
               </li>
               <li>
                 <a href="#" class="f"><span>شهروندان </span></a>
