@@ -94,17 +94,17 @@ class User3Model {
     $db = Db::getInstance();
     $record=$db->query("SELECT * 
                         FROM s_psych 
-                        INNER JOIN s_calender_psych 
-                        WHERE s_psych.shenaseh=s_calender_psych.psychShenaseh && s_calender_psych.counseling_id=$counseilId                         
+                        INNER JOIN s_calendar_appointment 
+                        WHERE s_psych.shenaseh=s_calendar_appointment.psychIdentity && s_calendar_appointment.counseling_id=$counseilId                         
                         ORDER BY 
                           date ASC,
                           day ASC,
                           startTime ASC;");
     return $record; 
   }
-  public static function insertCalender($shenaseh, $counsilingId, $date, $day, $startTime, $endTime, $appointment) {
+  public static function insertCalender($shenaseh, $counsilingId, $date, $day, $startTime, $endTime) {
     $db = Db::getInstance();
-    $db->insert("INSERT INTO s_calender_psych (psychShenaseh, counseling_id, date, day, startTime, endTime, appointment)VALUES('$shenaseh', $counsilingId, '$date', '$day', '$startTime', '$endTime', $appointment)");
+    $db->insert("INSERT INTO s_calendar_appointment (psychIdentity, counseling_id, date, day, startTime, endTime)VALUES('$shenaseh', $counsilingId, '$date', '$day', '$startTime', '$endTime')");
 }
   public static function getPsych($param) {
   $db = Db::getInstance();
@@ -125,13 +125,13 @@ public static function getPsychInfoByShenas($psychShenas){
 
 public static function listAvailableCalendarByShenasehAndCounsellingId($shenaseh, $conceil_id, $date, $time){
   $db = Db::getInstance();
-  $record = $db->query( "
+  $record = $db->query("
                         SELECT 
                           *
                         FROM
-                          s_calender_psych t1
+                          s_calendar_appointment 
                         WHERE
-                          psychShenaseh='$shenaseh' && counseling_id=$conceil_id && calender_id NOT IN (SELECT calendar_id FROM s_book_appointment) &&date>='$date' && IF(date='$date', startTime>='$time', 1=1) 
+                          psychIdentity='$shenaseh' && counseling_id=$conceil_id && (calendar_id NOT IN (SELECT calendar_id FROM s_booked_appointment))  && date>='$date' && IF(date='$date', startTime>='$time', 1=1) 
                         ORDER BY 
                           date ASC,
                           day ASC,
@@ -140,23 +140,17 @@ public static function listAvailableCalendarByShenasehAndCounsellingId($shenaseh
   return $record;
 }
 
-public static function bookAppointment($calendar_id, $paymentMode, $user_id){
-  $db = Db::getInstance();
-  $db->insert("
-              INSERT INTO
-                s_book_appointment
-              (calendar_id, user_id, paymentMode) VALUES ($calendar_id, $user_id, $paymentMode)
-            ");
-}
 
 public static function getPsychAndCounsellingByCalendarId($calendar_id){
   $db = Db::getInstance();
   $record = $db->query("
-                        SELECT psych.psychName, center.counselingName, cPsych.startTime, cPsych.endTime, cPsych.day, cPsych.date
-                        FROM s_calender_psych cPsych 
-                        INNER JOIN s_psych psych on psych.shenaseh=cPsych.psychShenaseh 
-                        LEFT OUTER JOIN s_counseling_center center on center.conceil_id=cPsych.counseling_id 
-                        WHERE cPsych.calender_id=$calendar_id                 
+                      SELECT 
+                        psych.psychName, center.counselingName, t1.startTime, t1.endTime, t1.day, t1.date
+                      FROM 
+                        s_calendar_appointment t1 
+                      INNER JOIN s_psych psych on psych.shenaseh=t1.psychIdentity 
+                        LEFT OUTER JOIN s_counseling_center center on center.conceil_id=t1.counseling_id 
+                      WHERE t1.calendar_id=$calendar_id               
                       ");
   
   return $record;
