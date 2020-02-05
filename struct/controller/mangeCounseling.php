@@ -68,22 +68,9 @@ class MangeCounselingController {
   }
 
   
-  function bookAppointment(){
-    $calendar_id = $_POST['calendar_id'];
-    $paymentMode = $_POST['paymentMode'];
-    $user_id = $_SESSION['user_id'];
-    User3Model::bookAppointment($calendar_id, $paymentMode, $user_id);
-    $response = [];
-    $response['Status'] = true;
-    $response['Error'] = [];
-    $response['ResultData'] = [];
-    $response['ResultData']['message'] = "نوبت ثبت شد";
-    echo json_encode($response);
-    exit;
 
-  }
 
-  function appointmentInfo(){
+  function calendarInfo(){
     $result = [];
     if (!isGuest()){
       $result['Status'] = true;
