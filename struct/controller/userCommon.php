@@ -17,7 +17,6 @@ class UserCommonController {
     if (isset($_POST['email'])) {
       $this->loginCheck();
     } else {
-
       $this->loginForm();
     }
   }
@@ -28,6 +27,13 @@ class UserCommonController {
     }
   }
   
+  public function isLoggedIn() {
+    $response = array();
+    if(isUserLogin()) $response['login'] = true;
+    else $response['login'] = false;
+    echo json_encode($response);
+    exit;
+  }
 
   public function register() {
     if (isset($_POST['email'])) {
@@ -99,9 +105,14 @@ class UserCommonController {
     view::render('user/showCounsiling.php', $response);
   }
 
-  function selectCounsiling() {
+  function searchCounsiling() {
     $data[] = array();
-    view::render('user/selectOstan.php', $data);
+    view::render('user/searchCounselingCenter.php', $data);
+  }
+
+  function searchPsych() {
+    $data[] = array();
+    view::render('user/searchPsych.php', $data);
   }
 
   function feedCounsiling() {
@@ -117,6 +128,29 @@ class UserCommonController {
         foreach ($records as $record) {
           $name = $record['counselingName'];
           $id = $record['conceil_id'];
+          $out['name'] = $name;
+          $out['id'] = $id;
+          $response['ResultData'][] = $out;
+        }
+      }
+    }
+    echo json_encode($response);
+    exit;
+  }
+
+  function feedPsych() {
+    $response = [];
+    $response['Status'] = false;
+    $response['Error'] = [];
+    $response['ResultData'] = [];
+    $keyword = $_POST['keyword'];
+    $count = strlen(trim($keyword));
+    if ($count >= 1) {
+      $records = User1Model::feedPsych($keyword);
+      if ($records != null) {
+        foreach ($records as $record) {
+          $name = $record['psychName'];
+          $id = $record['psych_id'];
           $out['name'] = $name;
           $out['id'] = $id;
           $response['ResultData'][] = $out;
@@ -297,15 +331,26 @@ class UserCommonController {
     exit;
   }
 
-  public static function cancelAppointmentByuser(){
-    $calendar_id = $_POST['calendar_id'];
-    $cardNum = $_POST['cardNum'];
-    $name = $_POST['name'];
-    $cardNum = stringConverter($cardNum, $type='faToEn');
-    User1Model::cancelAppointmentByuser($calendar_id, $cardNum, $name);
+  function appointmentInfo(){
     $result = [];
-    $result['Status'] = true;
+    if (!isGuest()){
+      $result['Status'] = true;
+      $result['register'] = true;  
+      $result['email'] = $_SESSION['email'];
+    }else{
+      $result['Status'] = false;
+      $result['register'] = false;
+    }
+    $appointment_id = $_POST['appointment_id'];
+    $response = UserCommonModel::getPsychAndCounsellingByAppointmentId($appointment_id);
+    $result['psychName'] = $response[0]['psychName'];
+    $result['counselingName'] = $response[0]['counselingName'];
+    $result['date'] = dateConverter($response[0]['date'], 'enToFa');
+    $result['startTime'] = stringConverter($response[0]['startTime'], $type='enToFa');
+    $result['endTime'] = stringConverter($response[0]['endTime'], $type='enToFa');
+    $result['day'] = $response[0]['day'];
     echo json_encode($result);
     exit;
   }
+
 }
