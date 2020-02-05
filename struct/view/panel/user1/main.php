@@ -120,36 +120,44 @@
 
           <!-- Dropdown menu -->
           <div class="table-responsive">
-          <table class="table text-nowrap table-striped border table-hover table-condensed">
-          <tbody>
-            <tr class="active border-double">
-              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نزدیک ترین نوبت</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="media-right">
-                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                </div>
-                <div class="media-left position">
-                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
-                  <div class="text-muted text-size-small">
-                      ۰۲:۰۰ - ۰۳:۰۰
-                  </div>
-                </div>
-												</td>
-              <td>
-                <div class="text-default text-semibold position">درمانگاه مدت</div>
-              </td>
-              <td>
-                <div class="media-left position">
-                  <div class="text-default text-semibold text-center">دوشنبه</div>
-                  <div class="text-muted text-size-small">
-                      ۱۳۹۸/۱۱/۱۰
-                  </div>
-                </div>
-								</td>
-              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div id="nearest-appointment" value="421" class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+            <?php if($firstAvailable!=null): ?>
+              <table class="table text-nowrap table-striped border table-hover table-condensed">
+                <tbody>
+                  <tr class="active border-double">
+                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نزدیک ترین نوبت</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="media-right">
+                        <a href="#"><img src="/asset/image/per-pic/<?=$firstAvailable['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                      </div>
+                      <div class="media-left position">
+                        <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$firstAvailable['psychName']?></a></div>
+                        <div class="text-muted text-size-small">
+                        <?=stringConverter($firstAvailable['endTime'], 'enToFa')?> - <?=stringConverter($firstAvailable['startTime'], 'enToFa')?> 
+                        </div>
+                      </div>
+										</td>
+                    <td>
+                      <div class="text-default text-semibold position">درمانگاه <?=$firstAvailable['counselingName']?></div>
+                    </td>
+                    <td>
+                      <div class="media-left position">
+                        <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($firstAvailable['day']) ?></div>
+                        <div class="text-muted text-size-small">
+                          <?=dateConverter($firstAvailable['date'], 'enToFa') ?>
+                        </div>
+                      </div>
+								    </td>
+                    <td><div class="text-default text-semibold position">
+                      <?php if($firstAvailable['paymentMode']==1): ?>
+                        پرداخت در محل
+                      <?php endif; ?>
+                      <?php if($firstAvailable['paymentMode']==2): ?>
+                        پرداخت آنلاین
+                      <?php endif; ?>
+                    </div></td>
+                    <td ><div id="nearest-appointment" onclick="runCancelDialog(<?=$firstAvailable['appointment_id']?>)" class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
 												<!-- <td class="text-center">
 													<ul class="icons-list">
 														<li class="dropdown">
@@ -164,204 +172,134 @@
 														</li>
 													</ul>
 												</td> -->
-                      </tr>
-                      
+                  </tr>
+                </tbody>
+              </table>
+            <?php endif; ?>
+            
+            <br>
+            <br>
 
-                     
-          
-          </tbody>
-          
-          </table>
-          
-          <table class="table text-nowrap table-striped border table-hover table-condensed">
-          <tbody>
-            <tr class="active border-double">
-              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های آتی </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="media-right">
-                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                </div>
-                <div class="media-left position">
-                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
-                  <div class="text-muted text-size-small">
-                      ۰۲:۰۰ - ۰۳:۰۰
-                  </div>
-                </div>
-												</td>
-              <td>
-                <div class="text-default text-semibold position">درمانگاه مدت</div>
-              </td>
-              <td>
-                <div class="media-left position">
-                  <div class="text-default text-semibold text-center">دوشنبه</div>
-                  <div class="text-muted text-size-small">
-                      ۱۳۹۸/۱۱/۱۰
-                  </div>
-                </div>
-								</td>
-              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                      </tr>
-                      <tr>
-              <td>
-                <div class="media-right">
-                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                </div>
-                <div class="media-left position">
-                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
-                  <div class="text-muted text-size-small">
-                      ۰۲:۰۰ - ۰۳:۰۰
-                  </div>
-                </div>
-												</td>
-              <td>
-                <div class="text-default text-semibold position">درمانگاه مدت</div>
-              </td>
-              <td>
-                <div class="media-left position">
-                  <div class="text-default text-semibold text-center">دوشنبه</div>
-                  <div class="text-muted text-size-small">
-                      ۱۳۹۸/۱۱/۱۰
-                  </div>
-                </div>
-								</td>
-              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                      </tr>
-                      
-
-                     
-          
-          </tbody>
-          <br>
-          <br>
+            <?php if($allAvailable!=null): ?>
+              <table class="table text-nowrap table-striped border table-hover table-condensed">
+                <tbody>
+                  <tr class="active border-double">
+                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های آتی</td>
+                  </tr>
+                  <?php for ($i=0; $i<count($allAvailable); $i++): ?>
+                    <tr>
+                      <td>
+                        <div class="media-right">
+                          <a href="#"><img src="/asset/image/per-pic/<?=$allAvailable[$i]['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                        </div>
+                        <div class="media-left position">
+                          <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$allAvailable[$i]['psychName']?></a></div>
+                          <div class="text-muted text-size-small">
+                          <?=stringConverter($allAvailable[$i]['endTime'], 'enToFa')?> - <?=stringConverter($allAvailable[$i]['startTime'], 'enToFa')?> 
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="text-default text-semibold position">درمانگاه <?=$allAvailable[$i]['counselingName']?></div>
+                      </td>
+                      <td>
+                        <div class="media-left position">
+                          <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($allAvailable[$i]['day']) ?></div>
+                          <div class="text-muted text-size-small">
+                            <?=dateConverter($allAvailable[$i]['date'], 'enToFa') ?>
+                          </div>
+                        </div>
+                      </td>
+                      <td><div class="text-default text-semibold position">
+                        <?php if($allAvailable[$i]['paymentMode']==1): ?>
+                          پرداخت در محل
+                        <?php endif; ?>
+                        <?php if($allAvailable[$i]['paymentMode']==2): ?>
+                          پرداخت آنلاین
+                        <?php endif; ?>
+                      </div></td>
+                      <td ><div id="nearest-appointment" onclick="runCancelDialog(<?=$allAvailable[$i]['appointment_id'] ?>)"  class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
+                          <!-- <td class="text-center">
+                            <ul class="icons-list">
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+                                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+                                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </td> -->
+                    </tr>
+                  <?php endfor; ?>    
+                </tbody>
+              </table>
+            <?php endif; ?>
           </table>
           
           <br>
           <br>
-          
-          <table class="table text-nowrap table-striped border table-hover table-condensed">
-          <tbody>
-            <tr class="active border-double">
-              <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">کل نوبت های گرفته شده</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="media-right">
-                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                </div>
-                <div class="media-left position">
-                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
-                  <div class="text-muted text-size-small">
-                      ۰۲:۰۰ - ۰۳:۰۰
-                  </div>
-                </div>
-												</td>
-              <td>
-                <div class="text-default text-semibold position">درمانگاه مدت</div>
-              </td>
-              <td>
-                <div class="media-left position">
-                  <div class="text-default text-semibold text-center">دوشنبه</div>
-                  <div class="text-muted text-size-small">
-                      ۱۳۹۸/۱۱/۱۰
-                  </div>
-                </div>
-								</td>
-              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                      </tr>
-                      <tr>
-              <td>
-                <div class="media-right">
-                  <a href="#"><img src="/asset/image/jaber_babaki.jpg" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                </div>
-                <div class="media-left position">
-                  <div class=""><a href="#" class="text-default text-semibold">دکتر علی زمانی</a></div>
-                  <div class="text-muted text-size-small">
-                      ۰۲:۰۰ - ۰۳:۰۰
-                  </div>
-                </div>
-												</td>
-              <td>
-                <div class="text-default text-semibold position">درمانگاه مدت</div>
-              </td>
-              <td>
-                <div class="media-left position">
-                  <div class="text-default text-semibold text-center">دوشنبه</div>
-                  <div class="text-muted text-size-small">
-                      ۱۳۹۸/۱۱/۱۰
-                  </div>
-                </div>
-								</td>
-              <td><div class="text-default text-semibold position">پرداخت در محل</div></td>
-              <td ><div class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                      </tr>
-                      
-
-                     
-          
+          <?php if($canceled!=null): ?>
+            <table class="table text-nowrap table-striped border table-hover table-condensed">
+            <tbody>
+              <tr class="active border-double">
+                <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های لغو شده</td>
+              </tr>
+              <?php for($i=0; $i<count($canceled); $i++): ?>
+                    <tr style="background-color:  #f25555 ">
+                      <td>
+                        <div class="media-right">
+                          <a href="#"><img src="/asset/image/per-pic/<?=$canceled[$i]['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
+                        </div>
+                        <div class="media-left position">
+                          <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$canceled[$i]['psychName']?></a></div>
+                          <div class="text-default text-size-small">
+                          <?=stringConverter($canceled[$i]['endTime'], 'enToFa')?> - <?=stringConverter($canceled[$i]['startTime'], 'enToFa')?> 
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="text-default text-semibold position">درمانگاه <?=$canceled[$i]['counselingName']?></div>
+                      </td>
+                      <td>
+                        <div class="media-left position">
+                          <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($canceled[$i]['day']) ?></div>
+                          <div class="text-default text-size-small">
+                            <?=dateConverter($canceled[$i]['date'], 'enToFa') ?>
+                          </div>
+                        </div>
+                      </td>
+                      <td ><div class="text-default text-semibold position" >
+                        <?php if($canceled[$i]['paymentMode']==1): ?>
+                          پرداخت در محل
+                        <?php endif; ?>
+                        <?php if($canceled[$i]['paymentMode']==2): ?>
+                         پرداخت آنلاین - در انتظار بازگشتن مبلغ
+                        
+                          <?php endif; ?>
+                      </div></td>
+                          <!-- <td class="text-center">
+                            <ul class="icons-list">
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
+                                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
+                                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </td> -->
+                    </tr>
+              <?php endfor; ?>              
           </tbody>
-          
           </table>
+        <?php endif; ?>
         </div>
           
 					<!-- /dropdown menu -->
@@ -383,14 +321,14 @@
 
 <?php
 $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-include "$doc_root/struct/view/panel/user1/dialog.php";  
+include "$doc_root/struct/view/dialog/user1/cancel.php";  
 ?>
 
-  <script>
+  <!-- <script>
     $(document).ready(function(){
       $('#nearest-appointment').click(function(){
       var calendar_id = document.getElementById('nearest-appointment').getAttribute('value');
       $('#cancelDialog').modal('show');
       });
     });
-  </script>
+  </script> -->
