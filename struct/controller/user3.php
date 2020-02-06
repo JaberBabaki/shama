@@ -570,8 +570,8 @@ class User3Controller {
                                       $startDate->format('Y-m-d'),
                                       $weekDay,
                                       $start,
-                                      $startTime->format('H:i'),
-                                      0
+                                      $startTime->format('H:i')
+                                      
             );
             }
           }

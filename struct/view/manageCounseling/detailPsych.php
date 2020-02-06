@@ -25,7 +25,7 @@
                 <?php endif; ?>
                 <?php if($nextAvailable!=null): ?>
                   <span class="next-available-title">نزدیکترین نوبت قابل رزرو</span>
-                      <a id="next-available"  class="apptTimeBtn search-time-fw" value="<?=$nextAvailable[0]?>">
+                      <a id="next-available" onclick="dialog(<?=$nextAvailable[0]?>)"  class="apptTimeBtn search-time-fw">
                         
                         <span><?=$nextAvailable[1]?> </span>
                         
@@ -38,7 +38,7 @@
                 <div class="day-row">
                   <span class="search-time-booknow"><?=$firstAvailableArray[0]?></span>
                   <?php for($i=1; $i<count($firstAvailableArray); $i++): ?>
-                      <a class="apptTimeBtn apptTimeBtnTime" href=""><?=$firstAvailableArray[$i]?></a>
+                      <a class="apptTimeBtn apptTimeBtnTime" onclick="dialog(<?=$firstAvailableArray[$i][0]?>)"><?=$firstAvailableArray[$i][1]?></a>
                       <?php if($i==5):?>
                         <a class="apptTimeBtn apptTimeBtnMore apptMoreShown" href="" style="display: inline-block;">بیشتر...</a>
                       <?php endif; ?>
@@ -50,7 +50,7 @@
                   <span class="search-time-booknow"><?=$secondAvailableArray[0]?></span>
 
                   <?php for($i=1; $i<count($secondAvailableArray); $i++): ?>
-                      <a class="apptTimeBtn apptTimeBtnTime" href=""><?=$secondAvailableArray[$i]?></a>
+                      <a class="apptTimeBtn apptTimeBtnTime" onclick="dialog(<?=$secondAvailableArray[$i][0]?>)"><?=$secondAvailableArray[$i][1]?></a>
                       <?php if($i==5):?>
                         <a class="apptTimeBtn apptTimeBtnMore apptMoreShown" href="" style="display: inline-block;">بیشتر...</a>
                       <?php endif; ?>
@@ -88,50 +88,17 @@
         </div>
     </div>
   </div>
-
-      <!-- /basic datatable -->
-
-<script>
-
-
-
-  // $('#next-available').click(function(event){
-  //   alert('ali');
-  // });
- 
-  // function bookAppointment(){
-  //   //var formData = new FormData();
-  //   nextAvailable = document.getElementById('next-available');
-  //   nextAvailableDialog = document.getElementById('dialog-next-available');
-  //   if (typeof nextAvailableDialog.showModal === "function") {
-  //           nextAvailableDialog.showModal();
-  //       } else {
-  //           alert("The dialog API is not supported by this browser");
-  //       }    
-        //var calendar_id = document.getElementById('next-available').getAttribute('value');
-    //formData.append('calendar_id', calendar_id);
-    //$.ajax({
-    //   url: '/mangeCounseling/bookAppointment',
-    //   type: 'POST',
-    //   dataType: 'JSON',
-    //   data: formData,
-    //   contentType: false,
-    //   processData: false,
-    //   success: function (result) {
-    //     var json = result;
-    //     if ((json.Status == true)) {
-    //       var msg = json.ResultData.message;
-    //       alert(msg);
-    //       location.reload();
-    //     } 
-    //   }
-    // });
-  // }
-
-</script>
-
 </div>
 <?php 
 $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-include "$doc_root/struct/view/user/loginDialog.php";  
+include "$doc_root/struct/view/dialog/userCommon/login.php";  
+include "$doc_root/struct/view/dialog/user4/appointment.php";  
 ?>
+<script>
+function dialog (calendar_id) {
+  // showLoginAndRegDialog(calendar_id);
+  showLoginAndRegDialog(calendar_id, runAppointmentDialog);
+  // runAppointmentDialog(calendar_id);
+  // runAppointmentDialog(calendar_id);
+}
+</script>

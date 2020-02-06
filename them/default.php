@@ -9,6 +9,7 @@
   <title>مشاوره آنلاین</title>
 
   <link rel="stylesheet" href="/asset/css/base.css">
+  <link rel="stylesheet" href="/asset/css/bootstrap.css">
   <link rel="stylesheet" href="/asset/css/bootstrap.min.css">
   <link rel="stylesheet" href="/asset/css/font-awesome.min.css">
   <link rel="stylesheet" href="/asset/css/animate.css">
@@ -17,7 +18,10 @@
   <link rel="stylesheet" href="/asset/css/colors/color-9.css">
   <link rel="stylesheet" href="/asset/css/responsive.css">
   <link rel="stylesheet" href="/asset/css/style-login.css">
-  
+	<link href="/asset/css/components.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/asset/css/sweetalert2/sweetalert2.css">
+
+
   <script src="/asset/js/jquery.min.js"></script>
   <script src="/asset/js/navigation.js"></script>
   <script src="/asset/js/bootstrap.min.js"></script>
@@ -120,13 +124,13 @@
                 <a href="<?php echo homePage(false); ?>" class="f"><span> صفحه اصلی</span></a>
               </li>
               <li >
-                <a href="<?php echo baseUrl(); ?>/UserCommon/selectCounsiling" class="f"><span> مراکز مشاوره </span></a>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchCounsiling" class="f"><span> مراکز مشاوره </span></a>
               </li>
               <li>
                 <a href="#" class="f"><span>مربیان ازدواج</span></a>
               </li>
               <li>
-                <a href="#" class="f"><span>درمانگران</span></a>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchPsych"  class="f"><span>درمانگران</span></a>
               </li>
               <li>
                 <a href="#" class="f"><span>شهروندان </span></a>

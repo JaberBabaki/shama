@@ -54,7 +54,7 @@
               <span class="help-block" style="font-size: 14px"> در نهایت با انتخاب گزینه ثبت درمانگر به مرکز مشاوره اضافه خواهد شد. </span>
             </h4>
 
-            <form action="#" class="main-search">
+            <form  class="main-search">
               <div class="input-group content-group">
                 <div class="has-feedback has-feedback-left">
                   <input type="text" id="edtShenaseh" class="form-control input-xlg" placeholder="جستجو بر اساس شناسه درمانگر ">

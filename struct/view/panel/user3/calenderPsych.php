@@ -171,8 +171,12 @@
                   <td style="text-align: center;"><?=stringConverter($regPsychs[$i]["startTime"], 'enToFa')?><br> تا <br><?=stringConverter($regPsychs[$i]["endTime"], 'enToFa')?></td>
                   <td style="text-align: center;">
                     <?php if($regPsychs[$i]["appointment"]==1):?>
-                      <span style="background-color: lightgreen; padding: 7px 17px; box-shadow: 2px 2px 5px grey;">رزرو شده</span>
+                      <span style="background-color: lightgreen; padding: 7px 17px; box-shadow: 2px 2px 5px grey;">رزرو شده (پرداخت در محل)</span>
                     <?php endif;?>
+                    <?php if($regPsychs[$i]["appointment"]==2):?>
+                      <span style="background-color: lightgreen; padding: 7px 17px; box-shadow: 2px 2px 5px grey;">رزرو شده (پرداخت آنلاین)</span>
+                    <?php endif;?>
+                    
                     <?php if($regPsychs[$i]["appointment"]==0):?>
                       <span style="background-color: yellow; padding: 7px 13px; box-shadow: 2px 2px 5px grey;">رزرو نشده</span>
                     <?php endif;?>

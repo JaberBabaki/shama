@@ -221,5 +221,17 @@ function dateConverter($date, $type='faToEn'){
   
   
 }
+
+function dayNumToDayNameConverter($dayNum){
+  $weekDay = [];
+  $weekDay[0] = "یکشنبه";
+  $weekDay[1] = "دوشنبه";
+  $weekDay[2] = "سه شنبه";
+  $weekDay[3] = "چهار شنبه";
+  $weekDay[4] = "پنجشنبه";
+  $weekDay[5] = "جمعه";
+  $weekDay[6] = "شنبه";
+  return $weekDay[$dayNum];
+}
   
 ?>

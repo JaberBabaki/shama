@@ -5,7 +5,7 @@ class Appointment{
     {
         $this->now = new DateTime();
         $this->now->modify('+20 minute');
-        $this->recordPsych = User3Model::listCalendarOfPsych($shenaseh, $conceil_id, $this->now->format('Y-m-d'), $this->now->format('H:i'));  
+        $this->recordPsych = User3Model::listAvailableCalendarByShenasehAndCounsellingId($shenaseh, $conceil_id, $this->now->format('Y-m-d'), $this->now->format('H:i'));  
         $this->now->modify('00:00');
         $this->recordPsychList = array();
         $date = 0;
@@ -33,16 +33,16 @@ class Appointment{
             $diff = $date->diff($this->now);
             switch ($diff->days){
                 case 0:
-                    return array($this->recordPsych[0]['calender_id'], ' امروز '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
+                    return array($this->recordPsych[0]['calendar_id'], ' امروز '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
                     break;
                 case 1:
-                    return array($this->recordPsych[0]['calender_id'], ' فردا '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
+                    return array($this->recordPsych[0]['calendar_id'], ' فردا '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
                     break;
                 case 2:
-                    return array($this->recordPsych[0]['calender_id'], ' پس فردا '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
+                    return array($this->recordPsych[0]['calendar_id'], ' پس فردا '.stringConverter($date->format('H:i'), 'enToFa').''.$this->pmAm($date->format('H:i')));
                     break;
                 default:
-                    return array($this->recordPsych[0]['calender_id'], stringConverter($diff->days, 'enToFa').'   روز دیگر ساعت   '.stringConverter($date->format('H:i'), 'enToFa').$this->pmAm($date->format('H:i')));
+                    return array($this->recordPsych[0]['calendar_id'], stringConverter($diff->days, 'enToFa').'   روز دیگر ساعت   '.stringConverter($date->format('H:i'), 'enToFa').$this->pmAm($date->format('H:i')));
                     break;
         
             } 
@@ -73,10 +73,22 @@ class Appointment{
             for($i=0; $i<count($this->recordPsychList[0]); $i++){
                 if($i==5)break;
                 $date = new DateTime($this->recordPsychList[0][$i]['date'].$this->recordPsychList[0][$i]['startTime']);
+                $arrayTemp = [];
                 array_push(
-                    $resultArray,
+                    $arrayTemp,
+                    $this->recordPsychList[0][$i]['calendar_id']
+                );
+                
+                array_push(
+                    $arrayTemp,
                     $this->pmAm($date->format('H:i')).''.stringConverter($date->format('H:i'), 'enToFa')
                 );
+
+                array_push(
+                    $resultArray,
+                    $arrayTemp
+                );
+
             }
         }
         return $resultArray;
@@ -92,14 +104,8 @@ class Appointment{
             $resultArray = array();
             switch ($diff->days){
                 case 0:
-                    if($diff->invert==0){
-                        array_push($resultArray, 'امروز');
-                        break;
-                    }else{
-                        array_push($resultArray, 'فردا');
-                        break;
-                    }
-                    
+                    array_push($resultArray, 'امروز');
+                    break; 
                 case 1:
                     array_push($resultArray, 'فردا');
                     break;
@@ -113,9 +119,20 @@ class Appointment{
             for($i=0; $i<count($this->recordPsychList[1]); $i++){
                 if($i==5)break;
                 $date = new DateTime($this->recordPsychList[1][$i]['date'].$this->recordPsychList[1][$i]['startTime']);
+                $arrayTemp = [];
+                array_push(
+                    $arrayTemp,
+                    $this->recordPsychList[1][$i]['calendar_id']
+                );
+                
+                array_push(
+                    $arrayTemp,
+                    $this->pmAm($date->format('H:i')).''.stringConverter($date->format('H:i'), 'enToFa')
+                );
+
                 array_push(
                     $resultArray,
-                    $this->pmAm($date->format('H:i')).''.stringConverter($date->format('H:i'), 'enToFa')
+                    $arrayTemp
                 );
             }
         }
