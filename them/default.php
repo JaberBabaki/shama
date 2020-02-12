@@ -222,7 +222,7 @@
         <div class="copyright-text text-center">
           <span style="font-size: 12px"> تمامی خدمات این سایت، حسب مورد دارای مجوزهای لازم از مراجع مربوطه می باشند و فعالیت های این سایت تابع قوانین و مقررات جمهوری اسلامی ایران است.</span><br>
           <span
-            style="font-size: 12px">  تمام حقوق مادي و معنوي اين سايت متعلق به موسسه آموزش عالی مدت مي باشد.</span><br>
+            style="font-size: 12px">تمام حقوق مادي و معنوي اين سايت متعلق به موسسه آموزش عالی مدت مي باشد.</span><br>
           <span style="font-size: 12px"> Copyright © 2017 All rights reservd </span>
         </div>
       </div>
