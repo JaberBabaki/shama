@@ -12,6 +12,7 @@ class User4Controller {
     $data[] = array();
     $psych = User4Model::checkExistPsych($_SESSION['email']);
     if ($psych != null) {
+      $_SESSION['shenaseh'] = $psych['shenaseh'];
       $data['psych'] = 1;
       $data['shenaseh'] = $psych['shenaseh'];
       $data['psychName'] = $psych['psychName'];
@@ -27,6 +28,49 @@ class User4Controller {
     view::renderPanel('panel/user4/dashboard.php', $data);
   }
 
+
+  function appointments() {
+    $data[] = array();
+    $psych = User4Model::checkExistPsych($_SESSION['email']);
+    if ($psych != null) {
+      $data['psych'] = 1;
+      $data['shenaseh'] = $psych['shenaseh'];
+      $data['psychName'] = $psych['psychName'];
+      $data['psychNationalCode'] = $psych['psychNationalCode'];
+      $data['psychPhoto'] = $psych['psychPhoto'];
+      $data['psychEmail'] = $psych['psychEmailAddress'];
+      $data['psychLicence'] = $psych['psychLicense'];
+      $data['registerTime'] = $psych['registerTime'];
+      $data['lastUpdate'] = $psych['updateTime'];
+    } else {
+      $data['psych'] = 0;
+    }
+    $data['booked'] = User4Model::getBookedAppoitmentsByPsychId($psych['shenaseh']);
+    $data['canceled'] = User4Model::getCanceledAppoitmentsByPsychId($psych['shenaseh']);
+    // print_r($data['booked']);
+    // exit;
+    view::renderPanel('panel/user4/appointments.php', $data);
+  }
+  
+  // function getBookedAndCanceledAppoitmentsByPsychId(){
+  //   $result = [];
+  //   if (isGuest()){
+  //     $result['Status'] = false;
+  //   }else{
+  //     $result['Status'] = true;
+  //   }
+  //   $shenaseh = $_SESSION['shenaseh'];
+  //   $booked = User4Model::getBookedAppoitmentsByPsychId($shenaseh);
+  //   $canceled = User4Model::getCanceledAppoitmentsByPsychId($shenaseh);
+  //   $result['psychName'] = $response[0]['psychName'];
+  //   $result['counselingName'] = $response[0]['counselingName'];
+  //   $result['date'] = dateConverter($response[0]['date'], 'enToFa');
+  //   $result['startTime'] = stringConverter($response[0]['startTime'], $type='enToFa');
+  //   $result['endTime'] = stringConverter($response[0]['endTime'], $type='enToFa');
+  //   $result['day'] = $response[0]['day'];
+  //   echo json_encode($result);
+  //   exit;
+  // }
 
   function informationPsych() {
     $data[] = array();
