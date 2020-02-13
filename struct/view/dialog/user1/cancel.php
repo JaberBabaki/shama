@@ -61,6 +61,7 @@
   <script>
       var baseURL = "<?php echo baseUrl(); ?>";
       var appointment_id;
+      var paymentMode;
       // var appointment_id = document.getElementById('nearest-appointment').getAttribute('value');
       // $('#nearest-appointment').click(function(){
       function runCancelDialog(_appointment_id){
@@ -91,6 +92,7 @@
       var endTime = json.endTime;
       var date = json.date;
       var day = json.day;
+      paymentMode = json.paymentMode;
       var weekDay = new Array(7);
       weekDay[0] = "یکشنبه";
       weekDay[1] = "دوشنبه";
@@ -100,17 +102,64 @@
       weekDay[5] = "جمعه";
       weekDay[6] = "شنبه";
       $("#appointmentText").html("<div>"+"شما برای دکتر "+psychName+" در درمانگاه "+counselingName+" از ساعت "+ startTime +" تا "+ endTime +"  در روز "+  weekDay[day]  +"  "+  date  +" درخواست لغو نوبت کرده اید. "+"</div>");
+    
+      $('#cancel').click(function(){
+        $('#cancelDialog').modal('hide');
+      });
+
+      $('#verify').click(function(){
+        $('#verifyBox').hide(400);
+      if (paymentMode==2){
+        $('#payInfo').show(1000);
+      }else{
+            var formData = new FormData();
+            formData.append('name', '');
+            formData.append('cardNum', '');
+            formData.append('appointment_id', appointment_id);
+            var jsonData;
+            $.ajax({
+                url: baseURL+'/user1/cancelAppointment',
+                type: 'POST',
+                dataType: 'JSON',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    jsonData = result;
+                    if (jsonData.Status == true) {
+                        $('#cancelDialog').modal('hide');
+
+                        Swal.fire({
+                            type: 'success',
+                            position: 'top',
+                            title: 'نوبت شما با موفقیت لغو شد',
+                            text: 'مبلغ تا ۲۴ ساعت آینده به حساب شما انتقال داده می شود',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            onClose: () => {
+                                location.reload(true)
+                            } 
+                        });
+                    }else{
+                        Swal.fire({
+                            type: 'error',
+                            position: 'top',
+                            title: 'مجددا تلاش کنید',
+                            showConfirmButton: false,
+                            timer: 6000,
+                            onClose: location.reload(true), 
+                        });
+                    }
+                    
+                }
+            });
+      }
+      });
     }
 
-    $('#cancel').click(function(){
-        $('#cancelDialog').modal('hide');
-    });
 
-    $('#verify').click(function(){
-      $('#verifyBox').hide(400);
-      $('#payInfo').show(1000);
-      
-    });
+
+
 
     $('#cancelBtn').click(function(){
       $('#cancelDialog').modal('hide');
