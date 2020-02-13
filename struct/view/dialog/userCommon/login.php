@@ -131,6 +131,7 @@ function showLoginAndRegDialog(_calendar_id, runFunction=null){
     var status;
     var formData = new FormData();
     calendar_id = _calendar_id;
+    var runFunctionPermit = false;
     $.ajax({
         url: baseURL+'/userCommon/isLoggedIn',
         type: 'GET',
@@ -170,6 +171,7 @@ function showLoginAndRegDialog(_calendar_id, runFunction=null){
                                 }
                                 else{
                                     $("#loginAndRegDialog").modal("hide");
+                                    runFunctionPermit = true;
                                     Swal.fire({
                                         type: 'success',
                                         position: 'top',
@@ -177,7 +179,7 @@ function showLoginAndRegDialog(_calendar_id, runFunction=null){
                                         showConfirmButton: false,
                                         timer: 2000,
                                     });
-                                    runFunction(calendar_id);
+                                    if (runFunctionPermit==true) runFunction(calendar_id);
                                     //   paymentSteps(jsonData, email = emailData);
                                 }
                             } 
