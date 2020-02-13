@@ -4,20 +4,6 @@ class Appointment{
     function __construct($user_id){
         $this->user_id = $user_id;
         $this->record = User1Model::getBookedAppointmentByUserId($user_id);  
-        // $date = 0;
-        // $dateId = -1;
-        // if($this->recordPsych!=null){
-        //     for ($i=0; $i<count($this->recordPsych); $i++){
-        //         if ($this->recordPsych[$i]['date']==$date){
-        //             $this->recordPsychList[$dateId][]= $this->recordPsych[$i];
-        //             //($this->recordPsychList[$dateId], $this->recordPsych[$i]);
-        //         }else{
-        //             $dateId++;
-        //             $date = $this->recordPsych[$i]['date'];
-        //             $this->recordPsychList[$dateId][] = $this->recordPsych[$i]; 
-        //         }     
-        //     }
-        // }
             
     }
 
