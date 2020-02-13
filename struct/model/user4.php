@@ -40,4 +40,47 @@ class User4Model {
     $record=$db->first("SELECT * FROM s_psych WHERE shenaseh='$shenaseh'");
     return $record;
   }
+
+  public static function getBookedAppoitmentsByPsychId($shenaseh){
+    $db=Db::getInstance();
+    $record=$db->query("
+                      SELECT
+                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode
+                      FROM
+                        s_booked_appointment t1
+                      INNER JOIN
+                        s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
+                      INNER JOIN
+                      s_counseling_center t3 ON t2.counseling_id=t3.conceil_id
+                      WHERE 
+                        t2.psychIdentity='$shenaseh'
+                      ORDER BY 
+                        t2.date ASC,
+                        t2.day ASC,
+                        t2.startTime ASC
+                        ");
+    return $record;
+  }
+
+  public static function getCanceledAppoitmentsByPsychId($shenaseh){
+    $db=Db::getInstance();
+    $record=$db->query("
+                      SELECT
+                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode
+                      FROM
+                        s_canceled_appointment t1
+                      INNER JOIN
+                        s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
+                      INNER JOIN
+                      s_counseling_center t3 ON t2.counseling_id=t3.conceil_id
+                      WHERE 
+                        t2.psychIdentity='$shenaseh'
+                      ORDER BY 
+                        t2.date ASC,
+                        t2.day ASC,
+                        t2.startTime ASC
+                        ");
+    return $record;
+  }
+
 }
