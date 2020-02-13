@@ -51,7 +51,7 @@ class UserCommonModel {
     $db = Db::getInstance();
     $record = $db->query("
                         SELECT 
-                          psych.psychName, center.counselingName, t2.startTime, t2.endTime, t2.day, t2.date
+                          psych.psychName, center.counselingName, t2.startTime, t2.endTime, t2.day, t2.date, t1.paymentMode
                         FROM 
                           s_booked_appointment t1 
                         INNER JOIN 
@@ -62,6 +62,24 @@ class UserCommonModel {
                           s_counseling_center center on center.conceil_id=t2.counseling_id 
                         WHERE 
                             t1.appointment_id=$appointment_id               
+                        ");
+    
+    return $record;
+  }
+
+  public static function getPsychInCounselingByPsychId($psych_id){
+    $db = Db::getInstance();
+    $record = $db->query("
+                        SELECT 
+                          t3.counselingName, t1.counseil_id, t1.psychShenaseh, t2.psychName
+                        FROM 
+                          s_psych_in_counseling t1 
+                        INNER JOIN 
+                          s_psych t2 on t1.psychShenaseh=t2.shenaseh 
+                        INNER JOIN 
+                          s_counseling_center t3 on t1.counseil_id=t3.conceil_id 
+                        WHERE 
+                            t2.psych_id=$psych_id               
                         ");
     
     return $record;
