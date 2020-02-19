@@ -87,7 +87,15 @@ class User3Model {
   }
   public static function listPsychInCenter($counseilId) {
     $db = Db::getInstance();
-    $record=$db->query("SELECT * FROM s_psych INNER JOIN s_psych_in_counseling WHERE s_psych.shenaseh=s_psych_in_counseling.psychShenaseh && s_psych_in_counseling.counseil_id=$counseilId");
+    $record=$db->query("
+                      SELECT
+                       * 
+                      FROM
+                       s_psych t1
+                      INNER JOIN
+                        s_psych_in_counseling t2
+                      WHERE
+                       t1.shenaseh=t2.psychShenaseh && t2.counseil_id=$counseilId");
     return $record;
   }
   
