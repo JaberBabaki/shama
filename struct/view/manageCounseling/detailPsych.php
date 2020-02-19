@@ -96,9 +96,6 @@ include "$doc_root/struct/view/dialog/user4/appointment.php";
 ?>
 <script>
 function dialog (calendar_id) {
-  // showLoginAndRegDialog(calendar_id);
-  showLoginAndRegDialog(calendar_id, runAppointmentDialog);
-  // runAppointmentDialog(calendar_id);
-  // runAppointmentDialog(calendar_id);
-}
+    showLoginAndRegDialog(calendar_id, runAppointmentDialog);
+  }
 </script>

@@ -508,8 +508,28 @@ class User3Controller {
     }
     $data['info']=$info;
     $data['regPsychs'] = User3Model::listCalenderInCounselling($counsilingId);
+    $booked = User3Model::listBookedAppointmentBycouselingId($counsilingId);
+    if ($data['regPsychs']!=null){
+      if ($booked == null){
+        for ($i=0; $i<count($data['regPsychs']); $i++){
+          $data['regPsychs'][$i]['appointment'] = 0;
+        }
+      }
+      else{
+        for ($i=0; $i<count($data['regPsychs']); $i++){
+          for ($j=0; $j<count($booked); $j++){
+            if ($data['regPsychs'][$i]['calendar_id']==$booked[$j]['calendar_id']){
+              $data['regPsychs'][$i]['appointment'] = $booked[$j]['paymentMode'];
+            }else{
+              $data['regPsychs'][$i]['appointment'] = 0;
+            }
+          }
+        }
+      }
+    }
     view::renderPanel('panel/user3/calenderPsych.php', $data);
   }
+
   function registerCalender() {
     $response = [];
     $response['Status'] = false;
@@ -523,6 +543,9 @@ class User3Controller {
       $days = $_POST['days'];
       $start = $_POST['start'];
       $end = $_POST['end'];
+      $fee = $_POST['fee'];
+      $duration = $_POST['duration'];
+      $timeBeforAppointment = $_POST['timeBeforAppointment'];
       $recordUser = UserBase::LoginCheckPerTask();
       $counsilingId = $this->checkExistInfoCounseling(false);
       $recordPsychInCenter = User3Model::checkExistPsychInCenter($counsilingId, $shenaseh);
@@ -553,7 +576,11 @@ class User3Controller {
       $startDate = new DateTime($from); 
       $endDate = new DateTime($to);
       $intervalHour = 1;
-      $intervalMinute = 0;
+      // print('ali');
+      // exit;
+      //  explode(':', $duration)[0];
+      $intervalMinute = 0; 
+      // explode(':', $duration)[1];
       while($startDate <= $endDate ){
         $startTime = new DateTime($seperatedStart[0]);
         $endTime = new DateTime($to.$seperatedEnd[0]);  
@@ -570,7 +597,10 @@ class User3Controller {
                                       $startDate->format('Y-m-d'),
                                       $weekDay,
                                       $start,
-                                      $startTime->format('H:i')
+                                      $startTime->format('H:i'),
+                                      $fee,
+                                      $duration,
+                                      $timeBeforAppointment
                                       
             );
             }

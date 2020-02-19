@@ -34,4 +34,16 @@ class User2Model {
     $record=$db->first("SELECT * FROM s_coach WHERE s_coach.user_id IN (SELECT user_id FROM s_user WHERE userName='$email')");
     return $record;
   }
+
+  public static function feedCoach($keyword){
+    $db=Db::getInstance();
+    $records = $db->query("
+                        SELECT
+                         *
+                        FROM
+                        s_coach
+                        WHERE 
+                          coachName LIKE '%$keyword%'");
+    return $records;
+  }
 }

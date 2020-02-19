@@ -128,7 +128,7 @@
                 <a href="<?php echo baseUrl(); ?>/UserCommon/searchCounsiling" class="f"><span> مراکز مشاوره </span></a>
               </li>
               <li>
-                <a href="#" class="f"><span>مربیان ازدواج</span></a>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchCoach" class="f"><span>مربیان ازدواج</span></a>
               </li>
               <li>
                 <a href="<?php echo baseUrl(); ?>/UserCommon/searchPsych"  class="f"><span>درمانگران</span></a>

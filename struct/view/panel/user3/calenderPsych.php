@@ -101,6 +101,20 @@
                   <input type="text" id="edtTimeEnd" class="form-control time-picker" name="edtEstablishDate" readonly="readonly"
                          placeholder="تا زمان">
               </div>
+              <br>
+              <br>
+              <div class="col-md-2">
+                <input type="text" id="edtFee" class="form-control" name="edtEstablishFee"
+                 placeholder="قیمت ">
+              </div>
+              <div class="col-md-2">
+                <input type="text" id="edtDuration" class="form-control time-picker" name="edtEstablishDuration"
+                 placeholder="طول هر نوبت">
+              </div>
+              <div class="col-md-2">
+                <input type="text" id="edtTimeBeforAppointment" class="form-control time-picker" name="edtEstablishTimeBeforAppointment"
+                 placeholder="بازه مجاز برای رزرو نوبت">
+              </div>
             </div>
             <br>
             <br>
@@ -345,6 +359,12 @@ function registerCalender() {
   var edtDays = $("#lstDays").val();
   var edtTimeStart = $("#edtTimeStart").val();
   edtTimeStart = convertNumberFatoEn(edtTimeStart);
+  var edtFee = $("#edtFee").val();
+  edtFee = convertNumberFatoEn(edtFee);
+  var edtDuration = $("#edtDuration").val();
+  edtDuration = convertNumberFatoEn(edtDuration.split(" ")[0]);
+  var edtTimeBeforAppointment = $("#edtTimeBeforAppointment").val();
+  edtTimeBeforAppointment = convertNumberFatoEn(edtTimeBeforAppointment.split(" ")[0]);
   var edtTimeEnd = $("#edtTimeEnd").val();
   edtTimeEnd = convertNumberFatoEn(edtTimeEnd);
   var formData = new FormData();
@@ -364,6 +384,10 @@ function registerCalender() {
     formData.append('days', edtDays);
     formData.append('start', edtTimeStart);
     formData.append('end', edtTimeEnd);
+    formData.append('fee', edtFee);
+    formData.append('duration', edtDuration);
+    formData.append('timeBeforAppointment', edtTimeBeforAppointment);
+
     //interval should be get in the front-end and replace with 1
     $.ajax({
       url: '/user3/registerCalender',

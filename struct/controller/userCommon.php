@@ -151,8 +151,10 @@ class UserCommonController {
         foreach ($records as $record) {
           $name = $record['psychName'];
           $id = $record['psych_id'];
+          $psych_id = $record['psych_id'];
           $out['name'] = $name;
           $out['id'] = $id;
+          $out['psych_id'] = $psych_id;
           $response['ResultData'][] = $out;
         }
       }
@@ -344,6 +346,7 @@ class UserCommonController {
     $appointment_id = $_POST['appointment_id'];
     $response = UserCommonModel::getPsychAndCounsellingByAppointmentId($appointment_id);
     $result['psychName'] = $response[0]['psychName'];
+    $result['paymentMode'] = $response[0]['paymentMode'];
     $result['counselingName'] = $response[0]['counselingName'];
     $result['date'] = dateConverter($response[0]['date'], 'enToFa');
     $result['startTime'] = stringConverter($response[0]['startTime'], $type='enToFa');
@@ -353,4 +356,22 @@ class UserCommonController {
     exit;
   }
 
+  function listCounselingByPsychId(){
+    $result = [];
+    $result['Status'] = true;
+    $psych_id = $_POST['psych_id'];
+    $response['resultData'] = [];
+    $response = UserCommonModel::getPsychInCounselingByPsychId($psych_id);
+    foreach ($response as $record) {
+      $out['counselingName'] = $record['counselingName'];
+      $out['counseil_id'] = $record['counseil_id'];
+      $out['psychShenaseh'] = $record['psychShenaseh'];
+      $result['resultData'][] = $out;
+    }
+    $result['psychName'] = $response[0]['psychName'];
+    echo json_encode($result);
+    exit;
+  }
+
 }
+

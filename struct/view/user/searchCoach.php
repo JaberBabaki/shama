@@ -37,7 +37,7 @@
     var value = val;
     $.ajax({
         method: 'POST',
-        url: '/UserCommon/feedPsych',
+        url: '/UserCommon/feedCoach',
         dataType: 'JSON',
         data: {
           keyword: value
@@ -46,33 +46,26 @@
           var html = '';
           var baseURL = "<?php echo baseUrl(); ?>";
           for (var i in data.ResultData) {
-            html += '<br><strong style="display: block;text-align:right; margin-right: 30px; color: black;" onclick="runSearchPsychDialog('+data.ResultData[i].psych_id +')" ><a >' + data.ResultData[i].name + ' </a></strong><br>';
+            html += '<br><strong style="display: block;text-align:right; margin-right: 30px"><a target="_blank"  href="' + baseURL + '/mangeCounseling/homePageCounseling/' + data.ResultData[i].id + '">' + data.ResultData[i].name + ' </a></strong><br>';
           }
-          var tooltipsterHtml = '<div style="direction: rtl;width:999px" >' + html + '</div>';
+          var tooltipsterHtml = '<div style="direction: rtl;width:999px">' + html + '</div>';
           $("#search").tooltipster('content', tooltipsterHtml);
         }
       }
     );
   }
 
- 
 </script>
-
-<?php 
-      $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-      include "$doc_root/struct/view/dialog/manageCounseling/searchPsych.php";    
-?>
-
 <section class='block-wrapper pt-0'>
   <div class='container'>
     <div id="IranMap" class="clear">
       <div class="form-group form-group-material">
         <div class="form-group form-group-material">
-          <span class="help-block tac" style="font-size: 15px;display: block">لطفا در این بخش نام کامل درمانگر را بنویسید:</span>
+          <span class="help-block tac" style="font-size: 15px;display: block">لطفا در این بخش نام کامل مربی را بنویسید:</span>
           <br>
           <input class="form-control" title="Search" id="search" name="edtCenterName"
                  onkeyup="runSearch(this.value)"
-                 placeholder="نام درمانگر">
+                 placeholder="نام مربی">
         </div>
       </div>
       <br>

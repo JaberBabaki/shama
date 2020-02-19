@@ -23,6 +23,7 @@
               <li class="active"><a href='/user4/dashboard'><i class="icon-home4"></i> <span>داشبورد</span></a>
               </li>
               <li><a href="informationPsych"><i class="icon-people"></i> <span>اطلاعات کاربری درمانگر</span></a></li>
+              <li><a href="/user4/appointments"><i class="icon-people"></i> <span>نوبت ها</span></a></li>
             </ul>
           </div>
         </div>

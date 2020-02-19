@@ -90,21 +90,34 @@ class User3Model {
     $record=$db->query("SELECT * FROM s_psych INNER JOIN s_psych_in_counseling WHERE s_psych.shenaseh=s_psych_in_counseling.psychShenaseh && s_psych_in_counseling.counseil_id=$counseilId");
     return $record;
   }
+  
   public static function listCalenderInCounselling($counseilId) {
     $db = Db::getInstance();
-    $record=$db->query("SELECT * 
-                        FROM s_psych 
-                        INNER JOIN s_calendar_appointment 
-                        WHERE s_psych.shenaseh=s_calendar_appointment.psychIdentity && s_calendar_appointment.counseling_id=$counseilId                         
+    $record=$db->query("SELECT *
+                        FROM s_psych t1
+                        INNER JOIN s_calendar_appointment t2 ON t1.shenaseh=t2.psychIdentity
+                        WHERE t2.counseling_id=$counseilId                         
                         ORDER BY 
                           date ASC,
                           day ASC,
                           startTime ASC;");
     return $record; 
   }
-  public static function insertCalender($shenaseh, $counsilingId, $date, $day, $startTime, $endTime) {
+
+  public static function listBookedAppointmentBycouselingId($counseilId) {
     $db = Db::getInstance();
-    $db->insert("INSERT INTO s_calendar_appointment (psychIdentity, counseling_id, date, day, startTime, endTime)VALUES('$shenaseh', $counsilingId, '$date', '$day', '$startTime', '$endTime')");
+    $record=$db->query("
+                        SELECT t1.paymentMode, t1.calendar_id
+                        FROM s_booked_appointment t1
+                        INNER JOIN s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
+                        WHERE t2.counseling_id=$counseilId                         
+                          ");
+    return $record; 
+  }
+
+  public static function insertCalender($shenaseh, $counsilingId, $date, $day, $startTime, $endTime, $fee, $duration, $timeBeforAppointment) {
+    $db = Db::getInstance();
+    $db->insert("INSERT INTO s_calendar_appointment (psychIdentity, counseling_id, date, day, startTime, endTime, fee, duration, timeBeforAppointment)VALUES('$shenaseh', $counsilingId, '$date', '$day', '$startTime', '$endTime', $fee, '$duration', '$timeBeforAppointment')");
 }
   public static function getPsych($param) {
   $db = Db::getInstance();
