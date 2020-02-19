@@ -114,7 +114,7 @@
                           <i class="icon-menu9"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                          <li onclick="start()"><a ><i class="icon-file-pdf"></i>شروع</a></li>
+                          <li onclick="runStartAppointmentDialog()"><a ><i class="icon-file-pdf"></i>شروع</a></li>
                           <li><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>
                           <li><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
                         </ul>
@@ -153,9 +153,7 @@ function showBookedAppointments(){
 //   alert("You have selected the country - " + psychShenaseh);
 // });
 
-function start(){
-  runStartAppointmentDialog();
-  }
+
 
 </script>
 <!-- <script>
