@@ -47,8 +47,12 @@ class User4Controller {
     }
     $data['booked'] = User4Model::getBookedAppoitmentsByPsychId($psych['shenaseh']);
     $data['canceled'] = User4Model::getCanceledAppoitmentsByPsychId($psych['shenaseh']);
-    // print_r($data['booked']);
-    // exit;
+    $result = UserCommonModel::getCounselingByPsychId($psych['psych_id']);
+    $info='';
+    for ($i = 0; $i <= count($result) - 1; $i++) {
+      $info=$info .'  <option value=' . $result[$i]['counseil_id'] . '>' . $result[$i]['counselingName'] . '</option>';
+    }
+    $data['info'] = $info;
     view::renderPanel('panel/user4/appointments.php', $data);
   }
   

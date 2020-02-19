@@ -27,6 +27,7 @@ class User2Controller{
     $data['record']=$recordCoach;
     view::renderPanel('panel/user2/informationCenter.php', $data);
   }
+
   function registerCoach() {
     $response = [];
     $response['Status'] = false;
