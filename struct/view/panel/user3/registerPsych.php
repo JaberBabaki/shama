@@ -41,7 +41,7 @@
         </div>
         <div class="breadcrumb-line" style="padding-left: 10px;padding-bottom: 10px;padding-top: 10px;"><a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
           <a type="submit" href='/user3/registerPsych' class="btn btn-primary">ثبت درمانگر <i class="icon-list-ordered position-right"></i></a>
-          <button type="submit" class="btn btn-primary">لیست درمانگر<i class="icon-plus2 position-right"></i></button>
+          <a type="submit" href='/user3/listPsych' class="btn btn-primary">لیست درمانگر<i class="icon-list-ordered position-right"></i></a>
           <a type="submit" href='/user3/calenderPsych' class="btn btn-primary">ثبت تقویم برای درمانگر<i class="icon-list-ordered position-right"></i></a>
         </div>
       </div>
