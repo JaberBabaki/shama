@@ -7,7 +7,6 @@
             <div class="media">
               <a href="#" class="media-left"><img src="/asset/image/logo/placeholder.jpg" class="img-circle img-sm"
                                                   alt=""></a>
-
               <div class="media-body">
                 <span class="media-heading text-semibold"><?php if (!isGuest()) {
                     echo $_SESSION['email'];
