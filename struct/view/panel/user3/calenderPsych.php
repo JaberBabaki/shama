@@ -344,6 +344,7 @@ function convertNumberFatoEn (str){
 
 function registerCalender() {
   var psychShenaseh = $('#lstPsychName').find('option:selected').val();
+  alert("d");
   var edtFrom = $("#edtDateFrom").val();
   edtFrom = convertNumberFatoEn(edtFrom);
   moment.locale('fa'); 

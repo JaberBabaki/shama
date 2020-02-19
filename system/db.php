@@ -43,6 +43,7 @@
       //print_r($sql);
       //exit;
       $result=$this->connection->query($sql);
+      //print_r(!$result);
       if(!$result){
         echo "Query".$sql."failed due to".mysql_error($this->connection);
         exit;
