@@ -67,7 +67,7 @@ class UserCommonModel {
     return $record;
   }
 
-  public static function getPsychInCounselingByPsychId($psych_id){
+  public static function getCounselingByPsychId($psych_id){
     $db = Db::getInstance();
     $record = $db->query("
                         SELECT 

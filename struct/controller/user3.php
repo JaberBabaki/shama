@@ -332,6 +332,7 @@ class User3Controller {
     }
   }
 
+
   function registerPsych() {
     if (!isset($_POST['shenaseh']) && !isset($_POST['id'])) {
       $data[] = array();
@@ -491,9 +492,12 @@ class User3Controller {
     $recordUser = UserBase::LoginCheckPerTask();
     $counsilingId = $this->checkExistInfoCounseling(true);
     $data[] = array();
-    if ($counsilingId != null) {
-      $recordPsych = User3Model::listPsychInCenter($counsilingId['counsel_id']);
+    $recordPsych = User3Model::listPsychInCenter($counsilingId);
+    for ($i=0; $i<count($recordPsych); $i++){
+        // joint query in select
+        $data['psychInfo'][$i] = User3Model::getPsychInfoByShenas($recordPsych[$i]['psychShenaseh']);
     }
+    $data['params'] = $counsilingId;
     view::renderPanel('panel/user3/listInfoPsych.php', $data);
 
   }
@@ -503,10 +507,12 @@ class User3Controller {
     $counsilingId = $this->checkExistInfoCounseling(false);
     $result = User3Model::listPsychInCenter($counsilingId);
     $info='';
-    for ($i = 0; $i <= count($result) - 1; $i++) {
-      $info=$info .'  <option value=' . $result[$i]['shenaseh'] . '>' . $result[$i]['psychName'] . '</option>';
+    if ($result!=null){
+      for ($i = 0; $i <= count($result) - 1; $i++) {
+        $info=$info .'  <option value=' . $result[$i]['shenaseh'] . '>' . $result[$i]['psychName'] . '</option>';
+      }
+      $data['info']=$info;
     }
-    $data['info']=$info;
     $data['regPsychs'] = User3Model::listCalenderInCounselling($counsilingId);
     $booked = User3Model::listBookedAppointmentBycouselingId($counsilingId);
     if ($data['regPsychs']!=null){

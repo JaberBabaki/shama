@@ -156,6 +156,31 @@ class UserCommonController {
           $out['id'] = $id;
           $out['psych_id'] = $psych_id;
           $response['ResultData'][] = $out;
+
+        }
+      }
+    }
+    echo json_encode($response);
+    exit;
+  }
+
+  
+  function feedCoach() {
+    $response = [];
+    $response['Status'] = false;
+    $response['Error'] = [];
+    $response['ResultData'] = [];
+    $keyword = $_POST['keyword'];
+    $count = strlen(trim($keyword));
+    if ($count >= 1) {
+      $records = User2Model::feedCoach($keyword);
+      if ($records != null) {
+        foreach ($records as $record) {
+          $name = $record['coachName'];
+          $id = $record['coach_id'];
+          $out['name'] = $name;
+          $out['id'] = $id;
+          $response['ResultData'][] = $out;
         }
       }
     }
@@ -333,6 +358,13 @@ class UserCommonController {
     exit;
   }
 
+
+  function searchCoach(){
+    $data = [];
+    view::render('user/searchCoach.php', $data);
+  }
+
+
   function appointmentInfo(){
     $result = [];
     if (!isGuest()){
@@ -361,7 +393,7 @@ class UserCommonController {
     $result['Status'] = true;
     $psych_id = $_POST['psych_id'];
     $response['resultData'] = [];
-    $response = UserCommonModel::getPsychInCounselingByPsychId($psych_id);
+    $response = UserCommonModel::getCounselingByPsychId($psych_id);
     foreach ($response as $record) {
       $out['counselingName'] = $record['counselingName'];
       $out['counseil_id'] = $record['counseil_id'];
