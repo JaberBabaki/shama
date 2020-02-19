@@ -46,16 +46,23 @@
           var html = '';
           var baseURL = "<?php echo baseUrl(); ?>";
           for (var i in data.ResultData) {
-            html += '<br><strong style="display: block;text-align:right; margin-right: 30px"><a target="_blank"  href="' + baseURL + '/mangeCounseling/detailPsych/' + data.ResultData[i].id + '">' + data.ResultData[i].name + ' </a></strong><br>';
+            html += '<br><strong style="display: block;text-align:right; margin-right: 30px; color: black;" onclick="runSearchPsychDialog('+data.ResultData[i].psych_id +')" ><a >' + data.ResultData[i].name + ' </a></strong><br>';
           }
-          var tooltipsterHtml = '<div style="direction: rtl;width:999px">' + html + '</div>';
+          var tooltipsterHtml = '<div style="direction: rtl;width:999px" >' + html + '</div>';
           $("#search").tooltipster('content', tooltipsterHtml);
         }
       }
     );
   }
 
+ 
 </script>
+
+<?php 
+      $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
+      include "$doc_root/struct/view/dialog/manageCounseling/searchPsych.php";    
+?>
+
 <section class='block-wrapper pt-0'>
   <div class='container'>
     <div id="IranMap" class="clear">
