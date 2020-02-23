@@ -81,23 +81,22 @@
 				<div class="sidebar-content">
 
 					<!-- User menu -->
-					<div class="sidebar-user-material">
+					<div class="sidebar-user-material" style="height: 511px;">
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
 								<a href="<?php echo baseUrl(); ?>/user1/mainPage"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
 								<h5 style="text-align: center; margin-top: 19px;">zamaniali1995@gmail.com</h5>
-							</div>
-														
+							</div>								
 						</div>
 						
 						<div class="navigation-wrapper" id="user-nav">
 							<ul class="navigation ">
               <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="active text-right"><span>پروفایل من</span></a></li>
-								<li><a href="<?php echo baseUrl(); ?>/user1/showReserved" class="text-right"><span>نوبت های رزرو شده</span></a></li>
+              <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>نوبت های رزرو شده</span></a></li>
 								<!-- <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li> -->
 								<!-- <li class="divider"></li> -->
-								<li><a href="<?php echo baseUrl(); ?>/user1/completePersonalData" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
-								<li><a href="#" class="text-right"></i> <span>خروج</span></a></li>
+								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
+								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"></i> <span>خروج</span></a></li>
 							</ul>
 						</div>
 					</div>

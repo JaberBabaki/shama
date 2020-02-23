@@ -62,18 +62,25 @@
               </ul>
             </div>
           </div>
-
-          <div class="panel-body tac">
-            لیست درمانگر های مرکز بر اساس حروف الفبا مرتب شده است ، میتوانید از با انتخاب فیلتر مورد نظر جستجو بر اساس
-            فیلتر داشته باشید.
-          </div>
+          <?php if($params!=null):?>
+            <div class="panel-body tac">
+              لیست درمانگر های مرکز بر اساس حروف الفبا مرتب شده است ، میتوانید از با انتخاب فیلتر مورد نظر جستجو بر اساس
+              فیلتر داشته باشید.
+            </div>
+          <?php endif;?>
+          <?php if($params==null):?>
+            <div class="panel-body tac">
+              برای مشاهده لیست درمانگران باید اطلاعات مرکز را تکمیل کنید.
+            </div>
+          <?php endif;?>
+          
           <br>
 <br>
 <section class="block-wraper p-0">
   <div class="container">
 
   <div class="row" >
-    <?php if($psychInfo!=null):?>
+    <?php if($params!=null):?>
       <?php for($i=0; $i<count($psychInfo); $i++): ?>
         <div class="col-lg-3 col-md-6" style="background-color:#ffffff; margin-left: 4px; margin-bottom: 8px;margin-right: 4px">
           <div class="thumbnail">

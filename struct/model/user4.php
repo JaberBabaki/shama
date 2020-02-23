@@ -45,7 +45,7 @@ class User4Model {
     $db=Db::getInstance();
     $record=$db->query("
                       SELECT
-                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode
+                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode, t2.calendar_id
                       FROM
                         s_booked_appointment t1
                       INNER JOIN
@@ -61,6 +61,26 @@ class User4Model {
                         ");
     return $record;
   }
+  
+  public static function startAppointment($calendar_id, $user_id){
+    $db=Db::getInstance();
+    $record=$db->insert("
+                        INSERT INTO
+                         s_info_appointment
+                        (calendar_id, user_id)VALUES($calendar_id, $user_id) 
+                        ");
+    return $record;
+  }
+
+  // public static function endAppointment($calendar_id, $data){
+  //   $db=Db::getInstance();
+  //   $record=$db->insert("
+  //                       INSERT INTO
+  //                        s_info_appointment
+  //                       (calendar_id, user_id)VALUES($calendar_id, $user_id) 
+  //                       ");
+  //   return $record;
+  // }
 
   public static function getCanceledAppoitmentsByPsychId($shenaseh){
     $db=Db::getInstance();

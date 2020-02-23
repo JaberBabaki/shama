@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>پنل مدیرت سامانه شبکه ملی ازدواج</title>
+
+  
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/asset/css/base.css">
   <link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
@@ -54,6 +56,7 @@
   <script type="text/javascript" src="/asset/js/plugins/pickers/pickadate/legacy.js"></script>
 
   <script type="text/javascript" src="/asset/js/pages/picker_date.js"></script>
+
 </head>
 <body>
 <div class="navbar navbar-inverse">

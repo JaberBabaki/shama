@@ -62,6 +62,7 @@
                   <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="End-date: activate to sort column ascending" style="text-align: center;">تاریخ</th>
                   <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Days" style="text-align: center;">ساعت</th>
                   <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">روز</th>
+                  <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">تعداد جلسات انجام شده</th>
                   <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="text-align: center;">عملیات</th>
                 </tr>
               </thead>
@@ -106,6 +107,7 @@
                         }
                       ?>
                     </td>
+                    <td style="text-align: center;"><?=stringConverter($booked[$i]['number_of_sessions'], 'enToFa') ?></td>
                   <td class="text-center">
                     <ul class="icons-list">
                       <li class="dropdown">
@@ -113,9 +115,9 @@
                           <i class="icon-menu9"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                          <li onclick="runStartAppointmentDialog()"><a ><i class="icon-file-pdf"></i>شروع</a></li>
+                          <li id="start" onclick="runStartAppointmentDialog()"><a ><i class="icon-file-pdf"></i>شروع</a></li>
                           <li><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>
-                          <li><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
+                          <li id="finish"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -136,6 +138,8 @@ include "$doc_root/struct/view/dialog/user4/startAppointment.php";
 ?>
 
 <script>
+$("#finish").hide();
+// function registerCalender() {
   var psychShenaseh;
   function showBookedAppointments() {
     psychShenaseh= $('#selectedCounseling').find('option:selected').val();
