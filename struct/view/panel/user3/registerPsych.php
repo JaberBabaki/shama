@@ -41,7 +41,7 @@
         </div>
         <div class="breadcrumb-line" style="padding-left: 10px;padding-bottom: 10px;padding-top: 10px;"><a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
           <a type="submit" href='/user3/registerPsych' class="btn btn-primary">ثبت درمانگر <i class="icon-list-ordered position-right"></i></a>
-          <a type="submit" href='/user3/listPsych' class="btn btn-primary">لیست درمانگر<i class="icon-list-ordered position-right"></i></a>
+          <a type="submit" href='/user3/listPsych' class="btn btn-primary">لیست درمانگر<i class="icon-plus2 position-right"></i></a>
           <a type="submit" href='/user3/calenderPsych' class="btn btn-primary">ثبت تقویم برای درمانگر<i class="icon-list-ordered position-right"></i></a>
         </div>
       </div>
@@ -53,21 +53,20 @@
               <span class="help-block" style="font-size: 14px">با انتخاب جستجو می توانید اطلاعات درمانگر را مشاهده کنید</span>
               <span class="help-block" style="font-size: 14px"> در نهایت با انتخاب گزینه ثبت درمانگر به مرکز مشاوره اضافه خواهد شد. </span>
             </h4>
-
-            <form  class="main-search">
-              <form action="#" class="main-search">
-                <div class="input-group content-group" style="width: 100%;">
-                  <div class="form-group">
-                    <select id="lstPsychName" name="location" data-placeholder="نام درمانگر" class="select">
-                      <option></option>
-                      <?php echo $info ?>
-                      </optgroup>
-                    </select>
+              <div class="input-group content-group">
+                <div class="has-feedback has-feedback-left">
+                  <input type="text" id="edtShenaseh" class="form-control input-xlg" placeholder="جستجو بر اساس شناسه درمانگر ">
+                  <div class="form-control-feedback">
+                    <i class="icon-search4 text-muted text-size-base"></i>
                   </div>
+                  <label style="display: none;font-size: 12px" id="lblShenaseh"
+                         class="validation-error-label"> </label>
                 </div>
-              </form>
 
-            </form>
+                <div class="input-group-btn">
+                  <button type="submit" onclick="searchPsych();" class="btn btn-primary btn-xlg">جستجو</button>
+                </div>
+              </div>
           </div>
         </div>
         <div class="row">
