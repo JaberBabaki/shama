@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
   <span></span>
-  <title>مشاوره آنلاین</title>
+  <title>سامانه ملی ازدواج</title>
 
   <link rel="stylesheet" href="/asset/css/base.css">
   <link rel="stylesheet" href="/asset/css/bootstrap.css">
@@ -120,7 +120,7 @@
             <div class="nav-toggle"></div>
           </div>
           <div class="nav-menus-wrapper clearfix">
-            <ul class="nav-menu">
+            <ul class="nav-menu d-flex justify-content-center"  >
               <li class="active">
                 <a href="<?php echo homePage(false); ?>" class="f"><span> صفحه اصلی</span></a>
               </li>
@@ -150,12 +150,12 @@
                   </li>
                 </ul>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#"><span> تست روانشناسی</span></a>
-              </li>
-              <li>
+              </li> -->
+              <!-- <li>
                 <a href="#"><span>مشاوره انلاین </span></a>
-              </li>
+              </li> -->
             </ul>
             <ul class="right-menu">
               <li class="header-search">
