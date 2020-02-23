@@ -360,6 +360,11 @@ class User3Controller {
       }
 
       User3Model::insertPsychInCenter($counsilingId, $shenaseh);
+      $response['Status'] = true;
+      $response['Error'] = [];
+      $response['ResultData']['code'] = 201;
+      $response['ResultData']['message'] = "اطلاعات درمانگر با موفقیت ثبت شد";
+      echo json_encode($response);
       exit;
       //dump($recordPsych,true);
 

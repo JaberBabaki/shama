@@ -1072,7 +1072,7 @@
       if (imageFile == null) {
         printError("#lblSelectPic", "لطفا عکس پرسنلی را وارد کنید");
       }
-      alert(okCity + '-' + okOstan + '-' + okEmail + '-' + okPhone + '-' + okNamePsych + '-' + okGender + '-' + okPic + '-' + okCV)
+      //alert(okCity + '-' + okOstan + '-' + okEmail + '-' + okPhone + '-' + okNamePsych + '-' + okGender + '-' + okPic + '-' + okCV)
       if (okCity == 0 && okOstan == 0 && okNamePsych == 0 && okGender == 0 && okPic == 0 && okEmail == 0 && okPhone == 0 && okNationalCode == 0 && okLicense == 0) {
         formDataPsych.append('personalImage', imageFile);
         formDataPsych.append('CVFile', CVFile);
