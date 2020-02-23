@@ -61,7 +61,7 @@ class User3Controller {
     view::renderPanel('panel/user3/informationPsych.php', $data);
   }
 
-  function checkExistInfoCounseling($return = false) {
+  function checkExistInfoCounseling($return = false, $viewFile='') {
     $recordCunseling = User3Model::checkExistCounseling($_SESSION['email']);
     $counsilingId = $recordCunseling['conceil_id'];
     if ($recordCunseling == null) {
@@ -73,7 +73,10 @@ class User3Controller {
         echo json_encode($response);
         exit;
       } else {
-        return $counsilingId;
+        $data['params'] = $counsilingId;
+        view::renderPanel($viewFile, $data);
+        exit;
+        // return $counsilingId;
       }
     } else {
       return $counsilingId;
@@ -490,7 +493,7 @@ class User3Controller {
 
   function listPsych() {
     $recordUser = UserBase::LoginCheckPerTask();
-    $counsilingId = $this->checkExistInfoCounseling(true);
+    $counsilingId = $this->checkExistInfoCounseling(true, 'panel/user3/listInfoPsych.php');
     $data[] = array();
     $recordPsych = User3Model::listPsychInCenter($counsilingId);
     for ($i=0; $i<count($recordPsych); $i++){
@@ -504,7 +507,7 @@ class User3Controller {
 
   function calenderPsych() {
     $data[] = array();
-    $counsilingId = $this->checkExistInfoCounseling(false);
+    $counsilingId = $this->checkExistInfoCounseling(true, 'panel/user3/calenderPsych.php');
     $result = User3Model::listPsychInCenter($counsilingId);
     $info='';
     if ($result!=null){

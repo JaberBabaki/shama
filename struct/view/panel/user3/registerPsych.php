@@ -55,20 +55,17 @@
             </h4>
 
             <form  class="main-search">
-              <div class="input-group content-group">
-                <div class="has-feedback has-feedback-left">
-                  <input type="text" id="edtShenaseh" class="form-control input-xlg" placeholder="جستجو بر اساس شناسه درمانگر ">
-                  <div class="form-control-feedback">
-                    <i class="icon-search4 text-muted text-size-base"></i>
+              <form action="#" class="main-search">
+                <div class="input-group content-group" style="width: 100%;">
+                  <div class="form-group">
+                    <select id="lstPsychName" name="location" data-placeholder="نام درمانگر" class="select">
+                      <option></option>
+                      <?php echo $info ?>
+                      </optgroup>
+                    </select>
                   </div>
-                  <label style="display: none;font-size: 12px" id="lblShenaseh"
-                         class="validation-error-label"> </label>
                 </div>
-
-                <div class="input-group-btn">
-                  <button type="submit" onclick="searchPsych();" class="btn btn-primary btn-xlg">جستجو</button>
-                </div>
-              </div>
+              </form>
 
             </form>
           </div>

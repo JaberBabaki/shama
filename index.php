@@ -2,6 +2,7 @@
 define('test',true);
 require_once("system/loader.php");
 //////////////////////// ali feature ///////////////////////////
+
 $uri=getRequestURL();
 $parts=explode('/',$uri);
 
@@ -42,6 +43,8 @@ call_user_func_array(array($controllerInsatnce,$method),$params);
   <form action="login.php" method="post">
    <button type="submit" style="width:100px;"></button>
   </form>
+  
 </div>
  </body>
+ 
 </html>--!>

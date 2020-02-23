@@ -7,7 +7,6 @@
             <div class="media">
               <a href="#" class="media-left"><img src="/asset/image/logo/placeholder.jpg" class="img-circle img-sm"
                                                   alt=""></a>
-
               <div class="media-body">
                 <span class="media-heading text-semibold"><?php if (!isGuest()) {
                     echo $_SESSION['email'];
@@ -45,7 +44,7 @@
               <form class="main-search">
                 <div class="input-group content-group" style="width: 100%;">
                   <div class="form-group">
-                    <select onclick="showBookedAppointments()" id="selectedCounseling" name="location" data-placeholder="نام مرکز مشاوره" class="select">
+                    <select onchange="showBookedAppointments()" id="selectedCounseling" name="location" data-placeholder="نام مرکز مشاوره" class="select">
                       <option></option>
                       <?php echo $info ?>
                       </optgroup>
@@ -81,7 +80,6 @@
                     <td style="text-align: center;">
                     <?=stringConverter($booked[$i]['endTime'], 'enToFa')?><br>  تا <br> <?=stringConverter($booked[$i]['startTime'], 'enToFa')?>
                     </td>
-                    <td style="text-align: center;"><?=stringConverter($number_of_sessions[$i], 'enToFa') ?></td>
                     <td style="text-align: center;">
                       <?php
                         switch($booked[$i]["day"]){
@@ -109,6 +107,7 @@
                         }
                       ?>
                     </td>
+                    <td style="text-align: center;"><?=stringConverter($booked[$i]['number_of_sessions'], 'enToFa') ?></td>
                   <td class="text-center">
                     <ul class="icons-list">
                       <li class="dropdown">
@@ -141,15 +140,21 @@ include "$doc_root/struct/view/dialog/user4/startAppointment.php";
 <script>
 $("#finish").hide();
 // function registerCalender() {
+  var psychShenaseh;
+  function showBookedAppointments() {
+    psychShenaseh= $('#selectedCounseling').find('option:selected').val();
+    alert(psychShenaseh);
+  }
+  // function registerCalender() {
 //   $("select.select").change(function(){
 //         var selectedCountry = $(this).children("option:selected").val();
 //         alert("You have selected the country - " + selectedCountry);
 //     });  
 // }
-function showBookedAppointments(){
+/*function showBookedAppointments(){
   var psychShenaseh = $('#selectedCounseling').find('option:selected').val();
   alert("You have selected the country - " + psychShenaseh);
-};
+};*/
 // $( document ).ready(function() {
 //   var psychShenaseh = $('#selectedCounseling').find('option:selected').val();
 //   alert("You have selected the country - " + psychShenaseh);
