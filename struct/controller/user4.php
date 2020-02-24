@@ -112,17 +112,18 @@ class User4Controller {
       $data['psych'] = 0;
     }
     $data['booked'] = User4Model::getBookedAppoitmentsByPsychId($psych['shenaseh']);
-    for ($i=0; $i<count($data['booked']); $i++){
-      $data['booked'][$i]['number_of_sessions'] = $this->getNumberOfSessions($data['booked'][$i]['calendar_id']);
+    if ($data['booked']!=null){
+      for ($i=0; $i<count($data['booked']); $i++){
+        $data['booked'][$i]['number_of_sessions'] = $this->getNumberOfSessions($data['booked'][$i]['calendar_id']);
+      }
+      $data['canceled'] = User4Model::getCanceledAppoitmentsByPsychId($psych['shenaseh']);
+      $result = UserCommonModel::getCounselingByPsychId($psych['psych_id']);
+      $info='';
+      for ($i = 0; $i <= count($result) - 1; $i++) {
+        $info=$info .'  <option value=' . $result[$i]['counseil_id'] . '>' . $result[$i]['counselingName'] . '</option>';
+      }
+      $data['info'] = $info;
     }
-    $data['canceled'] = User4Model::getCanceledAppoitmentsByPsychId($psych['shenaseh']);
-    $result = UserCommonModel::getCounselingByPsychId($psych['psych_id']);
-    $info='';
-    for ($i = 0; $i <= count($result) - 1; $i++) {
-      $info=$info .'  <option value=' . $result[$i]['counseil_id'] . '>' . $result[$i]['counselingName'] . '</option>';
-    }
-    $data['info'] = $info;
-
     view::renderPanel('panel/user4/appointments.php', $data);
   }
   
