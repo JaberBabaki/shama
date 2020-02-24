@@ -24,6 +24,8 @@
               </li>
               <li class="active"><a href='/user4/informationPsych'><i class="icon-stack"></i>
                   <span>ثبت اطلاعات درمانگر</span></a></li>
+              <li><a href="/user4/appointments"><i class="icon-people"></i> <span>نوبت ها</span></a></li>
+
             </ul>
           </div>
         </div>
