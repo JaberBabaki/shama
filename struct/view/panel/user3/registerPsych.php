@@ -22,10 +22,11 @@
               <li class="navigation-header"><span>بخش اصلی</span> <i class="icon-menu" title="Main pages"></i></li>
               <li><a href='/user3/dashboard'><i class="icon-home4"></i> <span>داشبورد</span></a>
               </li>
-              <li ><a href="informationCenter"><i class="icon-people"></i> <span>اطلاعات مرکز</span></a>
+              <li><a href="informationCenter"><i class="icon-people"></i> <span>اطلاعات مرکز</span></a>
               </li>
               <li><a href="course"><i class="icon-stack2"></i> <span>تعریف دوره ها</span></a></li>
-              <li class="active"><a href='/user3/registerPsych'><i class="icon-stack"></i> <span>ثبت  درمانگر</span></a></li>
+              <li class="active"><a href='/user3/registerPsych'><i class="icon-stack"></i> <span>ثبت  درمانگر</span></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -39,10 +40,14 @@
             </h4>
           </div>
         </div>
-        <div class="breadcrumb-line" style="padding-left: 10px;padding-bottom: 10px;padding-top: 10px;"><a class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
-          <a type="submit" href='/user3/registerPsych' class="btn btn-primary">ثبت درمانگر <i class="icon-list-ordered position-right"></i></a>
-          <a type="submit" href='/user3/listPsych' class="btn btn-primary">لیست درمانگر<i class="icon-plus2 position-right"></i></a>
-          <a type="submit" href='/user3/calenderPsych' class="btn btn-primary">ثبت تقویم برای درمانگر<i class="icon-list-ordered position-right"></i></a>
+        <div class="breadcrumb-line" style="padding-left: 10px;padding-bottom: 10px;padding-top: 10px;"><a
+            class="breadcrumb-elements-toggle"><i class="icon-menu-open"></i></a>
+          <a type="submit" href='/user3/registerPsych' class="btn btn-primary">ثبت درمانگر <i
+              class="icon-list-ordered position-right"></i></a>
+          <a type="submit" href='/user3/listPsych' class="btn btn-primary">لیست درمانگر<i
+              class="icon-plus2 position-right"></i></a>
+          <a type="submit" href='/user3/calenderPsych' class="btn btn-primary">ثبت تقویم برای درمانگر<i
+              class="icon-list-ordered position-right"></i></a>
         </div>
       </div>
       <div class="content">
@@ -50,23 +55,27 @@
           <div class="panel-body">
             <h4 class="text-center content-group-lg">
               <span class="help-block" style="font-size: 14px"> شناسه درمانگر را در بخش زیر وارد کنید. </span>
-              <span class="help-block" style="font-size: 14px">با انتخاب جستجو می توانید اطلاعات درمانگر را مشاهده کنید</span>
+              <span class="help-block"
+                    style="font-size: 14px">با انتخاب جستجو می توانید اطلاعات درمانگر را مشاهده کنید</span>
               <span class="help-block" style="font-size: 14px"> در نهایت با انتخاب گزینه ثبت درمانگر به مرکز مشاوره اضافه خواهد شد. </span>
             </h4>
-              <div class="input-group content-group">
-                <div class="has-feedback has-feedback-left">
-                  <input type="text" id="edtShenaseh" class="form-control input-xlg" placeholder="جستجو بر اساس شناسه درمانگر ">
-                  <div class="form-control-feedback">
-                    <i class="icon-search4 text-muted text-size-base"></i>
-                  </div>
-                  <label style="display: none;font-size: 12px" id="lblShenaseh"
-                         class="validation-error-label"> </label>
-                </div>
 
-                <div class="input-group-btn">
-                  <button type="submit" onclick="searchPsych();" class="btn btn-primary btn-xlg">جستجو</button>
+            <div class="input-group content-group">
+              <div class="has-feedback has-feedback-left">
+                <input type="text" id="edtShenaseh" class="form-control input-xlg"
+                       placeholder="جستجو بر اساس شناسه درمانگر ">
+
+                <div class="form-control-feedback">
+                  <i class="icon-search4 text-muted text-size-base"></i>
                 </div>
+                <label style="display: none;font-size: 12px" id="lblShenaseh"
+                       class="validation-error-label"> </label>
               </div>
+
+              <div class="input-group-btn">
+                <button type="submit" onclick="searchPsych();" class="btn btn-primary btn-xlg">جستجو</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -96,24 +105,26 @@
               <div class="panel-body">
                 <form name="formFounder">
                   <div class="form-group form-group-material">
-                    <input type="text" id="edtNamePsych" readonly="readonly" class="form-control" placeholder="نام و نام خانوادگی">
+                    <input type="text" id="edtNamePsych" readonly="readonly" class="form-control"
+                           placeholder="نام و نام خانوادگی">
                   </div>
                   <div class="form-group form-group-material">
-                    <input type="text" id="edtEmailPsych" readonly="readonly"  class="form-control" placeholder="ایمیل">
+                    <input type="text" id="edtEmailPsych" readonly="readonly" class="form-control" placeholder="ایمیل">
                   </div>
                   <div class="form-group form-group-material">
-                    <input type="text" id="edtPhoneNumberPsych" readonly="readonly"  class="form-control" placeholder="شماره موبایل">
+                    <input type="text" id="edtPhoneNumberPsych" readonly="readonly" class="form-control"
+                           placeholder="شماره موبایل">
                   </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group form-group-material">
-                          <input type="text" id="edtOstan" readonly="readonly"  class="form-control" placeholder="استان">
+                          <input type="text" id="edtOstan" readonly="readonly" class="form-control" placeholder="استان">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group form-group-material">
-                          <input type="text" id="edtCity" readonly="readonly"  class="form-control" placeholder="شهر">
+                          <input type="text" id="edtCity" readonly="readonly" class="form-control" placeholder="شهر">
                         </div>
                       </div>
                     </div>
@@ -149,17 +160,21 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="karshenasiFild" placeholder="رشته ">
+                                <input type="text" readonly="readonly" class="form-control" id="karshenasiFild"
+                                       placeholder="رشته ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="karshenasiGrayesh" placeholder="گرایش">
+                                <input type="text" readonly="readonly" class="form-control" id="karshenasiGrayesh"
+                                       placeholder="گرایش">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="karshenasiUni" placeholder="دانشگاه">
+                                <input type="text" readonly="readonly" class="form-control" id="karshenasiUni"
+                                       placeholder="دانشگاه">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="karshenasiYear" placeholder="سال  ">
+                                <input type="text" readonly="readonly" class="form-control" id="karshenasiYear"
+                                       placeholder="سال  ">
                               </div>
                             </div>
                           </div>
@@ -168,17 +183,21 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="arshadFild" placeholder="رشته ">
+                                <input type="text" readonly="readonly" class="form-control" id="arshadFild"
+                                       placeholder="رشته ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="arshadGrayesh" placeholder="گرایش">
+                                <input type="text" readonly="readonly" class="form-control" id="arshadGrayesh"
+                                       placeholder="گرایش">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="arshadUni" placeholder="دانشگاه">
+                                <input type="text" readonly="readonly" class="form-control" id="arshadUni"
+                                       placeholder="دانشگاه">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="arshadYear" placeholder="سال  ">
+                                <input type="text" readonly="readonly" class="form-control" id="arshadYear"
+                                       placeholder="سال  ">
                               </div>
                             </div>
                           </div>
@@ -187,18 +206,22 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="doctoraFild" placeholder="رشته ">
+                                <input type="text" readonly="readonly" class="form-control" id="doctoraFild"
+                                       placeholder="رشته ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="doctoraGrayesh" placeholder="گرایش">
+                                <input type="text" readonly="readonly" class="form-control" id="doctoraGrayesh"
+                                       placeholder="گرایش">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="doctoraUni" placeholder="دانشگاه">
+                                <input type="text" readonly="readonly" class="form-control" id="doctoraUni"
+                                       placeholder="دانشگاه">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="doctoraYear" placeholder="سال  ">
+                                <input type="text" readonly="readonly" class="form-control" id="doctoraYear"
+                                       placeholder="سال  ">
                               </div>
                             </div>
                           </div>
@@ -220,7 +243,8 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle1" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle1"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -233,14 +257,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopYear1" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopYear1"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>2:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle2" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle2"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -253,14 +279,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopYear2" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopYear2"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>3:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle3" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle3"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -273,14 +301,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopYear3" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopYear3"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>4:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle4" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle4"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -293,14 +323,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopYear4" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopYear4"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>5:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle5" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopTitle5"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -313,7 +345,8 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="workshopYear5" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="workshopYear5"
+                                       placeholder="سال">
                               </div>
                             </div>
                           </div>
@@ -335,25 +368,30 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleTitle1" placeholder="عنوان مقاله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleTitle1"
+                                       placeholder="عنوان مقاله">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleAuthor1" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="articleAuthor1"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine1" placeholder="نام مجله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine1"
+                                       placeholder="نام مجله">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleYear1" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="articleYear1"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>2:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleTitle2" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="articleTitle2"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -362,17 +400,20 @@
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine2" placeholder="نام مجله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine2"
+                                       placeholder="نام مجله">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleYear2" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="articleYear2"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>3:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleTitle3" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="articleTitle3"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -381,17 +422,20 @@
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine3" placeholder="نام مجله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine3"
+                                       placeholder="نام مجله">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleYear3" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="articleYear3"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>4:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleTitle4" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="articleTitle4"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -400,17 +444,20 @@
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine4" placeholder="نام مجله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine4"
+                                       placeholder="نام مجله">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleYear4" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="articleYear4"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>5:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleTitle5" placeholder="عنوان">
+                                <input type="text" readonly="readonly" class="form-control" id="articleTitle5"
+                                       placeholder="عنوان">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -419,10 +466,12 @@
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine5" placeholder="نام مجله">
+                                <input type="text" readonly="readonly" class="form-control" id="articleMagzine5"
+                                       placeholder="نام مجله">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="articleYear5" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="articleYear5"
+                                       placeholder="سال">
                               </div>
                             </div>
                           </div>
@@ -444,90 +493,110 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookTitle1" placeholder=" عنوان کتاب">
+                                <input type="text" readonly="readonly" class="form-control" id="bookTitle1"
+                                       placeholder=" عنوان کتاب">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor1" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor1"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookPublish1" placeholder="ناشر">
+                                <input type="text" readonly="readonly" class="form-control" id="bookPublish1"
+                                       placeholder="ناشر">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookYear1" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="bookYear1"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>2:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookTitle2" placeholder=" عنوان کتاب">
+                                <input type="text" readonly="readonly" class="form-control" id="bookTitle2"
+                                       placeholder=" عنوان کتاب">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor2" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor2"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookPublish2" placeholder="ناشر">
+                                <input type="text" readonly="readonly" class="form-control" id="bookPublish2"
+                                       placeholder="ناشر">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookYear2" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="bookYear2"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>3:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookTitle3" placeholder=" عنوان کتاب">
+                                <input type="text" readonly="readonly" class="form-control" id="bookTitle3"
+                                       placeholder=" عنوان کتاب">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor3" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor3"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookPublish3" placeholder="ناشر">
+                                <input type="text" readonly="readonly" class="form-control" id="bookPublish3"
+                                       placeholder="ناشر">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookYear3" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="bookYear3"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>4:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookTitle4" placeholder=" عنوان کتاب">
+                                <input type="text" readonly="readonly" class="form-control" id="bookTitle4"
+                                       placeholder=" عنوان کتاب">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor4" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor4"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookPublish4" placeholder="ناشر">
+                                <input type="text" readonly="readonly" class="form-control" id="bookPublish4"
+                                       placeholder="ناشر">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookYear4" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="bookYear4"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>5:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookTitle5" placeholder=" عنوان کتاب">
+                                <input type="text" readonly="readonly" class="form-control" id="bookTitle5"
+                                       placeholder=" عنوان کتاب">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor5" placeholder="نام نویسندگان">
+                                <input type="text" readonly="readonly" class="form-control" id="bookAuthor5"
+                                       placeholder="نام نویسندگان">
                               </div>
 
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookPublish5" placeholder="ناشر">
+                                <input type="text" readonly="readonly" class="form-control" id="bookPublish5"
+                                       placeholder="ناشر">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="bookYear5" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="bookYear5"
+                                       placeholder="سال">
                               </div>
                             </div>
                           </div>
@@ -549,7 +618,8 @@
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle1" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle1"
+                                       placeholder=" عنوان ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -562,14 +632,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear1" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear1"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>2:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle2" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle2"
+                                       placeholder=" عنوان ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -582,14 +654,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear2" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear2"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>3:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle3" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle3"
+                                       placeholder=" عنوان ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -602,14 +676,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear3" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear3"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>4:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle4" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle4"
+                                       placeholder=" عنوان ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -622,14 +698,16 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear4" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear4"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>5:</label>
 
                             <div class="row">
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle5" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceTitle5"
+                                       placeholder=" عنوان ">
                               </div>
 
                               <div class="col-md-4" style="padding-left: 5px;padding-right: 5px">
@@ -642,7 +720,8 @@
                                        placeholder="محل برگزاری">
                               </div>
                               <div class="col-md-2" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear5" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="conferanceYear5"
+                                       placeholder="سال">
                               </div>
                             </div>
                           </div>
@@ -664,50 +743,60 @@
 
                             <div class="row">
                               <div class="col-md-9" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle1" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle1"
+                                       placeholder=" عنوان ">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear1" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear1"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>2:</label>
 
                             <div class="row">
                               <div class="col-md-9" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle2" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle2"
+                                       placeholder=" عنوان ">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear2" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear2"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>3:</label>
 
                             <div class="row">
                               <div class="col-md-9" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle3" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle3"
+                                       placeholder=" عنوان ">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear3" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear3"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>4:</label>
 
                             <div class="row">
                               <div class="col-md-9" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle4" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle4"
+                                       placeholder=" عنوان ">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear4" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear4"
+                                       placeholder="سال">
                               </div>
                             </div>
                             <label>5:</label>
 
                             <div class="row">
                               <div class="col-md-9" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle5" placeholder=" عنوان ">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorTitle5"
+                                       placeholder=" عنوان ">
                               </div>
                               <div class="col-md-3" style="padding-left: 5px;padding-right: 5px">
-                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear5" placeholder="سال">
+                                <input type="text" readonly="readonly" class="form-control" id="awardsHonorYear5"
+                                       placeholder="سال">
                               </div>
                             </div>
                           </div>
@@ -718,7 +807,7 @@
                   </div>
                   <div class="form-group">
                     <div class="uploader">
-                      <sapn class="browse btn btn-primary hidden-xs" style="user-select: none;"> دریافت رزومه </sapn>
+                      <sapn class="browse btn btn-primary hidden-xs" style="user-select: none;"> دریافت رزومه</sapn>
                     </div>
                   </div>
                   <div class="text-right">
@@ -782,7 +871,7 @@
   }
 
   function searchPsych() {
-    var edtShenaseh =$("#edtShenaseh").val();
+    var edtShenaseh = $("#edtShenaseh").val();
     var formDataShenaseh = new FormData();
     okShenaseh = 1;
 
@@ -797,7 +886,7 @@
       okShenaseh = 0;
     }
 
-    if (okShenaseh == 0){
+    if (okShenaseh == 0) {
       formDataShenaseh.append('shenaseh', edtShenaseh);
       $.ajax({
         url: '/user3/registerPsych',
@@ -816,12 +905,12 @@
             $("#edtPhoneNumberPsych").val(json.ResultData.phone);
             $("#edtOstan").val(json.ResultData.ostan);
             $("#edtCity").val(json.ResultData.city);
-            if(json.ResultData.gender==1){
+            if (json.ResultData.gender == 1) {
               $('#male').attr('checked', 'checked');
-            }else{
+            } else {
               $('#female').attr('checked', 'checked');
             }
-            var photo='/asset/image/per-pic/'+json.ResultData.photo;
+            var photo = '/asset/image/per-pic/' + json.ResultData.photo;
             $("#preview").attr("src", photo);
 
             var karshenasi = json.ResultData.karshenasi.split("*");
@@ -995,25 +1084,25 @@
     }
   }
   function registerPsych() {
-    var edtShenaseh =$("#edtShenaseh").val();
-    var edtName =$("#edtNamePsych").val();
+    var edtShenaseh = $("#edtShenaseh").val();
+    var edtName = $("#edtNamePsych").val();
     var formData = new FormData();
     okName = 1;
     okShenaseh = 1;
 
-    if (edtShenaseh.length=="") {
+    if (edtShenaseh.length == "") {
       okShenaseh = 1;
-    } else{
+    } else {
       okShenaseh = 0;
     }
 
-    if (edtName.length=="") {
+    if (edtName.length == "") {
       okName = 1;
-    } else{
+    } else {
       okName = 0;
     }
 
-    if (okName == 0 && okShenaseh==0){
+    if (okName == 0 && okShenaseh == 0) {
       formData.append('id', edtShenaseh);
       $.ajax({
         url: '/user3/registerPsych',
@@ -1027,12 +1116,13 @@
           if ((json.ResultData.code == 200)) {
             $('html, body').stop();
             showStackTopLeft('info', "لطفا اطلاعات درمانگر را مشاهده و سپس ثبت کنید.");
-          } else {
-            if ((json.Error.code == 402 || json.Error.code == 401)) {
+          }else if ((json.Error.code == 402 || json.Error.code == 401)) {
               document.documentElement.scrollTop = 0.5;
               var msg = json.Error.message;
               showStackTopLeft('error', msg);
-            }
+          }else if ((json.ResultData.code == 201)) {
+            var msg = json.ResultData.message
+            showStackTopLeft('success', msg);
           }
         }
       });
