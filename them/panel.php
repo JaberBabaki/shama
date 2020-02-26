@@ -17,6 +17,7 @@
   <link href="/asset/css/persian-datepicker.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/sweetalert2/sweetalert2.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/asset/css/style-login.css">
+  <link rel="stylesheet" href="/asset/css/font-awesome.min.css">
 
   <script type="text/javascript" src="/asset/js/plugins/loaders/pace.min.js"></script>
   <!-- <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script> -->
