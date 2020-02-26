@@ -15,10 +15,11 @@
   <link href="/asset/css/components.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/colors.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/persian-datepicker.css" rel="stylesheet" type="text/css">
+  <link href="/asset/css/sweetalert2/sweetalert2.css" rel="stylesheet" type="text/css">
 
   <script type="text/javascript" src="/asset/js/plugins/loaders/pace.min.js"></script>
-  <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script>
-  <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script> -->
   <script type="text/javascript" src="/asset/js/plugins/notifications/bootbox.min.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/loaders/blockui.min.js"></script>
   <script type="text/javascript" src="/asset/js/date/persian-date.js"></script>
@@ -41,6 +42,8 @@
   <script type="text/javascript" src="/asset/js/combobox.js"></script>
 
   <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script>
+  <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="/asset/js/date/persian-date.js"></script>
   <script type="text/javascript" src="/asset/js/date/persian-datepicker.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/forms/wizards/steps.min.js"></script>
@@ -56,6 +59,7 @@
   <script type="text/javascript" src="/asset/js/plugins/pickers/pickadate/legacy.js"></script>
 
   <script type="text/javascript" src="/asset/js/pages/picker_date.js"></script>
+  <script src="/asset/js/sweetalert2/sweetalert2.js"></script>
 
 </head>
 <body>
