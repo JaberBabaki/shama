@@ -62,26 +62,80 @@ class User4Model {
     return $record;
   }
   
-  public static function startAppointment($calendar_id, $user_id){
+  public static function startAppointment($calendar_id){
     $db=Db::getInstance();
     $record=$db->insert("
                         INSERT INTO
                          s_info_appointment
-                        (calendar_id, user_id)VALUES($calendar_id, $user_id) 
+                        (calendar_id)VALUES($calendar_id) 
+                        ");
+    $record=$db->first("
+                      SELECT
+                        info_appointment_id
+                      FROM
+                        s_info_appointment
+                      WHERE 
+                        calendar_id=$calendar_id
+                      ");             
+    
+    return $record;
+  }
+
+  public static function endAppointment($info_id, $package_id, $date){
+    $db=Db::getInstance();
+    $db->modify("
+                UPDATE
+                  s_info_appointment
+                SET
+                  session_number=session_number+1
+                WHERE 
+                  info_appointment_id=$info_id
+                ");
+    $db->modify("
+                UPDATE
+                  s_info_appointment
+                SET
+                  end_time='$date', package_appointment_id=$package_id
+                WHERE 
+                  info_appointment_id=$info_id
+    ");
+  }
+
+  public static function getSessionNumberAndSessionSizeByUserId($user_id, $counseling_id, $psychIdentity){
+    $db = Db::getInstance();
+    $record = $db->query("
+                        SELECT 
+                          t1.session_number, t2.session_size 
+                        FROM
+                          s_info_appointment t1
+                        INNER JOIN
+                          s_package_appointment t2
+                        WHERE 
+                          t2.counseling_id=$counseling_id AND t2.user_id=$user_id AND t2.psychIdentity='$psychIdentity' AND t1.package_appointment_id=t2.package_appointment_id
+                        ORDER BY
+                          start_time DESC              
                         ");
     return $record;
   }
 
-  // public static function endAppointment($calendar_id, $data){
-  //   $db=Db::getInstance();
-  //   $record=$db->insert("
-  //                       INSERT INTO
-  //                        s_info_appointment
-  //                       (calendar_id, user_id)VALUES($calendar_id, $user_id) 
-  //                       ");
-  //   return $record;
-  // }
-
+  public static function startPackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $sessionSize){
+    $db=Db::getInstance();
+    $db->insert("
+                INSERT INTO
+                  s_package_appointment
+                (user_id, counseling_id, psychIdentity, treatment_approach, treatment_result, session_size)VALUES($user_id, $counseling_id, '$psychIdentity', '$treatmentApproach', '$treatmentResult', $sessionSize) 
+                ");          
+    $record = $db->first("
+                SELECT 
+                  package_appointment_id 
+                FROM
+                  s_package_appointment
+                ORDER BY
+                package_appointment_id DESC              
+                ");
+    return $record['package_appointment_id'];
+  }
+  
   public static function getCanceledAppoitmentsByPsychId($shenaseh){
     $db=Db::getInstance();
     $record=$db->query("
