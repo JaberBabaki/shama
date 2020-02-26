@@ -1,64 +1,77 @@
-<!-- <link rel="stylesheet" href="/asset/css/style-login.css"> -->
-<!-- <link rel="stylesheet" href="/asset/css/bootstrap.min.css"> -->
-<!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
-<!-- <script src="/asset/js/jquery.min.js"></script> -->
-<script src="/asset/js/sweetalert2/sweetalert2.js"></script>
-
 <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" style="margin-top: 12px" role="document">
   <!--Content-->
     <div class="modal-content"> 
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs">
-      <div class="h2" id="startText"></div>
-      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBtn">
+      <div class="h2 text-center" id="textAppointment"></div>
+      <br>
+      <br>
+      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="boxStartAppointment">
+        <li style="position: fixed; right: 65px;">
+          <div class="container-login100-form-btn display: none;" >
+          <button class="btn btn-pill btn-success" style=" width: 180px" id="btnVerifyStartAppointment"> تایید </button>
+          </div>
+        </li>
+        <li style="position: fixed; left: 65px;">
+          <div class="container-login100-form-btn" >
+          <button class="btn btn-pill btn-secondary"  id="btnCancelStartAppointment" style="background-color: lightcoral; width: 180px">لغو</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div style="display: none;" id="packageInfo">
+        <div class="wrap-input100 validate-input" data-validate="تعداد جلسات درمانی مورد نیاز" style="right: 9%">
+            <input class="input100" type="text" id="cardNum" placeholder="تعداد جلسات" style="width: 400px">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+        <sapn style="display: none; text-align: center;" class="form-validation" id="validCardNum"></sapn>
+        <div class="wrap-input100 validate-input" data-validate="شیوه درمان" style="right: 9%">
+            <input class="input100" type="text" id="name" placeholder="شیوه درمان" style="width: 400px">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="نتیجه درمان" style="right: 9%">
+            <input class="input100" type="text" id="name" placeholder="نتیجه درمان" style="width: 400px">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+        <sapn style="display: none; text-align: center;" class="form-validation" id="validName"></sapn>
+        <div>
+        <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="boxEndAppointment">
         <li style="position: fixed; right: 65px">
           <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-success" style=" width: 180px" id="verifystart"> تایید </button>
+          <button class="btn btn-success" style=" width: 180px" id="‌btnVerifyEndAppointment"> تایید </button>
           </div>
         </li>
         <li style="position: fixed; left: 65px">
           <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-secondary"  id="startNewPackage" style="background-color: lightcoral; width: 180px"> شروع جلسات جدید</button>
+          <button class="btn btn-danger"  id="‌btnCancelEndAppointment" style="background-color: lightcoral; width: 180px"> انصراف</button>
           </div>
         </li>
       </ul>
-      <div style="display: none; margin-bottom: 184px" id="checkPayment">
-        <div class="check-payment">انتخاب نوع پرداخت:</div>
-        <div>
-          <ul>
-            <li style="position: fixed; right: 65px">
-              <div class="container-login100-form-btn" >
-                <button class="check-payment-btn" id="onlinePay">  آنلاین </button>
-              </div>
-            </li>
-            <li style="position: fixed; left: 65px">
-              <div class="container-login100-form-btn" >
-              <button class="check-payment-btn" id="offlinePay">حضوری</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div style="display: none" id="payment">
-          <button class="payment-btn" >  پرداخت </button>
-        </div>
-        <div style="display: none" id="NotPayment">
-          <button class="payment-btn" >  تایید </button>
         </div>
       </div>
-    </div>
+      
     </div>
   </div>
 </div>  
 
 <script>
 var baseURL = "<?php echo baseUrl(); ?>";
-var calendar_id = 50;
+var calendar_id = 2;
 function runStartAppointmentDialog(){
     var formData = new FormData();
-    var startedFlag = 0;
+    var info_id;
     formData.append('calendar_id',calendar_id);
-    console.log(formData.get("calendar_id"));
     $.ajax({
       url: baseURL+'/user4/appointmentStatus',
       type: 'POST',
@@ -67,12 +80,87 @@ function runStartAppointmentDialog(){
       contentType: false,
       processData: false,
       success: function (result) {
-        alert(formData);
-      //   jsonData = result;
-      //   alert();
-      //   if (jsonData.Status == true) {
-      //     alert();
-      //   }
+        jsonData = result;
+        if (jsonData.Status == true) {
+          // Start new appointment package
+          if (jsonData.ResultData.sessionSize==0 && jsonData.ResultData.sessionNumber==0 );{
+            $("#textAppointment").html("<div>"+'شروع دسته نوبت های جدید برای بیمار مورد نظر'+"</div>");
+            $("#startModal").modal("show");
+            $("#boxStartAppointment").show();
+            $("#btnCancelStartAppointment").click(function(){
+              $("#startModal").modal("hide");  
+            });
+            $("#btnVerifyStartAppointment").click(function(){
+              $.ajax({
+                url: baseURL+'/user4/startAppointment',
+                type: 'POST',
+                dataType: 'JSON',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                  jsonData = result;
+                  if (jsonData.Status == true) {
+                    $("#startModal").modal("hide");
+                    $("#boxStartAppointment").hide();
+                    $("#start").hide();
+                    $("#finish").show();
+                    info_id = jsonData.ResultData.info_id;
+                    Swal.fire({
+                            type: 'success',
+                            position: 'top',
+                            title: 'دسته نوبت های جدید با موفقیت شروع شد',
+                            showConfirmButton: false,
+                            timer: 3000, 
+                        });
+                    $("#finish").click(function(){
+                      $("#startModal").modal("show");
+                      $("#packageInfo").show();
+                      $("#textAppointment").html("<div>"+'اطلاعات درمانی بیمار مورد نظر را تکمیل کنید'+"</div>");
+                      $("#btnVerifyEndAppointment").click(function(){
+                        // var approach = "4";
+                        var treatment_result = "ali";
+                        var treatment_approach = "ali";
+                        var session_size = 5;
+                        formData.append('startNewPackage', true);
+                        formData.append('info_id', info_id);
+                        // formData.append('start_new_package', 1);
+                        // formData.append('approach ', approach);
+                        formData.append('treatment_result', treatment_result);
+                        formData.append('session_size', session_size );
+                        formData.append('treatment_approach', treatment_approach);
+                        // formData.append('number_of_session', number_of_session );
+                        $.ajax({
+                        url: baseURL+'/user4/endAppointment',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (result) {
+                          jsonData = result;
+                          if (jsonData.Status == true) { 
+                              $("#finish").hide();
+                              Swal.fire({
+                            type: 'success',
+                            position: 'top',
+                            title: 'نوبت با موفقیت به پایان رسید',
+                            showConfirmButton: false,
+                            timer: 3000, 
+                        });
+                          }
+                        }
+                      });
+                      });
+
+                    });    
+                  }
+                }
+              });   
+            });
+
+          }
+        }
        }
     });
     //$("#startText").html("<div>"+' نوبت ۴ بیمار مورد نظر می باشد در صورت تمایل به ادامه نوبت ها بر روی تایید و در غیر این صورت روی پایان دادن چلسات کلیک کنید'+"</div>");
