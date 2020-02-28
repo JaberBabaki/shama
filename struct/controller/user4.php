@@ -35,20 +35,24 @@ class User4Controller {
     $response['Status'] = true;
     $response['Error'] = [];
     $response['ResultData'] = [];
-    $response['ResultData']['sessionNumber'] = $result['sessionNumber'];
-    $response['ResultData']['sessionSize'] = $result['sessionSize'];
+    $response['ResultData']['sessionNumber'] = $result['session_number'];
+    $response['ResultData']['sessionSize'] = $result['session_size'];
     echo json_encode($response);
     exit;
   }
 
   function startAppointment(){
     $calendar_id = $_POST['calendar_id'];
-    $info_id = User4Model::startAppointment($calendar_id);
-    $info_id = $info_id['info_appointment_id'];
+    $result = $this->getUserIdAndCounselingIdAndPsychIdentityByCalendarId($calendar_id);
+    // $package_id = User4Model::startPackage($result['user_id'], $result['counseling_id'], $result['psychIdentity']);
+    // User4Model::startAppointment($calendar_id, $package_id);
+    User4Model::startAppointment($calendar_id);
+    
+    // $info_id = $info_id['info_appointment_id'];
     $response = [];
     $response['Status'] = true;
     $response['Error'] = [];
-    $response['ResultData']['info_id'] = $info_id;
+    // $response['ResultData']['info_id'] = $info_id;
     echo json_encode($response);
     exit;
   }
@@ -66,20 +70,20 @@ class User4Controller {
 
   function endAppointment(){
     $calendar_id = $_POST['calendar_id'];
-    $info_id = $_POST['info_id'];
     $result = $this->getUserIdAndCounselingIdAndPsychIdentityByCalendarId($calendar_id);
-    // $treatment_approach = $_POST['treatment_app'];
-    $treatmentResult = $_POST['treatment_result'];
     $startNewPackage = $_POST['startNewPackage'];
-    // $approach = $_POST['approach'];
-    // print_r($treatmentResult);
-    // exit;
-    // $treatmentApproach = $_POST['treatment_approach'];
-    $sessionSize = $_POST['session_size'];
-    $date = grtCurrentTime(); 
-    if ($startNewPackage==true){
-      $package_id = User4Model::startPackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentResult, $treatmentResult, $sessionSize); 
+    if ($startNewPackage=='true'){
+      $treatmentResult = $_POST['treatment_result'];
+      $treatmentApproach = $_POST['treatment_approach'];
+      $sessionSize = $_POST['session_size'];  
+      $package_id = User4Model::startPackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach, $treatmentResult, $sessionSize); 
     }
+    $tmp = User4Model::getPackageIdAndInfoId($calendar_id, $result['user_id'], $result['counseling_id'], $result['psychIdentity']);
+    // print_r($tmp);
+    // exit;
+    $package_id = $tmp['package_appointment_id'];
+    $info_id = $tmp['info_appointment_id'];
+    $date = grtCurrentTime(); 
     User4Model::endAppointment($info_id,
                                $package_id,
                                $date
@@ -101,8 +105,8 @@ class User4Controller {
                                                                  );
 
     if($result==null){
-      $result['sessionNumber'] = 0;
-      $result['sessionSize'] = 0;
+      $result['session_number'] = 0;
+      $result['session_size'] = null;
       return $result;
     } 
     else return $result[0];
@@ -127,7 +131,9 @@ class User4Controller {
     $data['booked'] = User4Model::getBookedAppoitmentsByPsychId($psych['shenaseh']);
     if ($data['booked']!=null){
       for ($i=0; $i<count($data['booked']); $i++){
-        $data['booked'][$i]['number_of_sessions'] = $this->getSessionNumberAndSessionSize($data['booked'][$i]['calendar_id']);
+        $tmp = $this->getSessionNumberAndSessionSize($data['booked'][$i]['calendar_id']);
+        $data['booked'][$i]['sessionNumber'] = $tmp['session_number'];
+        $data['booked'][$i]['sessionSize'] = $tmp['session_size'];
       }
       $data['canceled'] = User4Model::getCanceledAppoitmentsByPsychId($psych['shenaseh']);
     }
