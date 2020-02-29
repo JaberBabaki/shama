@@ -59,10 +59,12 @@
               <thead>
                 <tr style="background-color: #263238; color: white; font-size: 16px" role="row">
                   <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ًRow-number" style="text-align: center;">ردیف</th>
+                  <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">بیمار</th>
                   <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="End-date: activate to sort column ascending" style="text-align: center;">تاریخ</th>
                   <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Days" style="text-align: center;">ساعت</th>
                   <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">روز</th>
                   <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">تعداد جلسات انجام شده</th>
+                  <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">تعداد جلسات مورد نیاز</th>
                   <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="text-align: center;">عملیات</th>
                 </tr>
               </thead>
@@ -74,8 +76,9 @@
               </style>
               <?php if ($booked!=null):?>
                 <?php for ($i=0; $i<count($booked); $i++):?>    
-                  <tr role="row" >
+                  <tr class="row<?=$i?>" role="row">
                     <td style="text-align: center;"><?=$i+1 ?></td>
+                    <td class="userName<?=$i?>" style="text-align: center;"><?=$booked[$i]['userName']?></td>
                     <td style="text-align: center;"><?=dateConverter($booked[$i]['date'], 'enToFa') ?></td>
                     <td style="text-align: center;">
                     <?=stringConverter($booked[$i]['endTime'], 'enToFa')?><br>  تا <br> <?=stringConverter($booked[$i]['startTime'], 'enToFa')?>
@@ -107,7 +110,15 @@
                         }
                       ?>
                     </td>
-                    <td style="text-align: center;"><?=stringConverter($booked[$i]['number_of_sessions'], 'enToFa') ?></td>
+                    <td class="sessionNumber<?=$i?>" style="text-align: center;"><?=stringConverter($booked[$i]['sessionNumber'], 'enToFa') ?></td>
+                    <td class="sessionSize<?=$i?>" style="text-align: center;" id="textSessionSize<?=$i?>">
+                      <?php if($booked[$i]['sessionSize']==null): ?>
+                        نامعلوم
+                      <?php endif; ?>
+                      <?php if($booked[$i]['sessionSize']!=null): ?>
+                        <?=stringConverter($booked[$i]['sessionSize'], 'enToFa') ?>
+                      <?php endif; ?>
+                    </td>
                   <td class="text-center">
                     <ul class="icons-list">
                       <li class="dropdown">
@@ -115,9 +126,9 @@
                           <i class="icon-menu9"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                          <li id="start" onclick="runStartAppointmentDialog()"><a ><i class="icon-file-pdf"></i>شروع</a></li>
+                          <li class=" start<?=$i?>" onclick="runStartAppointmentDialog(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a ><i class="icon-file-pdf"></i>شروع</a></li>
                           <li><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>
-                          <li id="finish"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
+                          <li style="display: none" class="end<?=$i?>" onclick="runEndAppointmentDialog(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
                         </ul>
                       </li>
                     </ul>
