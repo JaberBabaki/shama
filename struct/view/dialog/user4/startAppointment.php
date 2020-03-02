@@ -4,67 +4,43 @@
     <div class="modal-content"> 
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs">
-      <br>
       <div class="h2 text-center" id="textAppointment"></div>
       <br>
-      <ul style="list-style: none; display: inline-flex; display: none; margin-bottom: 80px" id="boxStartAppointment">
-        <li style="position: fixed; right: 65px;">
-          <div class="container-login100-form-btn display: none;" >
-          <button class="btn btn-pill btn-success" style=" width: 180px" id="btnVerifyStartAppointment"> تایید </button>
-          </div>
-        </li>
-        <li style="position: fixed; left: 65px;">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-secondary"  id="btnCancelStartAppointment" style="background-color: lightcoral; width: 180px">لغو</button>
-          </div>
-        </li>
-      </ul>
+      
 
-      <ul style="list-style: none; display: inline-flex; display: none; margin-bottom: 80px" id="boxAddAndNewPackage">
-        <li style="position: fixed; right: 65px;">
-          <div class="container-login100-form-btn display: none;" >
-          <button class="btn btn-pill btn-success" style=" width: 180px" id="btnNewPackage"> ایجاد دسته نوبت جدید </button>
-          </div>
-        </li>
-        <li style="position: fixed; left: 65px;">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-secondary"  id="btnAddSessionNumber" style="background-color: lightcoral; width: 180px">اضافه کردن جلسات</button>
-          </div>
-        </li>
-      </ul>
 
-      <ul style="list-style: none; display: inline-flex; display: none; margin-bottom: 80px" id="boxVerifyAndNewPackage">
-        <li style="position: fixed; right: 65px;">
-          <div class="container-login100-form-btn display: none;" >
-          <button class="btn btn-pill btn-success" style=" width: 180px" id="btnٰVerifyNewSession">تایید</button>
-          </div>
-        </li>
-        <li style="position: fixed; left: 65px;">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-pill btn-secondary"  id="btnAddSessionNumber" style="background-color: lightcoral; width: 180px">ایجاد دسته نوبت جدید</button>
-          </div>
-        </li>
-      </ul>
 
     <div style="display: none;" id="packageInfo">
+        <span style="margin: 66px" class="p h4">تعداد جلسات مورد نیاز</span>
         <div class="wrap-input100 validate-input" data-validate="تعداد جلسات درمانی مورد نیاز" style="right: 9%">
-            <input class="input100" type="text" id="sessionSize" placeholder="تعداد جلسات" style="width: 400px">
+            <input class="input100" type="text" id="sessionSize" placeholder="تعداد جلسات" style="width: 400px" value="">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </span>
         </div>
         <span style="display: none; text-align: center;" class="form-validation" id="textSessionSize"></span>
+        <span style="margin: 66px" class="p h4">شیوه درمان</span>
         <div class="wrap-input100 validate-input" data-validate="شیوه درمان" style="right: 9%">
-            <input class="input100" type="text" id="treatmentApproach" placeholder="شیوه درمان" style="width: 400px">
+            <input class="input100" type="text" id="treatmentApproach" placeholder="شیوه درمان" style="width: 400px" value="">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </span>
         </div>
         <span style="display: none; text-align: center;" class="form-validation" id="textTreatmentApproach"></span>
+        <span style="margin: 66px" class="p h4">نتیجه درمان</span>
         <div class="wrap-input100 validate-input" data-validate="نتیجه درمان" style="right: 9%">
-            <input class="input100" type="text" id="treatmentResult" placeholder="نتیجه درمان" style="width: 400px">
+            <input class="input100" type="text" id="treatmentResult" placeholder="نتیجه درمان" style="width: 400px" value="">
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+        </div>
+        <span style="display: none; text-align: center;" class="form-validation" id="textDiagnosis"></span>
+        <span style="margin: 66px" class="p h4">تشخیص</span>
+        <div class="wrap-input100 validate-input" data-validate="تشخیص" style="right: 9%">
+            <input class="input100" type="text" id="diagnosis" placeholder="تشخیص" style="width: 400px" value="">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -73,7 +49,94 @@
         <span style="display: none; text-align: center;" class="form-validation" id="textTreatmentResult"></span>
     </div>
 
-    <div id="boxEndAppointment" style="list-style: none; display: inline-flex; margin-bottom: 80px; display: none">
+    <div style="display: none;" id="btnBoxNewStart" class="btn-group btn-group-justified">
+      <div class="btn-group">
+        <button class="btn btn-success"  id="btnVerifyNewStart">تایید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-danger"  id="btnCancelNewStart">انصراف</button>
+      </div>  
+    </div>
+
+    <div style="display: none;" class="btn-group btn-group-justified" id="btnBoxStart">
+      <div class="btn-group">
+        <button class="btn btn-success"  id="btnStartVerify">تایید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-primary"  id="btnStartModify">ویرایش</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-info"  id="btnStartCreatNewPackage">ایجاد درمان جدید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-danger"  id="btnStartCancel">انصراف</button>
+      </div>  
+    </div>
+
+    <div style="display: none;" id="btnBoxFinishWithEndAppointmentNumber" class="btn-group btn-group-justified">
+      <div class="btn-group">
+        <button class="btn btn-success"  id="btnFinishWithEndAppointmentNumberVerify">تایید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-primary"  id="btnFinishWithEndAppointmentNumberModify">ویرایش</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-info"  id="btnFinishWithEndAppointmentNumberCreatNewPackage">ایجاد درمان جدید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-danger"  id="btnFinishWithEndAppointmentNumberCancel">انصراف</button>
+      </div>  
+    </div>
+
+    <div style="display: none;" id="boxVerifyAndNewPackage">
+      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" >
+        <li style="position: fixed; right: 65px;">
+          <button class="btn btn-pill btn-success" style=" width: 180px" id="btnٰVerifyNewSession">تایید</button>
+        </li>
+        <li style="position: fixed; left: 65px;">
+          <button class="btn btn-pill btn-secondary"  id="btnAddSessionNumber" style="background-color: lightcoral; width: 180px">ایجاد دسته نوبت جدید</button>
+        </li>
+      </ul>
+    </div>
+
+    <div style="display: none;" id="btnBoxFinish">
+      <ul style="list-style: none; display: inline-flex;" >
+        <li style="margin: 6px">
+          <button class="btn btn-pill btn-success"  id="btnٰFinishVerify111n">تایید</button>
+        </li>
+        <li style="margin: 6px">
+          <button class="btn btn-pill btn-info"  id="btnFinishCancel">شروع دسته نوبت جدید</button>
+        </li>
+        <li style="margin: 6px">
+          <button class="btn btn-pill btn-warning"  id="btnFinishModify">ویرایش</button>
+        </li>
+      </ul>
+    </div>
+
+    <div style="display: none;" id="btnBoxFinishWithFillInfo" class="btn-group btn-group-justified">
+      <div class="btn-group">
+        <button class="btn btn-success"  id="btnٰFinishWithFillInfoVerify">تایید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-danger"  id="btnFinishWithFillInfoCancel">انصراف</button>
+      </div> 
+    </div>
+    
+    <div style="display: none;" id="btnBoxFinishWithoutFillInfo" class="btn-group btn-group-justified">
+      <div class="btn-group">
+        <button class="btn btn-success"  id="btnٰFinishhWithoutFillInfoVerify">تایید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-primary"  id="btnٰFinishWithoutFillInfoModify">ویرایش</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-info"  id="btnٰFinishWithoutFillInfoCreatNewPackage">ایجاد درمان جدید</button>
+      </div>  
+      <div class="btn-group">
+        <button class="btn btn-danger"  id="btnFinishWithoutFillInfoCancel">انصراف</button>
+      </div> 
+    </div>
+    <!-- <div id="boxEndAppointment" style="list-style: none; display: inline-flex; margin-bottom: 80px; display: none">
       <ul>
         <li style="position: fixed; right: 65px">
           <button class="btn btn-success" style=" width: 180px" id="‌btnVerifyEndAppointment"> تایید </button>
@@ -82,18 +145,232 @@
           <button class="btn btn-danger"  id="‌btnCancelEndAppointment" style="background-color: lightcoral; width: 180px"> انصراف</button>
         </li>
       </ul>
-    </div>
+    </div> -->
     </div>
     </div>
   </div>
 </div>  
 
 <script>
+var creatNewPackage = false;
+var calendar_id;
+var sessionNumber;
+var calssName;
 var baseURL = "<?php echo baseUrl(); ?>";
-var info_id;
-function runStartAppointmentDialog(calendar_id, className){
+
+$("#btnCancelNewStart").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnVerifyNewStart").click(function(){
+  sendStart(calendar_id, className, sessionNumber, false);
+});
+
+$("#btnCancelStart").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnStartCancel").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnFinishFinishWithoutFillInfoCancel").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnFinishWithFillInfoCancel").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnFinishWithEndAppointmentNumberCancel").click(function(){
+  $("#startModal").modal("hide"); 
+});
+
+$("#btnModify").click(function(){
+  $("#sessionSize").prop('disabled', false);
+  $("#treatmentApproach").prop('disabled', false);
+  $("#treatmentResult").prop('disabled', false);
+  $("#diagnosis").prop('disabled', false);
+});
+
+$("#btnStartModify").click(function(){
+  $("#sessionSize").prop('disabled', false);
+  $("#treatmentApproach").prop('disabled', false);
+  $("#treatmentResult").prop('disabled', false);
+  $("#diagnosis").prop('disabled', false);
+});
+
+$("#btnٰFinishWithoutFillInfoModify").click(function(){
+  $("#sessionSize").prop('disabled', false);
+  $("#treatmentApproach").prop('disabled', false);
+  $("#treatmentResult").prop('disabled', false);
+  $("#diagnosis").prop('disabled', false);
+});
+
+$("#btnFinishWithEndAppointmentNumberModify").click(function(){
+  $("#sessionSize").prop('disabled', false);
+  $("#treatmentApproach").prop('disabled', false);
+  $("#treatmentResult").prop('disabled', false);
+  $("#diagnosis").prop('disabled', false);
+});
+
+$("#btnStartVerify").click(function(){
+  sendStart(calendar_id, className, sessionNumber, false);
+});
+
+$("#btnCreatNewPackage").click(function(){
+  sendStart(calendar_id, className, sessionNumber, true);
+});
+
+$("#btnٰFinishWithFillInfoVerify").click(function(){
+      var formData = new FormData();
+      formData.append('calendar_id', calendar_id);
+      var sessionSize = $("#sessionSize").val();
+      sessionSize = covertNumber(sessionSize, 'faToEn');
+      sessionSize = parseInt(sessionSize);
+      var treatmentResult = $("#treatmentResult").val();
+      var treatmentApproach = $("#treatmentApproach").val();
+      var diagnosis = $("#diagnosis").val();
+      status1 = checkSessionSize(sessionSize);
+      status2 = checkTreatmentApproach(treatmentApproach);
+      status3 = checkTreatmentResult(treatmentResult);
+      status3 = checkDiagnosis(diagnosis);
+      if (status1 == true && status2 == true && status3 == true){
+        formData.append('startNewPackage', true);
+        formData.append('treatment_result', treatmentResult);
+        formData.append('session_size', sessionSize );
+        formData.append('treatment_approach', treatmentApproach);
+        formData.append('diagnosis', diagnosis);
+        sendEndAppointment(formData, className, sessionNumber, sessionSize);            
+      }     
+    });
+
+$("#btnٰFinishhWithoutFillInfoVerify").click(function(){
+  var formData = new FormData();
+  formData.append('calendar_id', calendar_id);
+  var sessionSize = $("#sessionSize").val();
+  sessionSize = covertNumber(sessionSize, 'faToEn');
+  sessionSize = parseInt(sessionSize);
+  var treatmentResult = $("#treatmentResult").val();
+  var treatmentApproach = $("#treatmentApproach").val();
+  var diagnosis = $("#diagnosis").val();
+  status1 = checkSessionSize(sessionSize);
+  status2 = checkTreatmentApproach(treatmentApproach);
+  status3 = checkTreatmentResult(treatmentResult);
+  status3 = checkDiagnosis(diagnosis);
+  if (status1 == true && status2 == true && status3 == true){
+    formData.append('startNewPackage', false);
+    formData.append('treatment_result', treatmentResult);
+    formData.append('session_size', sessionSize );
+    formData.append('treatment_approach', treatmentApproach);
+    formData.append('diagnosis', diagnosis);
+    sendEndAppointment(formData, className, sessionNumber, sessionSize);            
+  }     
+});
+
+$("#btnStartCreatNewPackage").click(function(){
+  $('.sessionSize'+className).text('نامعلوم');
+  $('.sessionNumber'+className).text('۰');
+  sendStart(calendar_id, className, sessionNumber, true);
+});
+
+$("#btnFinishWithEndAppointmentNumberCreatNewPackage").click(function(){
+  $('.sessionSize'+className).text('نامعلوم');
+  $('.sessionNumber'+className).text('۰');
+  sendStart(calendar_id, className, sessionNumber, true);
+
+
+  // $("#sessionSize").prop('disabled', false);
+  // $("#treatmentApproach").prop('disabled', false);
+  // $("#treatmentResult").prop('disabled', false);
+  // $("#diagnosis").prop('disabled', false);
+  // $("#textAppointment").html("<div>"+'لطفا اطلاعات بیمار مورد نظر را تکمیل کنید'+"</div>");
+  // $("#sessionSize").val('');
+  // $("#treatmentResult").val('');
+  // $("#treatmentApproach").val('');
+  // $("#diagnosis").val('');
+  // creatNewPackage = true;
+});
+    
+$("#btnFinishWithEndAppointmentNumberVerify").click(function(){
+  var sessionNumber = $('.sessionNumber'+className).text();
+  sessionNumber = covertNumber(sessionNumber, 'faToEn');
+  sessionNumber = parseInt(sessionNumber);
+  var sessionSize = $("#sessionSize").val();
+  sessionSize = covertNumber(sessionSize, 'faToEn');
+  sessionSize = parseInt(sessionSize);
+  if (sessionSize<=sessionNumber){
+    $("#textAppointment").html("<div>"+'برای ادامه روند درمان باید تعداد جلسات مورد نیاز را افزایش دهید سپس روی تایید کلیک کنید'+"</div>");
+  }else{
+    // if (creatNewPackage==true){
+      // sendStart(calendar_id, className, sessionNumber, true);
+      // creatNewPackage = false;
+    // }else{
+      sendStart(calendar_id, className, sessionNumber, false);
+    // }
+      
+    $('.sessionSize'+className).text(sessionSize);
+  }
+});
+
+function hideAll(){
+  
+}
+
+function runAppointmenInfo(calendar_id, className){
     var formData = new FormData();
-    var sessionNumber;
+    $("#btnBoxNewStart").hide();
+    $("#btnBoxStart").hide();
+    formData.append('calendar_id',calendar_id);
+    $.ajax({
+      url: baseURL+'/user4/appointmentStatus',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+        jsonData = result;
+        if (jsonData.Status == true) {
+          sessionNumber = jsonData.ResultData.sessionNumber;
+          sessionSize = jsonData.ResultData.sessionSize;
+          if (sessionSize==null && sessionNumber==0){
+            $("#textAppointment").html("<div>"+'بیمار مورد نظر جلسه درمانی نداشته است'+"</div>");
+            $("#startModal").modal("show");
+          }else if (parseInt(sessionSize)>parseInt(sessionNumber)){
+            sessionNumber = covertNumber(sessionNumber, 'enToFa');
+            $("#textAppointment").html("<div>"+" نوبت  "+sessionNumber+"  بیمار مورد نظر انجام شده است "+"</div>"+"<div>"+"اطلاعات درمانی بیمار:"+"</div>");
+            $("#startModal").modal("show");
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }else{
+            $("#textAppointment").html("<div>"+' نوبت های بیمار مورد نظر تمام شده است'+"</div>");
+            $("#startModal").modal("show");
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }
+        }
+       }
+    });
+}
+function runStartAppointmentDialog(_calendar_id, _className){
+    className = _className;
+    calendar_id = _calendar_id;
+    var formData = new FormData();
     formData.append('calendar_id',calendar_id);
     $.ajax({
       url: baseURL+'/user4/appointmentStatus',
@@ -109,43 +386,77 @@ function runStartAppointmentDialog(calendar_id, className){
           sessionNumber = jsonData.ResultData.sessionNumber;
           sessionSize = jsonData.ResultData.sessionSize;
           if (sessionSize==null && sessionNumber==0){
-            $("#textAppointment").html("<div>"+'شروع دسته نوبت های جدید برای بیمار مورد نظر'+"</div>");
-            $("#boxStartAppointment").show();
+            $("#textAppointment").html("<div>"+'شروع درمان جدید برای بیمار مورد نظر'+"</div>");
+            $("#btnBoxNewStart").show();
+            $("#startModal").modal("show");
           }else if (parseInt(sessionSize)>parseInt(sessionNumber)){
             num = parseInt(sessionNumber)+1;
             num = num.toString();
-            $("#textAppointment").html("<div>"+" نوبت  "+num+"  بیمار مورد نظر است "+"</div>");
-            $("#boxVerifyAndNewPackage").show();
-            $("#boxStartAppointment").hide();
-          }else{
-            $("#textAppointment").html("<div>"+'دسته نوبت های بیمار مورد نظر تمام شده است'+"</div>");
-            $("#boxAddAndNewPackage").show();
-          }
+            $("#textAppointment").html("<div>"+" نوبت  "+num+"  بیمار مورد نظر است "+"</div>"+"<div>"+"اطلاعات درمانی بیمار:"+"</div>");
+            $("#btnBoxStart").show();
             $("#startModal").modal("show");
-            $("#btnCancelStartAppointment").click(function(){
-              $("#startModal").modal("hide"); 
-              $("#boxStartAppointment").hide();
-              $("#boxAddAndNewPackage").hide();
-              $("#boxVerifyAndNewPackage").hide();
-            });
-
-            $("#btnVerifyStartAppointment").click(function(){
-              $info_id = sendStart(calendar_id, className);
-            });
-            
-            $("#btnٰVerifyNewSession").click(function(){
-              $info_id = sendStart(calendar_id, className);
-            });
-            
-          // }
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }else{
+            $("#textAppointment").html("<div>"+' نوبت های بیمار مورد نظر تمام شده است'+"</div>");
+            $("#btnBoxFinishWithEndAppointmentNumber").show();
+            $("#startModal").modal("show");
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }
         }
        }
     });
 }
 
-function sendStart(calendar_id, className){
+function sendStart(calendar_id, className, sessionNumber, startNewPackage){
   var formData = new FormData();
-  formData.append('calendar_id',calendar_id);
+  var sessionNumber = $('.sessionNumber'+className).text();
+  sessionNumber = covertNumber(sessionNumber, 'faToEn');
+  sessionNumber = parseInt(sessionNumber);
+  formData.append('calendar_id',calendar_id);            
+  if (sessionNumber==0){
+    formData.append('startNewPackage', startNewPackage);
+    sendStartAjax(formData, className, sessionNumber);
+  }else{
+    var sessionSize = $("#sessionSize").val();
+    sessionSize = covertNumber(sessionSize, 'faToEn');
+    sessionSize = parseInt(sessionSize);
+    var treatmentResult = $("#treatmentResult").val();
+    var treatmentApproach = $("#treatmentApproach").val();
+    var diagnosis = $("#diagnosis").val();
+    status1 = checkSessionSize(sessionSize);
+    status2 = checkTreatmentApproach(treatmentApproach);
+    status3 = checkTreatmentResult(treatmentResult);
+    status3 = checkDiagnosis(diagnosis);
+    if (status1 == true && status2 == true && status3 == true){
+      formData.append('startNewPackage', startNewPackage);
+      formData.append('treatment_result', treatmentResult);
+      formData.append('session_size', sessionSize );
+      formData.append('treatment_approach', treatmentApproach);
+      formData.append('diagnosis', diagnosis);
+      sendStartAjax(formData, className, sessionNumber);
+    }     
+  }
+  
+}
+
+function sendStartAjax(formData, className, sessionNumber){
+  var jsonData;
   $.ajax({
     url: baseURL+'/user4/startAppointment',
     type: 'POST',
@@ -156,63 +467,71 @@ function sendStart(calendar_id, className){
     success: function (result) {
       jsonData = result;
       if (jsonData.Status == true) {
+        if (sessionNumber !=0){
+          sessionSize = $("#sessionSize").val();
+          sessionSize = covertNumber(sessionSize, 'enToFa');
+          $('.sessionSize'+className).text(sessionSize);
+        }
         $("#startModal").modal("hide");
-        $("#boxStartAppointment").hide();
+        $("#btnBoxStart").hide();
+        $("#btnBoxNewStart").hide();
         $('.start'+className).hide();
         $('.end'+className).show();
-        $("#boxStartAppointment").hide();
-        $("#boxAddAndNewPackage").hide();
-        $("#boxVerifyAndNewPackage").hide();
-        // info_id = jsonData.ResultData.info_id;
-        Swal.fire({
+        $('.row'+className).css("background-color", "#FFFF00");
+        if (sessionNumber==0){
+          Swal.fire({
                 type: 'success',
                 position: 'top',
-                title: 'دسته نوبت های جدید با موفقیت شروع شد',
+                title: 'درمان جدید برای بیمار مورد نظر با موفقیت آغاز شد',
                 showConfirmButton: false,
-                timer: 1500, 
+                timer: 2000, 
             });   
+        }else{
+          Swal.fire({
+                type: 'success',
+                position: 'top',
+                title: 'نوبت با موفقیت آغاز شد',
+                showConfirmButton: false,
+                timer: 2000, 
+            });   
+        }
+        
       }
     }
   });
-  return info_id;
 }
 
 function runEndAppointmentDialog(calendar_id, className){
-  // $("#finish").click(function(){
     var sessionNumber = $('.sessionNumber'+className).text();
     sessionNumber = covertNumber(sessionNumber, 'faToEn');
     sessionNumber = parseInt(sessionNumber);
     var formData = new FormData();
     $("#startModal").modal("show");
-    $("#boxEndAppointment").show();
-    $("#‌btnVerifyEndAppointment").click(function(){
-      formData.append('calendar_id',calendar_id);
-      if (sessionNumber==0){
-        $("#packageInfo").show();
-        $("#textAppointment").html("<div>"+'اطلاعات درمانی بیمار مورد نظر را تکمیل کنید'+"</div>");
-      var sessionSize = $("#sessionSize").val();
-      var treatmentResult = $("#treatmentResult").val();
-      var treatmentAppraoch = $("#treatmentApproach").val();
-      status1 = checkSessionSize(sessionSize);
-      status2 = checktreatmentApproach(treatmentAppraoch);
-      status3 = checktreatmentResult(treatmentResult);
-      if (status1 == true && status2 == true && status3 == true){
-        formData.append('startNewPackage', true);
-        formData.append('treatment_result', treatmentResult);
-        formData.append('treatment_approach', treatmentAppraoch);
-        formData.append('session_size', sessionSize );
-        formData.append('treatment_approach', treatmentApproach);
-        sendEndAppointment(formData, className, sessionNumber, sessionSize);
-      }                 
+    $("#packageInfo").show();
+    if (sessionNumber==0){
+      $("#textAppointment").html("<div>"+'لطفا اطلاعات درمانی بیمار مورد نظر را تکمیل نمایید'+"</div>");  
+      $("#btnBoxFinishWithoutFillInfo").hide();
+      $("#btnBoxFinishWithEndAppointmentNumber").hide();
+      $("#btnBoxFinishWithFillInfo").show();
+      $("#sessionSize").val('');
+      $("#treatmentResult").val('');
+      $("#treatmentApproach").val('');
+      $("#diagnosis").val('');
+      $("#sessionSize").prop('disabled', false);
+      $("#treatmentApproach").prop('disabled', false);
+      $("#treatmentResult").prop('disabled', false);
+      $("#diagnosis").prop('disabled', false);
     }else{
-      num = sessionNumber+1;
-      num = num.toString();      
-      $("#textAppointment").html("<div>"+" نوبت  "+num+"  بیمار مورد نظر به پایان برسد؟ "+"</div>");
-      formData.append('startNewPackage', false);
-      sendEndAppointment(formData, className, sessionNumber, sessionSize);
+      $("#textAppointment").html("<div>"+'اطلاعات درمانی بیمار مورد نظر '+"</div>");  
+      $("#btnBoxFinishWithFillInfo").hide();
+      $("#btnBoxFinishWithEndAppointmentNumber").hide();
+      $("#btnBoxFinishWithoutFillInfo").show();
+      $("#sessionSize").prop('disabled', true);
+      $("#treatmentApproach").prop('disabled', true);
+      $("#treatmentResult").prop('disabled', true);
+      $("#diagnosis").prop('disabled', true);
     }
 
-    });
 }
 
 function sendEndAppointment(formData, className, sessionNumber, sessionSize){
@@ -227,13 +546,18 @@ function sendEndAppointment(formData, className, sessionNumber, sessionSize){
           jsonData = result;
           if (jsonData.Status == true) { 
             $('.end'+className).hide();
-            num = parseInt(sessionNumber)+1;
-            num = num.toString();
-            $('.sessionNumber'+className).text(covertNumber(num, 'enToFa'));
-            $('.sessionSize'+className).text(covertNumber(sessionSize, 'enToFa'));
+            sessionNumber = $('.sessionNumber'+className).text();
+            sessionNumber = covertNumber(sessionNumber, 'faToEn')
+            sessionNumber = parseInt(sessionNumber)+1;
+            sessionNumber = sessionNumber.toString();
+            sessionSize = $("#sessionSize").val();
+            $('.sessionNumber'+className).text(covertNumber(sessionNumber, 'enToFa'));
+            $('.sessionSize'+className).text(covertNumber(sessionSize, 'enToFa')); 
             $('.row'+className).css("background-color", "#A3DB02");
             $("#startModal").modal("hide");
             $("#packageInfo").hide();
+            $("#btnBoxFinishWithFillInfo").hide();
+
             Swal.fire({
               type: 'success',
               position: 'top',
@@ -268,7 +592,7 @@ function checkSessionSize(sessionSize){
   return status;
 }
 
-function checktreatmentResult(treatmentResult){
+function checkTreatmentResult(treatmentResult){
   var status = true;
   if (treatmentResult.length == 0) {
     $("#textTreatmentResult").css({"display": "block", "color": "red"});
@@ -281,7 +605,7 @@ function checktreatmentResult(treatmentResult){
   return status;
 }
 
-function checktreatmentApproach(treatmentApproach){
+function checkTreatmentApproach(treatmentApproach){
   var status = true;
   if (treatmentApproach.length == 0) {
     $("#textTreatmentApproach").css({"display": "block", "color": "red"});
@@ -290,6 +614,19 @@ function checktreatmentApproach(treatmentApproach){
   } else {    
     $("#textTreatmentApproach").css({"display": "none"});
     $("#textTreatmentApproach").text("");
+  }
+  return status;
+}
+
+function checkDiagnosis(diagnosis){
+  var status = true;
+  if (diagnosis.length == 0) {
+    $("#textDiagnosis").css({"display": "block", "color": "red"});
+    $("#textDiagnosis").text("لطفا تشخیص را انتخاب کنید");
+    status = false;
+  } else {    
+    $("#textDiagnosis").css({"display": "none"});
+    $("#textDiagnosis").text("");
   }
   return status;
 }
