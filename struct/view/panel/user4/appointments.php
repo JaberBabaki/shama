@@ -126,8 +126,8 @@
                           <i class="icon-menu9"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                          <li class=" start<?=$i?>" onclick="runStartAppointmentDialog(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a ><i class="icon-file-pdf"></i>شروع</a></li>
-                          <li><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>
+                          <li class="start<?=$i?>" onclick="runStartAppointmentDialog(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a ><i class="icon-file-pdf"></i>شروع</a></li>
+                          <li onclick="runAppointmenInfo(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>
                           <li style="display: none" class="end<?=$i?>" onclick="runEndAppointmentDialog(<?=$booked[$i]['calendar_id']?>, <?=$i?>)"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>
                         </ul>
                       </li>
