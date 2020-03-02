@@ -64,12 +64,12 @@ class User4Model {
     return $record;
   }
   
-  public static function startAppointment($calendar_id){
+  public static function startAppointment($calendar_id, $sessionNumber){
     $db=Db::getInstance();
     $record=$db->insert("
                         INSERT INTO
                          s_info_appointment
-                        (calendar_id)VALUES($calendar_id) 
+                        (calendar_id, session_number)VALUES($calendar_id, $sessionNumber) 
                         ");
     
                         // $record=$db->first("
@@ -100,7 +100,7 @@ class User4Model {
     $db = Db::getInstance();
     $record = $db->query("
                         SELECT 
-                          t1.session_number, t2.session_size 
+                          t1.session_number, t2.session_size, t2.treatment_approach, t2.treatment_result, t2.diagnosis
                         FROM
                           s_info_appointment t1
                         INNER JOIN
@@ -113,7 +113,7 @@ class User4Model {
     return $record;
   }
 
-  public static function completePackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $sessionSize){
+  public static function updatePackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize){
     $db=Db::getInstance();
     $record = $db->first("
                       SELECT 
@@ -130,7 +130,7 @@ class User4Model {
               UPDATE
                 s_package_appointment
               SET
-                treatment_approach='$treatmentApproach' , treatment_result='$treatmentResult', session_size=$sessionSize 
+                treatment_approach='$treatmentApproach' , treatment_result='$treatmentResult', session_size=$sessionSize, diagnosis='$diagnosis' 
               WHERE 
                 package_appointment_id=$package_id
     ");
@@ -138,12 +138,12 @@ class User4Model {
     return $package_id;
   }
   
-  public static function startPackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $sessionSize){
+  public static function startPackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize){
     $db=Db::getInstance();
     $db->insert("
                 INSERT INTO
                   s_package_appointment
-                (user_id, counseling_id, psychIdentity, treatment_approach, treatment_result, session_size)VALUES($user_id, $counseling_id, '$psychIdentity', '$treatmentApproach' , '$treatmentResult', $sessionSize) 
+                (user_id, counseling_id, psychIdentity, treatment_approach, treatment_result, session_size, diagnosis)VALUES($user_id, $counseling_id, '$psychIdentity', '$treatmentApproach' , '$treatmentResult', $sessionSize, '$diagnosis') 
                 ");   
     $record = $db->first("
                       SELECT 
@@ -171,7 +171,8 @@ class User4Model {
                         WHERE
                           t2.user_id=$user_id AND t2.counseling_id=$counseling_id AND t2.psychIdentity='$psychIdentity' AND t1.calendar_id=$calendar_id
                         ORDER BY
-                          t2.creat_time DESC              
+                          t2.creat_time DESC,
+                          t1.start_time DESC              
                         ");
     return $record;
   }
