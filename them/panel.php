@@ -75,10 +75,14 @@
     </ul>
   </div>
 
+
   <div class="navbar-collapse collapse" id="navbar-mobile">
     <ul class="nav navbar-nav">
       <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
     </ul>
+    <div class="nav navbar-text h2 " id="time"></div>
+
+    
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -86,7 +90,6 @@
           <span class="visible-xs-inline-block position-right">پیام ها</span>
           <span class="badge bg-warning-400">2</span>
         </a>
-
         <div class="dropdown-menu dropdown-content width-350">
           <div class="dropdown-content-heading">
             Messages
@@ -199,6 +202,27 @@
 
     <?php echo $content ?>
 
+<script>
+  var timestamp = '<?=time();?>';
+  var date = new Date(timestamp * 1000);
+  var hours;
+  var minutes;
+  var seconds;
+  var formattedTime;
+  setInterval(updateTime, 1000);
+
+  function updateTime(){
+    hours = date.getHours();
+    minutes = "0" + date.getMinutes();
+    seconds = "0" + date.getSeconds();
+    formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    $('#time').html(formattedTime);
+    date.setSeconds( date.getSeconds() + 1 );
+  }
+
+</script>
    
 </body>
 </html>
+
+
