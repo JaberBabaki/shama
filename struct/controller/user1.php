@@ -47,7 +47,9 @@ class User1Controller {
     $calendar_id = $_POST['calendar_id'];
     $paymentMode = $_POST['paymentMode'];
     $user_id = $_SESSION['user_id'];
-    User1Model::bookAppointment($calendar_id, $paymentMode, $user_id);
+    $date = getCurrentDate();
+    $time = getCurrentTime();
+    User1Model::bookAppointment($calendar_id, $paymentMode, $user_id, $date, $time);
     $response = [];
     $response['Status'] = true;
     $response['Error'] = [];
