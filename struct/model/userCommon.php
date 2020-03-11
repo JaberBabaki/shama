@@ -115,6 +115,30 @@ class UserCommonModel {
     return $record;
   }
 
+  public static function listWorkshopsByCounselingId($counseling_id){
+    $db = Db::getInstance();
+    $record = $db->query("
+                        SELECT 
+                          *
+                        FROM 
+                          s_calendar_workshop  
+                        WHERE counseling_id=$counseling_id               
+                        "); 
+    return $record;
+  }
+
+  public static function listWorkshopsByCounselingIdAndWorkshopId($counseling_id, $workshop_id){
+    $db = Db::getInstance();
+    $record = $db->first("
+                        SELECT 
+                          *
+                        FROM 
+                          s_calendar_workshop  
+                        WHERE counseling_id=$counseling_id AND workshop_id=$workshop_id               
+                        "); 
+    return $record;
+  }
+
   public static function getpsychIdentityByCalendarId($calendar_id){
     $db = Db::getInstance();
     $record = $db->first("
