@@ -177,4 +177,51 @@ public static function getPsychAndCounsellingByCalendarId($calendar_id){
   return $record;
 }
 
+public static function insertWorkshop($user_id, $nameCourse, $nameTeacher, $location, $durationCourse, $feeCourse, $startRegisterTime, $startRegisterDate, $endRegisterTime, $endRegisterDate, $capacityCourse, $startTime, $startDate, $endTime, $endDate, $moreExplain, $active){
+  $db = Db::getInstance();
+  $db->insert("
+              INSERT INTO
+                s_calendar_workshop
+              (counseling_id, course_name, teacher_name, duration_course, fee_workshop, start_date_register_workhop, end_date_register_workshop, start_time_register_workshop, end_time_register_workshop, capacity_workshop, start_date_workhop, end_date_workshop, start_time_workshop, end_time_workshop, content_workshop, location, status, booked_number)VALUES((SELECT conceil_id FROM s_counseling_center WHERE user_id=$user_id), '$nameCourse', '$nameTeacher', $durationCourse, $feeCourse, '$startRegisterDate', '$endRegisterDate', '$startRegisterTime', '$endRegisterTime', $capacityCourse, '$startDate', '$endDate', '$startTime', '$endTime', '$moreExplain', '$location', $active, 0)"
+            );
+
+}
+
+function listWorkshopsByUserId($user_id){
+  $db = Db::getInstance();
+  $record = $db->query("
+                      SELECT 
+                        *
+                      FROM 
+                        s_calendar_workshop t1 
+                      INNER JOIN s_counseling_center t2 on t1.counseling_id =t2.conceil_id 
+                      WHERE t2.user_id=$user_id               
+                      "); 
+  return $record;
+}
+
+function getWorkshopInfoByWorkshopId($workshop_id){
+  $db = Db::getInstance();
+  $record = $db->first("
+                      SELECT 
+                        *
+                      FROM 
+                        s_calendar_workshop 
+                      WHERE workshop_id=$workshop_id               
+                      "); 
+  return $record;
+}
+
+function getBooekedAppointmentByBookedId($booked_id){
+  $db = Db::getInstance();
+  $record = $db->first("
+                      SELECT 
+                        *
+                      FROM 
+                        s_calendar_workshop t1
+                      INNER JoIN s_booked_workshop t2 ON t1.workshop_id=t2.workshop_id 
+                      WHERE t2.booked_workshop_id=$booked_id               
+                      "); 
+  return $record;
+}
 }
