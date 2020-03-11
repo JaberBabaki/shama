@@ -156,8 +156,10 @@ class UserCommonController {
         foreach ($records as $record) {
           $name = $record['course_name'];
           $id = $record['counseling_id'];
+          $workshop_id = $record['workshop_id'];
           $out['name'] = $name;
           $out['id'] = $id;
+          $out['workshop_id'] = $workshop_id;
           $response['ResultData'][] = $out;
         }
       }
