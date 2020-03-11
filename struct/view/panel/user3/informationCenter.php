@@ -24,7 +24,7 @@
               </li>
               <li class="active"><a href="informationCenter"><i class="icon-people"></i> <span>اطلاعات مرکز</span></a>
               </li>
-              <li><a href="course"><i class="icon-stack2"></i> <span>تعریف دوره ها</span></a></li>
+              <li><a href="workshop"><i class="icon-stack2"></i> <span>تعریف دوره ها</span></a></li>
               <li><a href='/user3/registerPsych'><i class="icon-stack"></i> <span>ثبت  درمانگر</span></a></li>
             </ul>
           </div>
