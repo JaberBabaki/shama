@@ -29,6 +29,7 @@
       $this->connection->query("SET NAMES 'utf8'");
     }
     public function first($sql){
+      // print_r($sql);
       $record=$this->query($sql);
       /*if(!$record){
         echo "Query".$sql."failed due to".mysql_errno($this->connection);
@@ -57,6 +58,7 @@
       return $record;
     }
     public function insert($sql){
+      // print_r($sql);
       $id=$this->connection->query($sql);
       //dump($sql,true);
       if(!$id){
@@ -66,6 +68,7 @@
       return $id;
     }
     public function modify($sql){
+      // print_r($sql);
       $rowwEffect=$this->connection->query($sql);
       //dump($sql,true);
       if(!$rowwEffect){

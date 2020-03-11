@@ -7,7 +7,7 @@
   <title>پنل مدیرت سامانه شبکه ملی ازدواج</title>
 
   
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css"> -->
   <link rel="stylesheet" href="/asset/css/base.css">
   <link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
   <script type="text/javascript" src="/asset/js/core/app.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/notifications/pnotify.min.js"></script>
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBh5HPijDZRnO-0UHCYdqBuyal4RqPxN2s&amp;sensor=false&amp;libraries=places"></script>
+  <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBh5HPijDZRnO-0UHCYdqBuyal4RqPxN2s&amp;sensor=false&amp;libraries=places"></script> -->
 
   <script type="text/javascript" src="/asset/js/core/libraries/jquery_ui/widgets.min.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
@@ -80,7 +80,6 @@
     <ul class="nav navbar-nav">
       <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
     </ul>
-    <div class="nav navbar-text h2 " id="time"></div>
 
     
     <ul class="nav navbar-nav navbar-right">
@@ -202,25 +201,6 @@
 
     <?php echo $content ?>
 
-<script>
-  var timestamp = '<?=time();?>';
-  var date = new Date(timestamp * 1000);
-  var hours;
-  var minutes;
-  var seconds;
-  var formattedTime;
-  setInterval(updateTime, 1000);
-
-  function updateTime(){
-    hours = date.getHours();
-    minutes = "0" + date.getMinutes();
-    seconds = "0" + date.getSeconds();
-    formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    $('#time').html(formattedTime);
-    date.setSeconds( date.getSeconds() + 1 );
-  }
-
-</script>
    
 </body>
 </html>
