@@ -6,6 +6,11 @@ class User1Model {
     return $records;
   }
 
+  public static function feedWorkshops($keyword){
+    $db=Db::getInstance();
+    $records = $db->query("SELECT * FROM s_calendar_workshop WHERE course_name LIKE '%$keyword%'");
+    return $records;
+  }
   public static function feedPsych($keyword){
     $db=Db::getInstance();
     $records = $db->query("
@@ -56,6 +61,72 @@ class User1Model {
 
   }
 
+  public static function cancelWorkshop($bookedId, $cardNum, $name){
+    $db = Db::getInstance();
+    $db->insert("
+                INSERT INTO
+                  s_canceled_workshop (workshop_id, booked_workshop_id , user_id , booked_workshop_date, booked_workshop_payment_mode)
+                SELECT
+                  workshop_id, booked_workshop_id , user_id , booked_workshop_date, booked_workshop_payment_mode
+                FROM
+                  s_booked_workshop
+                WHERE 
+                  booked_workshop_id=$bookedId
+              ");
+
+    $db->insert("
+                UPDATE 
+                  s_canceled_workshop
+                SET
+                  card_num='$cardNum', name='$name'
+                WHERE
+                  booked_workshop_id=$bookedId
+              ");
+
+$db->insert("
+              UPDATE
+              s_calendar_workshop
+              SET booked_number = booked_number - 1 WHERE workshop_id=(SELECT workshop_id FROM s_booked_workshop WHERE booked_workshop_id=$bookedId)
+          ");
+
+$db->insert("
+                DELETE FROM
+                  s_booked_workshop
+                WHERE 
+                  booked_workshop_id=$bookedId
+              ");
+
+
+  }
+
+  public static function getBookedWorkshopByUsesrId($user_id){
+    $db = Db::getInstance();
+    $records = $db->query("
+                        SELECT
+                         *
+                        FROM
+                         s_booked_workshop t1
+                        INNER JOIN s_calendar_workshop t2 ON t1.workshop_id=t2.workshop_id 
+                        WHERE 
+                          t1.user_id=$user_id
+                        ");
+    return $records;
+  }
+
+  public static function getCanceledWorkshopByUsesrId($user_id){
+    $db = Db::getInstance();
+    $records = $db->query("
+                        SELECT
+                         *
+                        FROM
+                         s_canceled_workshop t1
+                        INNER JOIN s_calendar_workshop t2 ON t1.workshop_id=t2.workshop_id 
+                        WHERE 
+                          t1.user_id=$user_id
+                        ");
+    return $records;
+  }
+  
   public static function getBookedAppointmentByUserId($user_id){
     $db = Db::getInstance();
     $record = $db->query("
@@ -73,12 +144,26 @@ class User1Model {
     return $record;
   }
 
-  public static function bookAppointment($calendar_id, $paymentMode, $user_id){
+  public static function bookAppointment($calendar_id, $paymentMode, $user_id, $date, $time){
     $db = Db::getInstance();
     $db->insert("
                 INSERT INTO
                   s_booked_appointment
-                (calendar_id, user_id, paymentMode) VALUES ($calendar_id, $user_id, $paymentMode)
+                (calendar_id, user_id, paymentMode, date, time) VALUES ($calendar_id, $user_id, $paymentMode, '$date', '$time')
+              ");
+  }
+
+  public static function bookWorkshop($workshop_id, $paymentMode, $user_id, $date){
+    $db = Db::getInstance();
+    $db->insert("
+                INSERT INTO
+                  s_booked_workshop
+                (workshop_id, user_id, booked_workshop_payment_mode, booked_workshop_date) VALUES ($workshop_id, $user_id, $paymentMode, '$date')
+              ");
+    $db->insert("
+                UPDATE
+                 s_calendar_workshop
+                SET booked_number = booked_number +1 WHERE workshop_id=$workshop_id
               ");
   }
 
