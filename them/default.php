@@ -134,6 +134,9 @@
                 <a href="<?php echo baseUrl(); ?>/UserCommon/searchPsych"  class="f"><span>درمانگران</span></a>
               </li>
               <li>
+                <a href="<?php echo baseUrl(); ?>/UserCommon/searchWorkshops"  class="f"><span>دوره ها</span></a>
+              </li>
+              <li>
                 <a href="#" class="f"><span>شهروندان </span></a>
                 <ul class="nav-dropdown">
                   <li>
