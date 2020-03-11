@@ -93,7 +93,9 @@
 							<ul class="navigation ">
               <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>پروفایل من</span></a></li>
               <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="active text-right"><span>نوبت های رزرو شده</span></a></li>
-								<!-- <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li> -->
+              <li><a href="<?php echo baseUrl(); ?>/user1/workshop" class="text-right"><span>دوره های رزرو شده</span></a></li>
+
+              <!-- <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li> -->
 								<!-- <li class="divider"></li> -->
 								<li><a href="<?php echo baseUrl(); ?>/user1/completePersonalData" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
 								<li><a href="#" class="text-right"></i> <span>خروج</span></a></li>
@@ -320,7 +322,7 @@
 
 <?php
 $doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-include "$doc_root/struct/view/dialog/user1/cancel.php";  
+include "$doc_root/struct/view/dialog/user1/cancelAppointment.php";  
 ?>
 
   <!-- <script>
