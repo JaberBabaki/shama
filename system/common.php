@@ -39,6 +39,14 @@ function grtCurrentTime() {
   return date("Y-m-d H:i:s");
 }
 
+function getCurrentDate(){
+  return date("Y-m-d");
+}
+
+function getCurrentTime(){
+  return date("H:i:s");
+}
+
 function grtCurrentDate() {
   $now = new DateTime();
 }
@@ -217,6 +225,8 @@ function dateConverter($date, $type='faToEn'){
                           "yyyy-MM-dd");
     $dateTmp = $formatter->format($dateTmp);
     return stringConverter($dateTmp, $type);
+  }else{
+    
   }
   
   
