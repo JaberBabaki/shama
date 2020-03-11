@@ -152,11 +152,158 @@
 </div>  
 
 <script>
+$('#table').html('<div class="h2 text-center">لطفا درمانگاه مورد نظر را انتخاب کنید</div>');
+var timestamp = '<?=time();?>';
+var date = new Date(timestamp * 1000);
+var hours;
+var minutes;
+var seconds;
+var formattedTime;
+var booked=null;
+
 var creatNewPackage = false;
 var calendar_id;
 var sessionNumber;
-var calssName;
+var className;
 var baseURL = "<?php echo baseUrl(); ?>";
+
+setInterval(updateTime, 1000);
+
+function showBookedAppointments() {
+    var formData = new FormData();
+    counseling_id = $('#selectedCounseling').find('option:selected').val();
+    formData.append('counseling_id',counseling_id);
+    $.ajax({
+      url: baseURL+'/user4/todayAppointments',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+        jsonData = result;
+        if (jsonData.Status == true) {
+          booked = jsonData.ResultData;
+          if(booked!=null){          
+          var tableBody = '<table class="table datatable-basic dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">';
+          tableBody += '<thead>';
+          tableBody += '<tr style="background-color: #263238; color: white; font-size: 16px" role="row">';
+          tableBody += '<th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ًRow-number" style="text-align: center;">ردیف</th>';
+          tableBody += '<th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">بیمار</th>';
+          tableBody += '<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="End-date: activate to sort column ascending" style="text-align: center;">تاریخ</th>';
+          tableBody += '<th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Days" style="text-align: center;">ساعت</th>';
+          tableBody += '<th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">روز</th>';
+          tableBody += '<th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">تعداد جلسات انجام شده</th>';
+          tableBody += '<th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="End-hour" style="text-align: center;">تعداد جلسات مورد نیاز</th>';
+          tableBody += '<th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="text-align: center;">عملیات</th>';
+          tableBody += '</tr>';
+          tableBody += '</thead>';
+          tableBody += '<tbody>';
+          for(var i=0; i < booked.length; i++){
+
+            if(booked[i]['status']=="started"){
+              className = i;
+              calendar_id = booked[i]['calendar_id'];
+              tableBody += '<tr class="row'+i+ '"role="row" style="background-color: #FFFF00"  value="">';
+            }else if(booked[i]['status']=="finished"){
+              tableBody += '<tr class="row'+i+ '"role="row" style="background-color: #A3DB02" value="">';
+            }else{
+              tableBody += '<tr class="row'+i+ '"role="row" value="">';
+            }
+            
+            tableBody += '<td style="text-align: center;">';
+            tableBody += toPersianNum(i);
+            tableBody += '</td>';
+          
+            tableBody += '<td class="userName'+i+'" style="text-align: center;">';
+            tableBody += booked[i]['userName'];
+            tableBody += '</td>';
+          
+            tableBody += '<td style="text-align: center;">';
+            tableBody += dateConverter(booked[i]['date'], 'enToFa');
+            tableBody += '</td>';
+          
+            tableBody += '<td style="text-align: center;">';
+            tableBody += toPersianNum(booked[i]['endTime'])+'<br>'+'تا'+'<br>'+toPersianNum(booked[i]['startTime']);
+            tableBody += '</td>';
+          
+            tableBody += '<td style="text-align: center;">';
+            switch (booked[i]["day"]){
+              case "6":
+                tableBody += '<span> شنبه</span>';
+                break;
+              case "0":
+                tableBody += '<span> یکشنبه</span>';
+                break;
+              case "1":
+                tableBody += '<span> دوشنبه</span>';
+                break;
+              case "2":
+                tableBody += '<span> سه شنبه</span>';
+                break;
+              case "3":
+                tableBody += '<span> چهارشنبه</span>';
+                break;
+              case "4":
+                tableBody += '<span> پنجشنبه</span>';
+                break;
+              case "5":
+                tableBody += '<span> جمعه</span>';
+                break;
+            }
+            tableBody +='</td>';
+          
+            tableBody +='<td class="sessionNumber'+i+'" style="text-align: center;">';
+            tableBody += toPersianNum(booked[i]['sessionNumber']);
+            tableBody +='</td>';
+          
+            tableBody +='<td class="sessionSize'+i+'" style="text-align: center;" id="textSessionSize'+i+'">';
+            if (booked[i]['sessionNumber']==0){
+              tableBody += 'نامعلوم';
+            }else{
+              tableBody += toPersianNum(booked[i]['sessionSize'])
+            }
+            tableBody +='</td>';
+          
+            tableBody +='<td class="text-center">';
+            tableBody += '<ul class="icons-list">';
+            tableBody += '<li class="dropdown">';
+            tableBody += '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
+            tableBody += '<i class="icon-menu9"></i>';
+            tableBody += '</a>';
+            tableBody += '<ul class="dropdown-menu dropdown-menu-right">';
+            if(booked[i]['status']=="notStarted"){
+              tableBody += '<li class="start'+i+'" onclick="runStartAppointmentDialog('+booked[i]["calendar_id"]+','+i+')"><a ><i class="icon-file-pdf"></i>شروع</a></li>';
+            }
+            tableBody += '<li onclick="runAppointmenInfo('+booked[i]["calendar_id"]+','+i+')"><a href="#"><i class="icon-file-excel"></i> اطلاعات بیمار</a></li>';
+            tableBody += '<li'
+            if(booked[i]['status']=="finished" || booked[i]['status']=="notStarted"){
+              tableBody += ' style="display: none" '
+            }
+            tableBody += ' class="end'+i+'" onclick="runEndAppointmentDialog('+booked[i]["calendar_id"]+','+i+')"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>';
+            // tableBody += '<li style="display: none" class="end'+i+'" onclick="runEndAppointmentDialog('+booked[i]["calendar_id"]+','+i+')"><a href="#"><i class="icon-file-excel"></i> پایان</a></li>';
+            tableBody += '</ul>';
+            tableBody += '</li>';
+            tableBody += '</ul>';
+            tableBody +='</td>';
+            
+            tableBody+='</tr>';
+
+
+          }
+          tableBody+='</tbody>';
+          tableBody+='</table>';
+          $('#table').html(tableBody);
+
+        }else{
+          $('#table').html('<div class="h2 text-center">نوبت رزرو شده ایی وجود ندارد</div>');
+        }
+        }
+       }
+    });
+  }
+
+
 
 $("#btnCancelNewStart").click(function(){
   $("#startModal").modal("hide"); 
@@ -317,11 +464,13 @@ function hideAll(){
   
 }
 
-function runAppointmenInfo(calendar_id, className){
+function runAppointmenInfo(ـcalendar_id, className){
     var formData = new FormData();
     $("#btnBoxNewStart").hide();
     $("#btnBoxStart").hide();
-    formData.append('calendar_id',calendar_id);
+    formData.append('calendar_id',ـcalendar_id);
+    formData.append('infoRequest',true);
+    
     $.ajax({
       url: baseURL+'/user4/appointmentStatus',
       type: 'POST',
@@ -335,7 +484,9 @@ function runAppointmenInfo(calendar_id, className){
           sessionNumber = jsonData.ResultData.sessionNumber;
           sessionSize = jsonData.ResultData.sessionSize;
           if (sessionSize==null && sessionNumber==0){
-            $("#textAppointment").html("<div>"+'بیمار مورد نظر جلسه درمانی نداشته است'+"</div>");
+            $("#btnBoxFinishWithFillInfo").hide();
+            $("#packageInfo").hide();
+            $("#textAppointment").html("<div>"+'بیمار مورد نظر جلسه درمانی تمام شده ندارد'+"</div>");
             $("#startModal").modal("show");
           }else if (parseInt(sessionSize)>parseInt(sessionNumber)){
             sessionNumber = covertNumber(sessionNumber, 'enToFa');
@@ -368,10 +519,10 @@ function runAppointmenInfo(calendar_id, className){
     });
 }
 function runStartAppointmentDialog(_calendar_id, _className){
-    className = _className;
-    calendar_id = _calendar_id;
     var formData = new FormData();
-    formData.append('calendar_id',calendar_id);
+    formData.append('calendar_id',_calendar_id);
+    formData.append('infoRequest', false);
+    $("#btnBoxFinishWithEndAppointmentNumber").hide();
     $.ajax({
       url: baseURL+'/user4/appointmentStatus',
       type: 'POST',
@@ -381,14 +532,19 @@ function runStartAppointmentDialog(_calendar_id, _className){
       processData: false,
       success: function (result) {
         jsonData = result;
-        if (jsonData.Status == true) {
-          // Start new appointment package
+        if (jsonData.Status == false) {
+          $("#startModal").modal("show");
+          $("#textAppointment").html("<div>"+jsonData.Message+"</div>");
+        }else{
+          className = _className;
+          calendar_id = _calendar_id;
           sessionNumber = jsonData.ResultData.sessionNumber;
           sessionSize = jsonData.ResultData.sessionSize;
-          if (sessionSize==null && sessionNumber==0){
+          if (sessionNumber==0){
             $("#textAppointment").html("<div>"+'شروع درمان جدید برای بیمار مورد نظر'+"</div>");
             $("#btnBoxNewStart").show();
             $("#startModal").modal("show");
+            $('.sessionSize'+className).text('نامعلوم');
           }else if (parseInt(sessionSize)>parseInt(sessionNumber)){
             num = parseInt(sessionNumber)+1;
             num = num.toString();
@@ -396,6 +552,7 @@ function runStartAppointmentDialog(_calendar_id, _className){
             $("#btnBoxStart").show();
             $("#startModal").modal("show");
             $("#packageInfo").show();
+            $("#btnBoxFinishWithoutFillInfo").hide();
             $("#sessionSize").val(jsonData.ResultData.sessionSize);
             $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
             $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
@@ -477,6 +634,7 @@ function sendStartAjax(formData, className, sessionNumber){
         $("#btnBoxNewStart").hide();
         $('.start'+className).hide();
         $('.end'+className).show();
+        $('.row'+className).val("start=done");
         $('.row'+className).css("background-color", "#FFFF00");
         if (sessionNumber==0){
           Swal.fire({
@@ -501,37 +659,73 @@ function sendStartAjax(formData, className, sessionNumber){
   });
 }
 
-function runEndAppointmentDialog(calendar_id, className){
+function runEndAppointmentDialog(_calendar_id, className){
     var sessionNumber = $('.sessionNumber'+className).text();
     sessionNumber = covertNumber(sessionNumber, 'faToEn');
     sessionNumber = parseInt(sessionNumber);
     var formData = new FormData();
     $("#startModal").modal("show");
     $("#packageInfo").show();
-    if (sessionNumber==0){
-      $("#textAppointment").html("<div>"+'لطفا اطلاعات درمانی بیمار مورد نظر را تکمیل نمایید'+"</div>");  
-      $("#btnBoxFinishWithoutFillInfo").hide();
-      $("#btnBoxFinishWithEndAppointmentNumber").hide();
-      $("#btnBoxFinishWithFillInfo").show();
-      $("#sessionSize").val('');
-      $("#treatmentResult").val('');
-      $("#treatmentApproach").val('');
-      $("#diagnosis").val('');
-      $("#sessionSize").prop('disabled', false);
-      $("#treatmentApproach").prop('disabled', false);
-      $("#treatmentResult").prop('disabled', false);
-      $("#diagnosis").prop('disabled', false);
-    }else{
-      $("#textAppointment").html("<div>"+'اطلاعات درمانی بیمار مورد نظر '+"</div>");  
-      $("#btnBoxFinishWithFillInfo").hide();
-      $("#btnBoxFinishWithEndAppointmentNumber").hide();
-      $("#btnBoxFinishWithoutFillInfo").show();
-      $("#sessionSize").prop('disabled', true);
-      $("#treatmentApproach").prop('disabled', true);
-      $("#treatmentResult").prop('disabled', true);
-      $("#diagnosis").prop('disabled', true);
-    }
-
+    var formData = new FormData();
+    formData.append('calendar_id', _calendar_id);
+    formData.append('infoRequest',true);
+    $.ajax({
+      url: baseURL+'/user4/appointmentStatus',
+      type: 'POST',
+      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+        jsonData = result;
+        if (jsonData.Status == true) {
+          sessionNumber = jsonData.ResultData.sessionNumber;
+          sessionSize = jsonData.ResultData.sessionSize;
+          if (sessionNumber==0){
+            $("#textAppointment").html("<div>"+'لطفا اطلاعات درمانی بیمار مورد نظر را تکمیل نمایید'+"</div>");  
+            $("#btnBoxFinishWithoutFillInfo").hide();
+            $("#btnBoxFinishWithEndAppointmentNumber").hide();
+            $("#btnBoxFinishWithFillInfo").show();
+            $("#sessionSize").val('');
+            $("#treatmentResult").val('');
+            $("#treatmentApproach").val('');
+            $("#diagnosis").val('');
+            $("#sessionSize").prop('disabled', false);
+            $("#treatmentApproach").prop('disabled', false);
+            $("#treatmentResult").prop('disabled', false);
+            $("#diagnosis").prop('disabled', false);
+          }else if (parseInt(sessionSize)>parseInt(sessionNumber)){
+            $("#btnBoxFinishWithoutFillInfo").show();
+            $("#btnBoxFinishWithEndAppointmentNumber").hide();
+            $("#btnBoxFinishWithFillInfo").hide();
+            sessionNumber = covertNumber(sessionNumber, 'enToFa');
+            $("#textAppointment").html("<div>"+" نوبت  "+sessionNumber+"  بیمار مورد نظر انجام شده است "+"</div>"+"<div>"+"اطلاعات درمانی بیمار:"+"</div>");
+            $("#startModal").modal("show");
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }else{
+            $("#textAppointment").html("<div>"+' نوبت های بیمار مورد نظر تمام شده است'+"</div>");
+            $("#startModal").modal("show");
+            $("#packageInfo").show();
+            $("#sessionSize").val(jsonData.ResultData.sessionSize);
+            $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
+            $("#diagnosis").val(jsonData.ResultData.diagnosis);
+            $("#sessionSize").prop('disabled', true);
+            $("#treatmentApproach").prop('disabled', true);
+            $("#treatmentResult").prop('disabled', true);
+            $("#diagnosis").prop('disabled', true);
+          }
+        }
+      }
+    });
 }
 
 function sendEndAppointment(formData, className, sessionNumber, sessionSize){
@@ -648,148 +842,64 @@ function covertNumber(str, convert='faToEn'){
 
   return str;
 }
-// function runEndAppointmentDialog(){
-//     var formData = new FormData();
-//     var startedFlag = 0;
-//     var endedFlag = 0;
-//     formData.append('calendar_id', calendar_id);
-//     formData.append('treatment_approach ', treatment_approach);
-//     formData.append('treatment_result', treatment_result);
-//     formData.append('session_size', session_size );
-//     formData.append('number_of_session', number_of_session );
-
-//     $.ajax({
-//       url: baseURL+'/user4/endAppointment',
-//       type: 'POST',
-//       dataType: 'JSON',
-//       data: formData,
-//       contentType: false,
-//       processData: false,
-//       success: function (result) {
-//         jsonData = result;
-//         if (jsonData.Status == true) {
-//             endedFlag = 1;
-
-//         }
-//       }
-//     });
-// }
-
-// $(document).ready(function(){
-  
-// });
 
 
-// function paymentSteps(json, email = null){
-//   var counselingName = json.counselingName;
-//   var psychName = json.psychName;
-//   if (email == null) email = json.email;
-//   var startTime = json.startTime;
-//   var endTime = json.endTime;
-//   var date = json.date;
-//   var day = json.day;
-//   var weekDay = new Array(7);
-//   weekDay[0] = "یکشنبه";
-//   weekDay[1] = "دوشنبه";
-//   weekDay[2] = "سه شنبه";
-//   weekDay[3] = "چهار شنبه";
-//   weekDay[4] = "پنجشنبه";
-//   weekDay[5] = "جمعه";
-//   weekDay[6] = "شنبه";
-//   $("#modalVerify").modal("show");
-//   $("#appointmentText").html("<div>"+'کاربر    '+email+"</div>"+"<div>"+"شما برای دکتر "+psychName+" در درمانگاه "+counselingName+" از ساعت "+ startTime +" تا "+ endTime +"  در روز "+  weekDay[day]  +"  "+  date  +" درخواست نوبت کرده اید. "+"</div>");
-//   $("#verifyAppointment").click(function(){
-//     $('#verifyBtn').hide(500);
-//     $('#checkPayment').show();
-//   });
-//   $("#onlinePay").click(function(){
-//     $("#offlinePay").css('background-color', '#6f6b6b54');
-//     $("#offlinePay").css('color', 'black');
-//     $("#onlinePay").css('background-color', 'green');
-//     $("#onlinePay").css('color', 'white');
-//     $('#NotPayment').hide();
-//     $('#payment').show();
-//   });
-
-//   $("#offlinePay").click(function(){
-//     $("#onlinePay").css('background-color', '#6f6b6b54');
-//     $("#onlinePay").css('color', 'black');
-//     $("#offlinePay").css('background-color', 'green');
-//     $("#offlinePay").css('color', 'white');
-//     $('#payment').hide();
-//     $('#NotPayment').show();
-//   });
-
-//   $('#bookAgain').click(function(){
-//       $("#modalVerify").modal("hide");
-//     });
-
-//   $('#payment').click(function(){
-//     $("#modalVerify").modal("hide");
-//     var formData = new FormData();
-//     formData.append('calendar_id', calendar_id);
-//     formData.append('paymentMode', 2);
-//     $.ajax({
-//       url: baseURL+'/user1/bookAppointment',
-//       type: 'POST',
-//       dataType: 'JSON',
-//       data: formData,
-//       contentType: false,
-//       processData: false,
-//       buttonsStyling: false,
-//       success: function (result) {
-//         var json = result;
-//         if ((json.Status == true)) {
-//           showConfrmAppointment();
-//         }
-//       }
-//     });              
-//   });
+  function updateTime(){
+    hours = date.getHours();
+    minutes = "0" + date.getMinutes();
+    seconds = "0" + date.getSeconds();
+    formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    $('#time').html(formattedTime);
+    date.setSeconds( date.getSeconds() + 1 );
+    if (booked!=null){
+      for (var i=0; i<booked.length; i++){
+        var tmp = booked[i]["startTime"].split(":");
+        var startHour = tmp[0];
+        var startMin = tmp[1];
+        tmp = booked[i]["endTime"].split(":");
+        var endHour = tmp[0];
+        var endMin = tmp[1];
+        var startTimeObject = new Date();
+        startTimeObject.setHours(startHour, startMin, "00");
+        var endTimeObject = new Date(startTimeObject);
+        endTimeObject.setHours(endHour, endMin, "00");
+        var currentTimeObject = new Date();
+        currentTimeObject.setHours(date.getHours(), date.getMinutes(), "00")
+        // alert(startTimeObject.getTime());
+        // alert(currentTimeObject.getTime());
+        // alert(endTimeObject.getTime());
+        if (startTimeObject.getTime() < currentTimeObject.getTime() && currentTimeObject.getTime()<endTimeObject.getTime() && $('.row'+i).val()!="start=done" && booked[i]['status']=='notStarted'){
+          $('.row'+i).css("background-color", "#D8BFD8");
+        }else if(currentTimeObject.getTime()>endTimeObject.getTime() && $('.row'+i).val()!="start=done" && booked[i]['status']=='notStarted'){
+          $('.row'+i).css("background-color", "#ff6666");
+        }
+      }
+    }
+  }
 
   
-//   $('#NotPayment').click(function(){
-//     $("#modalVerify").modal("hide");
-//     var formData = new FormData();
-//     formData.append('calendar_id', calendar_id);
-//     formData.append('paymentMode', 1);
-//     $.ajax({
-//       url: baseURL+'/user1/bookAppointment',
-//       type: 'POST',
-//       dataType: 'JSON',
-//       data: formData,
-//       contentType: false,
-//       processData: false,
-//       buttonsStyling: false,
-//       success: function (result) {
-//         var json = result;
-//         if ((json.Status == true)) {
-//           showConfrmAppointment();
-//         }
-//       }
-//     });
-//   });
-// }
+  function dateConverter(date){
+    return today = new Date(date).toLocaleDateString('fa-IR');
+  }
 
-//   function showConfrmAppointment(){
-//     url = baseURL+'/user1/mainPage';
-//           Swal.fire({
-//             type: 'success',
-//             position: 'top',
-//             html: '<div style="font-size: 25px">تبریک</div><div style="font-size: 20px">نوبت شما با موفقیت ثبت شد</div><div style="font-size: 15px">برای مشاهده نوبت رزرو شده وارد پنل خود شوید و یا برای رزرو مجدد نوبت روی رزرو نویت کلیک کنید</div>',
-//             showCloseButton: false,
-//             showCancelButton: true,
-//             focusConfirm: false,
-//             buttonsStyling: false,
-//             confirmButtonText:
-//               creatButton('ورود به پنل کاربری', url, 'class="btn btn-pill btn-danger"'),
-//             cancelButtonText:
-//               creatButton('رزرو مجدد', '', 'class="btn btn-pill btn-secondary"'),
-//           });
-//   }
 
-//   function creatButton(text, link, style){
-//     return ('<a'+' type="button"'+ style + ' href='+link+'>'+text+'</a>');
-//   }
+  function toPersianNum(number)
+    {
+      number.toString();
+      for(var i=0; i<number.length; i++){
+        number = number.replace("1","۱");
+        number = number.replace("2","۲");
+        number = number.replace("3","۳");
+        number = number.replace("4","۴");
+        number = number.replace("5","۵");
+        number = number.replace("6","۶");
+        number = number.replace("7","۷");
+        number = number.replace("8","۸");
+        number = number.replace("9","۹");
+        number = number.replace("0","۰");   
+      }
+      return number;
+    }
 
 </script>
 
