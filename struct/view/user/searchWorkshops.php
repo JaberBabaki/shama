@@ -46,7 +46,7 @@
           var html = '';
           var baseURL = "<?php echo baseUrl(); ?>";
           for (var i in data.ResultData) {
-            html += '<br><strong style="display: block;text-align:right; margin-right: 30px"><a target="_blank"  href="' + baseURL + '/mangeCounseling/homePageCounseling/' + data.ResultData[i].id + '">' + data.ResultData[i].name + ' </a></strong><br>';
+            html += '<br><strong style="display: block;text-align:right; margin-right: 30px"><a target="_blank"  href="' + baseURL + '/mangeCounseling/detailWorkshop/' + data.ResultData[i].id + '/' + data.ResultData[i].workshop_id + '">' + data.ResultData[i].name + ' </a></strong><br>';
           }
           var tooltipsterHtml = '<div style="direction: rtl;width:999px">' + html + '</div>';
           $("#search").tooltipster('content', tooltipsterHtml);
