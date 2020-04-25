@@ -84,11 +84,14 @@ class User1Controller {
     exit;
   }
   public static function bookAppointment(){
+    exit;
     $calendar_id = $_POST['calendar_id'];
     $paymentMode = $_POST['paymentMode'];
     $user_id = $_SESSION['user_id'];
     $date = getCurrentDate();
     $time = getCurrentTime();
+    print_r($date);
+    exit;
     User1Model::bookAppointment($calendar_id, $paymentMode, $user_id, $date, $time);
     $response = [];
     $response['Status'] = true;
