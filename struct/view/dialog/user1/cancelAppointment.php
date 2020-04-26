@@ -7,18 +7,18 @@
     <!--Modal cascading tabs-->
     <div class="modal-c-tabs" style="color: #000; line-height: 34px">
         <div class="verify-title" id="appointmentText"></div>
-      <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBox">
-        <li style="position: fixed; right: 65px">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-success" style=" width: 180px" id="verify"> تایید </button>
-          </div>
-        </li>
-        <li style="position: fixed; left: 65px">
-          <div class="container-login100-form-btn" >
-          <button class="btn btn-danger"  id="cancelBtn" style="background-color: lightcoral; width: 180px"> انصراف</button>
-          </div>
-        </li>
-      </ul>
+        <ul style="list-style: none; display: inline-flex; margin-bottom: 80px" id="verifyBox">
+          <li style="position: fixed; right: 65px">
+            <div class="container-login100-form-btn" >
+            <button class="btn btn-success" style=" width: 180px" id="verify"> تایید </button>
+            </div>
+          </li>
+          <li style="position: fixed; left: 65px">
+            <div class="container-login100-form-btn" >
+            <button class="btn btn-danger"  id="cancelBtn" style="background-color: lightcoral; width: 180px"> انصراف</button>
+            </div>
+          </li>
+        </ul>
 
       <div style="display: none;" id="payInfo">
         <div class="wrap-input100 validate-input" data-validate="لطفا شماره کارت خود را وارد کنید!" style="right: 9%">

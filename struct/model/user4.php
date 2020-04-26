@@ -45,13 +45,15 @@ class User4Model {
     $db=Db::getInstance();
     $record=$db->query("
                       SELECT
-                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode, t2.calendar_id
+                        t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode, t2.calendar_id, t4.userName
                       FROM
                         s_booked_appointment t1
                       INNER JOIN
                         s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
                       INNER JOIN
                       s_counseling_center t3 ON t2.counseling_id=t3.conceil_id
+                      INNER JOIN
+                        s_user t4 ON t1.user_id=t4.user_id
                       WHERE 
                         t2.psychIdentity='$shenaseh'
                       ORDER BY 
@@ -62,25 +64,185 @@ class User4Model {
     return $record;
   }
   
-  public static function startAppointment($calendar_id, $user_id){
+  public static function startAppointment($calendar_id, $sessionNumber){
     $db=Db::getInstance();
     $record=$db->insert("
                         INSERT INTO
                          s_info_appointment
-                        (calendar_id, user_id)VALUES($calendar_id, $user_id) 
+                        (calendar_id, session_number)VALUES($calendar_id, $sessionNumber) 
                         ");
+    
+                        // $record=$db->first("
+    //                   SELECT
+    //                     info_appointment_id
+    //                   FROM
+    //                     s_info_appointment
+    //                   WHERE 
+    //                     calendar_id=$calendar_id
+    //                   ");             
+    
     return $record;
   }
 
-  // public static function endAppointment($calendar_id, $data){
-  //   $db=Db::getInstance();
-  //   $record=$db->insert("
-  //                       INSERT INTO
-  //                        s_info_appointment
-  //                       (calendar_id, user_id)VALUES($calendar_id, $user_id) 
-  //                       ");
-  //   return $record;
-  // }
+  public static function endAppointment($info_id, $package_id, $date){
+    $db=Db::getInstance();
+    $db->modify("
+                UPDATE
+                  s_info_appointment
+                SET
+                  session_number=session_number+1, end_time='$date', package_appointment_id=$package_id
+                WHERE 
+                  info_appointment_id=$info_id
+                ");
+  }
+
+  public static function getSessionNumberAndSessionSizeByCalendarId($calendar_id){
+    $db=Db::getInstance();
+    $record = $db->first("
+                        SELECT 
+                          t1.session_number, t2.session_size, t2.treatment_approach, t2.treatment_result, t2.diagnosis
+                        FROM 
+                          s_info_appointment t1
+                        INNER JOIN 
+                          s_package_appointment t2 ON t1.package_appointment_id=t2.package_appointment_id
+                        WHERE t1.calendar_id=$calendar_id AND t1.end_time IS NOT NULL;
+    ");
+    return $record;
+  }
+
+  public static function isStartedAppointment($calendar_id){
+    $db=Db::getInstance();
+    $record = $db->query("
+                        SELECT COUNT(1)
+                        FROM s_info_appointment
+                        WHERE calendar_id=$calendar_id AND end_time IS NULL;
+    ");
+    return $record;
+  }
+    
+  public static function isFinishedAppointment($calendar_id){
+    $db=Db::getInstance();
+    $record = $db->query("
+                        SELECT COUNT(1)
+                        FROM s_info_appointment
+                        WHERE calendar_id=$calendar_id AND end_time IS NOT NULL;
+    ");
+    return $record;
+  }
+
+  public static function isPscychBusy($psychShenaseh){
+    $db=Db::getInstance();
+    $record = $db->query("
+                        SELECT COUNT(1)
+                        FROM
+                          s_info_appointment t1
+                        INNER JOIN
+                        s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
+                        WHERE 
+                          t2.psychIdentity='$psychShenaseh' AND t1.end_time IS NULL;
+    ");
+    return $record;
+  }
+
+  public static function getSessionNumberAndSessionSizeByUserId($user_id, $counseling_id, $psychIdentity){
+    $db = Db::getInstance();
+    $record = $db->first("
+    SELECT 
+      t1.info_appointment_id
+    FROM
+      s_info_appointment t1
+    INNER JOIN
+      s_calendar_appointment t2 ON t1.calendar_id = t2.calendar_id 
+    WHERE 
+      t2.counseling_id=$counseling_id AND t2.psychIdentity='$psychIdentity'
+    ORDER BY
+      t1.start_time DESC              
+    ");
+    if($record!=null){
+      $info = $record['info_appointment_id'];
+      $record = $db->query("
+                        SELECT 
+                          t1.session_number, t2.session_size, t2.treatment_approach, t2.treatment_result, t2.diagnosis
+                        FROM
+                          s_info_appointment t1
+                        INNER JOIN
+                          s_package_appointment t2 
+                        WHERE 
+                          t1.info_appointment_id=$info AND t2.counseling_id=$counseling_id AND t2.user_id=$user_id AND t2.psychIdentity='$psychIdentity'
+                        ORDER BY
+                          t2.creat_time DESC              
+      ");
+      return $record;
+    }else{
+      return null;
+    }
+    
+
+  }
+
+  public static function updatePackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize){
+    $db=Db::getInstance();
+    $record = $db->first("
+                      SELECT 
+                        package_appointment_id 
+                      FROM
+                        s_package_appointment
+                      WHERE
+                        counseling_id=$counseling_id AND user_id=$user_id AND psychIdentity='$psychIdentity'
+                      ORDER BY
+                        creat_time DESC              
+                      ");
+    $package_id = $record['package_appointment_id'];
+    $db->modify("
+              UPDATE
+                s_package_appointment
+              SET
+                treatment_approach='$treatmentApproach' , treatment_result='$treatmentResult', session_size=$sessionSize, diagnosis='$diagnosis' 
+              WHERE 
+                package_appointment_id=$package_id
+    ");
+        
+    return $package_id;
+  }
+  
+  public static function startPackage($user_id, $counseling_id, $psychIdentity, $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize){
+    $db=Db::getInstance();
+    $db->insert("
+                INSERT INTO
+                  s_package_appointment
+                (user_id, counseling_id, psychIdentity, treatment_approach, treatment_result, session_size, diagnosis)VALUES($user_id, $counseling_id, '$psychIdentity', '$treatmentApproach' , '$treatmentResult', $sessionSize, '$diagnosis') 
+                ");   
+    $record = $db->first("
+                      SELECT 
+                        package_appointment_id 
+                      FROM
+                        s_package_appointment
+                      WHERE
+                        counseling_id=$counseling_id AND user_id=$user_id AND psychIdentity='$psychIdentity'
+                      ORDER BY
+                        creat_time DESC              
+                      ");
+    return $record['package_appointment_id'];                   
+    // return $record['package_appointment_id'];
+  }
+
+  public static function getPackageIdAndInfoId($calendar_id, $user_id, $counseling_id, $psychIdentity){
+    $db=Db::getInstance();
+    $record = $db->first("
+                        SELECT 
+                          t2.package_appointment_id, t1.info_appointment_id
+                        FROM
+                          s_info_appointment t1
+                        INNER JOIN
+                          s_package_appointment t2
+                        WHERE
+                          t2.user_id=$user_id AND t2.counseling_id=$counseling_id AND t2.psychIdentity='$psychIdentity' AND t1.calendar_id=$calendar_id
+                        ORDER BY
+                          t2.creat_time DESC,
+                          t1.start_time DESC              
+                        ");
+    return $record;
+  }
 
   public static function getCanceledAppoitmentsByPsychId($shenaseh){
     $db=Db::getInstance();
@@ -101,6 +263,30 @@ class User4Model {
                         t2.startTime ASC
                         ");
     return $record;
+  }
+
+  public static function getTodayAppointmentByPsychShenasehAndCounselingId($psychShenaseh, $counseling_id, $date){
+    $db=Db::getInstance();
+    $record=$db->query("
+                    SELECT
+                    t2.endTime, t2.startTime, t3.counselingName, t2.day, t2.date, t1.paymentMode, t2.calendar_id, t4.userName
+                  FROM
+                    s_booked_appointment t1
+                  INNER JOIN
+                    s_calendar_appointment t2 ON t1.calendar_id=t2.calendar_id
+                  INNER JOIN
+                  s_counseling_center t3 ON t2.counseling_id=t3.conceil_id
+                  INNER JOIN
+                    s_user t4 ON t1.user_id=t4.user_id
+                  WHERE 
+                    t2.psychIdentity='$psychShenaseh' AND t2.counseling_id=$counseling_id AND t2.date='$date'
+                  ORDER BY 
+                    t2.date ASC,
+                    t2.day ASC,
+                    t2.startTime ASC
+                      ");
+  return $record;
+
   }
 
 }

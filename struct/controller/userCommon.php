@@ -115,6 +115,11 @@ class UserCommonController {
     view::render('user/searchPsych.php', $data);
   }
 
+  function searchworkshops() {
+    $data[] = array();
+    view::render('user/searchWorkshops.php', $data);
+  }
+
   function feedCounsiling() {
     $response = [];
     $response['Status'] = false;
@@ -130,6 +135,31 @@ class UserCommonController {
           $id = $record['conceil_id'];
           $out['name'] = $name;
           $out['id'] = $id;
+          $response['ResultData'][] = $out;
+        }
+      }
+    }
+    echo json_encode($response);
+    exit;
+  }
+
+  function feedWorkshops() {
+    $response = [];
+    $response['Status'] = false;
+    $response['Error'] = [];
+    $response['ResultData'] = [];
+    $keyword = $_POST['keyword'];
+    $count = strlen(trim($keyword));
+    if ($count >= 1) {
+      $records = User1Model::feedWorkshops($keyword);
+      if ($records != null) {
+        foreach ($records as $record) {
+          $name = $record['course_name'];
+          $id = $record['counseling_id'];
+          $workshop_id = $record['workshop_id'];
+          $out['name'] = $name;
+          $out['id'] = $id;
+          $out['workshop_id'] = $workshop_id;
           $response['ResultData'][] = $out;
         }
       }

@@ -100,7 +100,7 @@
 								<!-- <li class="divider"></li> -->
 								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
 								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"></i> <span>خروج</span></a></li>
-							</ul>
+	          	</ul>
 						</div>
 					</div>
 					<!-- /user menu -->
@@ -110,83 +110,17 @@
 				</div>
 			</div>
 			<!-- /main sidebar -->
-
-
 			<!-- Main content -->
 			<div class="content-wrapper">
-
-				
-
 				<!-- Content area -->
 				<div class="content" style="padding: 0 93px 60px 123px">
-
           <!-- Dropdown menu -->
           <div class="table-responsive">
-            <?php if($firstAvailable!=null): ?>
-              <table class="table text-nowrap table-striped border table-hover table-condensed">
-                <tbody>
-                  <tr class="active border-double">
-                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نزدیک ترین نوبت</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="media-right">
-                        <a href="#"><img src="/asset/image/per-pic/<?=$firstAvailable['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                      </div>
-                      <div class="media-left position">
-                        <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$firstAvailable['psychName']?></a></div>
-                        <div class="text-muted text-size-small">
-                        <?=stringConverter($firstAvailable['endTime'], 'enToFa')?> - <?=stringConverter($firstAvailable['startTime'], 'enToFa')?> 
-                        </div>
-                      </div>
-										</td>
-                    <td>
-                      <div class="text-default text-semibold position">درمانگاه <?=$firstAvailable['counselingName']?></div>
-                    </td>
-                    <td>
-                      <div class="media-left position">
-                        <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($firstAvailable['day']) ?></div>
-                        <div class="text-muted text-size-small">
-                          <?=dateConverter($firstAvailable['date'], 'enToFa') ?>
-                        </div>
-                      </div>
-								    </td>
-                    <td><div class="text-default text-semibold position">
-                      <?php if($firstAvailable['paymentMode']==1): ?>
-                        پرداخت در محل
-                      <?php endif; ?>
-                      <?php if($firstAvailable['paymentMode']==2): ?>
-                        پرداخت آنلاین
-                      <?php endif; ?>
-                    </div></td>
-                    <td ><div id="nearest-appointment" onclick="runCancelDialog(<?=$firstAvailable['appointment_id']?>)" class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                  </tr>
-                </tbody>
-              </table>
-            <?php endif; ?>
-            
-            <br>
-            <br>
-
             <?php if($allAvailable!=null): ?>
               <table class="table text-nowrap table-striped border table-hover table-condensed">
                 <tbody>
                   <tr class="active border-double">
-                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های آتی</td>
+                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">کل نوبت های رزرو شده</td>
                   </tr>
                   <?php for ($i=0; $i<count($allAvailable); $i++): ?>
                     <tr>
@@ -241,67 +175,6 @@
               </table>
             <?php endif; ?>
           </table>
-          
-          <br>
-          <br>
-          <?php if($canceled!=null): ?>
-            <table class="table text-nowrap table-striped border table-hover table-condensed">
-            <tbody>
-              <tr class="active border-double">
-                <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های لغو شده</td>
-              </tr>
-              <?php for($i=0; $i<count($canceled); $i++): ?>
-                    <tr style="background-color:  #f25555 ">
-                      <td>
-                        <div class="media-right">
-                          <a href="#"><img src="/asset/image/per-pic/<?=$canceled[$i]['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                        </div>
-                        <div class="media-left position">
-                          <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$canceled[$i]['psychName']?></a></div>
-                          <div class="text-default text-size-small">
-                          <?=stringConverter($canceled[$i]['endTime'], 'enToFa')?> - <?=stringConverter($canceled[$i]['startTime'], 'enToFa')?> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-default text-semibold position">درمانگاه <?=$canceled[$i]['counselingName']?></div>
-                      </td>
-                      <td>
-                        <div class="media-left position">
-                          <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($canceled[$i]['day']) ?></div>
-                          <div class="text-default text-size-small">
-                            <?=dateConverter($canceled[$i]['date'], 'enToFa') ?>
-                          </div>
-                        </div>
-                      </td>
-                      <td ><div class="text-default text-semibold position" >
-                        <?php if($canceled[$i]['paymentMode']==1): ?>
-                          پرداخت در محل
-                        <?php endif; ?>
-                        <?php if($canceled[$i]['paymentMode']==2): ?>
-                         پرداخت آنلاین - در انتظار بازگشتن مبلغ
-                        
-                          <?php endif; ?>
-                      </div></td>
-                          <!-- <td class="text-center">
-                            <ul class="icons-list">
-                              <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-                                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-                                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </td> -->
-                    </tr>
-              <?php endfor; ?>              
-          </tbody>
-          </table>
-        <?php endif; ?>
         </div>
           
 					<!-- /dropdown menu -->

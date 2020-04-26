@@ -9,6 +9,7 @@ class User1Controller {
   public function mainPage(){
     $data = [];
     RQO('struct/controller/algorithms/user1.php');
+    UserBase::LoginCheckPerTask();
     $appointment = new Appointment($_SESSION['user_id']);
     $allAvailable = $appointment->getAllAvailable();
     $firstAvailable = $appointment->getFirstAvailable();
@@ -19,9 +20,37 @@ class User1Controller {
     view::render('panel/user1/main.php', $data);
   }
 
-  public function showReserved(){
-    $response = [];
+  public function showAllReserved(){
+    $data = [];
+    UserBase::LoginCheckPerTask();
+    RQO('struct/controller/algorithms/user1.php');
+    $appointment = new Appointment($_SESSION['user_id']);
+    $allAvailable = $appointment->getAllAvailable();
+    $data['allAvailable'] = $allAvailable;
+    view::render('panel/user1/showAllReserved.php', $data);
+  }
 
+  public function showNotCompleted(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showCompleted(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showAllCanceled(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showPassed(){
+    $response = [];
+    
     view::render('panel/user1/showReserved.php', $response);
   }
 
@@ -43,11 +72,24 @@ class User1Controller {
     exit;
   }
 
+  public static function cancelWorkshop(){
+    $booked_id = $_POST['booked_id'];
+    $cardNum = $_POST['cardNum'];
+    $name = $_POST['name'];
+    $cardNum = stringConverter($cardNum, $type='faToEn');
+    User1Model::cancelWorkshop($booked_id, $cardNum, $name);
+    $result = [];
+    $result['Status'] = true;
+    echo json_encode($result);
+    exit;
+  }
   public static function bookAppointment(){
     $calendar_id = $_POST['calendar_id'];
     $paymentMode = $_POST['paymentMode'];
     $user_id = $_SESSION['user_id'];
-    User1Model::bookAppointment($calendar_id, $paymentMode, $user_id);
+    $date = getCurrentDate();
+    $time = getCurrentTime();
+    User1Model::bookAppointment($calendar_id, $paymentMode, $user_id, $date, $time);
     $response = [];
     $response['Status'] = true;
     $response['Error'] = [];
@@ -58,5 +100,32 @@ class User1Controller {
 
   }
   
- 
+  public static function bookWorkshop(){
+    $calendar_id = $_POST['workshop_id'];
+    $paymentMode = $_POST['paymentMode'];
+    $user_id = $_SESSION['user_id'];
+    $date = grtCurrentTime();
+    User1Model::bookWorkshop($calendar_id, $paymentMode, $user_id, $date);
+    $response = [];
+    $response['Status'] = true;
+    $response['Error'] = [];
+    $response['ResultData'] = [];
+    $response['ResultData']['message'] = "نوبت ثبت شد";
+    echo json_encode($response);
+    exit;
+
+  }
+
+  public static function workshop(){
+    $data = [];
+    $user_id = $_SESSION['user_id'];
+    $records = User1Model::getBookedWorkshopByUsesrId($user_id);
+    $data['allBooked'] = $records;
+    $records = User1Model::getCanceledWorkshopByUsesrId($user_id);
+    $data['canceled'] = $records;
+    view::render('panel/user1/workshop.php', $data);
+  }
+
+
+
 }

@@ -99,26 +99,51 @@ class UserCommonModel {
     return $record;
   }
 
-  public static function getNumberOfSessionsAndSessionSizeByUserId($user_id, $counseling_id){
-    $db = Db::getInstance();
-    $record = $db->query("
-                        SELECT 
-                          number_of_session, session_size
-                        FROM
-                          s_info_appointment
-                        WHERE 
-                          counseling_id=$counseling_id AND user_id=$user_id
-                        ORDER BY
-                          start_time DESC              
-                        ");
-    return $record;
-  }
 
-  public static function getcounselingIdByCalendarId($calendar_id){
+
+  public static function getCounselingIdByCalendarId($calendar_id){
     $db = Db::getInstance();
     $record = $db->first("
                         SELECT
                          counseling_id
+                        FROM
+                         s_calendar_appointment 
+                        WHERE 
+                          calendar_id=$calendar_id               
+                        ");
+    
+    return $record;
+  }
+
+  public static function listWorkshopsByCounselingId($counseling_id){
+    $db = Db::getInstance();
+    $record = $db->query("
+                        SELECT 
+                          *
+                        FROM 
+                          s_calendar_workshop  
+                        WHERE counseling_id=$counseling_id               
+                        "); 
+    return $record;
+  }
+
+  public static function listWorkshopsByCounselingIdAndWorkshopId($counseling_id, $workshop_id){
+    $db = Db::getInstance();
+    $record = $db->first("
+                        SELECT 
+                          *
+                        FROM 
+                          s_calendar_workshop  
+                        WHERE counseling_id=$counseling_id AND workshop_id=$workshop_id               
+                        "); 
+    return $record;
+  }
+
+  public static function getpsychIdentityByCalendarId($calendar_id){
+    $db = Db::getInstance();
+    $record = $db->first("
+                        SELECT
+                          psychIdentity
                         FROM
                          s_calendar_appointment 
                         WHERE 

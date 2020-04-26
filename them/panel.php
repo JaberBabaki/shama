@@ -7,7 +7,7 @@
   <title>پنل مدیرت سامانه شبکه ملی ازدواج</title>
 
   
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css"> -->
   <link rel="stylesheet" href="/asset/css/base.css">
   <link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -15,10 +15,13 @@
   <link href="/asset/css/components.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/colors.css" rel="stylesheet" type="text/css">
   <link href="/asset/css/persian-datepicker.css" rel="stylesheet" type="text/css">
+  <link href="/asset/css/sweetalert2/sweetalert2.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/asset/css/style-login.css">
+  <link rel="stylesheet" href="/asset/css/font-awesome.min.css">
 
   <script type="text/javascript" src="/asset/js/plugins/loaders/pace.min.js"></script>
-  <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script>
-  <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script> -->
   <script type="text/javascript" src="/asset/js/plugins/notifications/bootbox.min.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/loaders/blockui.min.js"></script>
   <script type="text/javascript" src="/asset/js/date/persian-date.js"></script>
@@ -27,7 +30,7 @@
   <script type="text/javascript" src="/asset/js/core/app.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/notifications/pnotify.min.js"></script>
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBh5HPijDZRnO-0UHCYdqBuyal4RqPxN2s&amp;sensor=false&amp;libraries=places"></script>
+  <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBh5HPijDZRnO-0UHCYdqBuyal4RqPxN2s&amp;sensor=false&amp;libraries=places"></script> -->
 
   <script type="text/javascript" src="/asset/js/core/libraries/jquery_ui/widgets.min.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
@@ -41,6 +44,8 @@
   <script type="text/javascript" src="/asset/js/combobox.js"></script>
 
   <script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script>
+  <script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="/asset/js/date/persian-date.js"></script>
   <script type="text/javascript" src="/asset/js/date/persian-datepicker.js"></script>
   <script type="text/javascript" src="/asset/js/plugins/forms/wizards/steps.min.js"></script>
@@ -56,6 +61,7 @@
   <script type="text/javascript" src="/asset/js/plugins/pickers/pickadate/legacy.js"></script>
 
   <script type="text/javascript" src="/asset/js/pages/picker_date.js"></script>
+  <script src="/asset/js/sweetalert2/sweetalert2.js"></script>
 
 </head>
 <body>
@@ -69,10 +75,13 @@
     </ul>
   </div>
 
+
   <div class="navbar-collapse collapse" id="navbar-mobile">
     <ul class="nav navbar-nav">
       <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
     </ul>
+
+    
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -80,7 +89,6 @@
           <span class="visible-xs-inline-block position-right">پیام ها</span>
           <span class="badge bg-warning-400">2</span>
         </a>
-
         <div class="dropdown-menu dropdown-content width-350">
           <div class="dropdown-content-heading">
             Messages
@@ -196,3 +204,5 @@
    
 </body>
 </html>
+
+

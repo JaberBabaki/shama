@@ -4,7 +4,7 @@ class Appointment{
     function __construct($shenaseh, $conceil_id)
     {
         $this->now = new DateTime();
-        $this->now->modify('+20 minute');
+        // $this->now->modify('+20 minute');
         $this->recordPsych = User3Model::listAvailableCalendarByShenasehAndCounsellingId($shenaseh, $conceil_id, $this->now->format('Y-m-d'), $this->now->format('H:i'));  
         $this->now->modify('00:00');
         $this->recordPsychList = array();

@@ -41,6 +41,63 @@ class MangeCounselingController {
     view::renderCounselingPage('manageCounseling/queue.php', $data);
   }
 
+  function workshops($counseling_id){
+    $data[] = array();
+    $records = UserCommonModel::listWorkshopsByCounselingId($counseling_id);
+    $data['records'] = $records;
+    $data['params'] = $counseling_id;
+    view::renderCounselingPage('manageCounseling/workshops.php', $data);
+  }
+
+  function detailWorkshop($counseling_id, $workshop_id)
+  {
+    RQO('struct/controller/algorithms/userCommon.php');
+    $data = [];
+    $record = UserCommonModel::listWorkshopsByCounselingIdAndWorkshopId($counseling_id, $workshop_id);
+    // print_r($record);
+    // exit;
+    $data['params'] = $counseling_id;
+    if ($record['booked_number']<$record['capacity_workshop']){
+      $data['filled'] = false;
+      $data['remainedCapacity'] = $record['capacity_workshop'] - $record['booked_number'];
+      $data['remainedCapacity'] = stringConverter($data['remainedCapacity'], 'enToFa');
+      $data['workshop_id'] = $record['workshop_id'];
+      $now = new DateTime();
+      $now->modify('+20 minute');
+      $dateFirstRegister = new DateTime($record['start_date_register_workhop'].$record['start_time_register_workshop']);
+      $dateEndRegister = new DateTime($record['end_date_register_workshop'].$record['end_time_register_workshop']);
+      // print_r($dateFirstRegister);
+      // print_r($dateEndRegister);
+      // print_r($now);
+      // exit;
+      if($dateFirstRegister<$now  && $now<$dateEndRegister){
+        $data['passed'] = false;
+        $diff = $dateEndRegister->diff($now);
+        switch ($diff->days){
+            case 0:
+                $data['dateRegister'] =  ' امروز '.stringConverter($dateEndRegister->format('H:i'), 'enToFa').''.userCommonAlgorithm::pmAm($dateEndRegister->format('H:i'));
+                break;
+            case 1:
+                $data['dateRegister'] = ' فردا '.stringConverter($dateEndRegister->format('H:i'), 'enToFa').''.userCommonAlgorithm::pmAm($dateEndRegister->format('H:i'));
+                break;
+            case 2:
+                $data['dateRegister'] = ' پس فردا '.stringConverter($dateEndRegister->format('H:i'), 'enToFa').''.userCommonAlgorithm::pmAm($dateEndRegister->format('H:i'));
+                break;
+            default:
+                $data['dateRegister'] = stringConverter($diff->days, 'enToFa').'   روز دیگر ساعت   '.stringConverter($dateEndRegister->format('H:i'), 'enToFa').userCommonAlgorithm::pmAm($dateEndRegister->format('H:i'));
+                break;
+        }
+      $data['dateStart'] = dateConverter($record['start_date_workhop'], 'enToFa');
+    
+        
+      }else{
+        $data['passed'] = true;
+      }
+    }else{
+      $data['filled'] = true;
+    }
+    view::renderCounselingPage('manageCounseling/detailWorkshop.php', $data);
+  }
 
   function detailPsych($shenaseh, $conceil_id) {
     $_SESSION['psychShenaseh'] = $shenaseh;
@@ -91,4 +148,64 @@ class MangeCounselingController {
     echo json_encode($result);
     exit;
   }
+
+  function workshopInfo(){
+    $result = [];
+    if (!isGuest()){
+      $result['Status'] = true;
+      $result['register'] = true;  
+      $result['email'] = $_SESSION['email'];
+    }else{
+      $result['Status'] = true;
+      $result['register'] = false;
+    }
+    $workshop_id = $_POST['workshop_id'];
+    $response = User3Model::getWorkshopInfoByWorkshopId($workshop_id);
+    // print_r($response['course_name']);
+    // exit;
+    $result['courseName'] = $response['course_name'];
+    $result['teacherName'] = $response['teacher_name'];
+    $result['startDateRegister'] = dateConverter($response['start_date_register_workhop'], 'enToFa');
+    $result['endDateRegister'] = dateConverter($response['end_date_register_workshop'], $type='enToFa');
+    $result['startTimeRegister'] = stringConverter($response['start_time_register_workshop'], 'enToFa');
+    $result['endTimeRegister'] = stringConverter($response['end_time_register_workshop'], $type='enToFa');
+    $result['startDate'] = dateConverter($response['start_date_workhop'], 'enToFa');
+    $result['endDate'] = dateConverter($response['end_date_workshop'], $type='enToFa');
+    $result['startTime'] = stringConverter($response['start_time_workshop'], 'enToFa');
+    $result['endTime'] = stringConverter($response['end_time_workshop'], $type='enToFa');
+    
+    echo json_encode($result);
+    exit;
+  }
+
+  function bookedWorkshopInfo(){
+    $result = [];
+    if (!isGuest()){
+      $result['Status'] = true;
+      $result['register'] = true;  
+      $result['email'] = $_SESSION['email'];
+    }else{
+      $result['Status'] = true;
+      $result['register'] = false;
+    }
+    $booked_id = $_POST['booked_id'];
+    $response = User3Model::getBooekedAppointmentByBookedId($booked_id);
+    // print_r($response['course_name']);
+    // exit;
+    $result['courseName'] = $response['course_name'];
+    $result['teacherName'] = $response['teacher_name'];
+    $result['startDateRegister'] = dateConverter($response['start_date_register_workhop'], 'enToFa');
+    $result['endDateRegister'] = dateConverter($response['end_date_register_workshop'], $type='enToFa');
+    $result['startTimeRegister'] = stringConverter($response['start_time_register_workshop'], 'enToFa');
+    $result['endTimeRegister'] = stringConverter($response['end_time_register_workshop'], $type='enToFa');
+    $result['startDate'] = dateConverter($response['start_date_workhop'], 'enToFa');
+    $result['endDate'] = dateConverter($response['end_date_workshop'], $type='enToFa');
+    $result['startTime'] = stringConverter($response['start_time_workshop'], 'enToFa');
+    $result['endTime'] = stringConverter($response['end_time_workshop'], $type='enToFa');
+    $result['paymentMode'] = $response['booked_workshop_payment_mode'];
+    
+    echo json_encode($result);
+    exit;
+  }
+
 }

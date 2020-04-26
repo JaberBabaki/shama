@@ -92,7 +92,7 @@
 						<div class="navigation-wrapper" id="user-nav">
 							<ul class="navigation ">
               <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="active text-right"><span>پروفایل من</span></a></li>
-              <li><a href="<?php echo baseUrl(); ?>/user1/showAllReserved" class="text-right"><span>کل نوبت های رزرو شده</span></a></li>
+              <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>نوبت های رزرو شده</span></a></li>
               <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>نوبت های انجام شده</span></a></li>
               <li><a href="<?php echo baseUrl(); ?>/user1/workshop" class="text-right"><span>دوره های رزرو شده</span></a></li>
               <li><a href="<?php echo baseUrl(); ?>/user1/workshop" class="text-right"><span>دوره های انجام شده</span></a></li>

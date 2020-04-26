@@ -51,9 +51,9 @@ class User3Controller {
     view::renderPanel('panel/user3/informationCenter.php', $data);
   }
 
-  function course() {
+  function workshop() {
     $data[] = array();
-    view::renderPanel('panel/user3/course.php', $data);
+    view::renderPanel('panel/user3/workshop.php', $data);
   }
 
   function informationPsych() {
@@ -176,6 +176,56 @@ class User3Controller {
     }
 
   }
+
+  function registerWorkShop() {
+    $response = [];
+    $response['Status'] = false;
+    $response['Error'] = [];
+    $response['ResultData'] = [];
+    $nameCourse = $_POST['nameCourse'];
+    $nameTeacher = $_POST['nameTeacher'];
+    $ostanData = $_POST['ostan'];
+    $cityData = $_POST['city'];
+    $location = $ostanData . '|' . $cityData;
+    $durationCourse = $_POST['durationCourse'];
+    $feeCourse = $_POST['feeCourse'];
+    $startRegisterTime = $_POST['startRegisterTime'];
+    $startRegisterDate = $_POST['startRegisterDate'];
+    $endRegisterTime = $_POST['endRegisterTime'];
+    $endRegisterDate = $_POST['endRegisterDate'];
+    $capacityCourse = $_POST['capacityCourse'];
+    $startTime = $_POST['startTime'];
+    $startDate = $_POST['startDate'];
+    $endTime = $_POST['endTime'];
+    $endDate = $_POST['endDate'];
+    $moreExplain = $_POST['moreExplain'];
+    $active = $_POST['active'];
+    $record = UserCommonModel::checkExist($_SESSION['email']);
+    if ($record == null) {
+      session_destroy();
+      $data[] = array();
+      $data['text1'] = 'خطا';
+      $data['text2'] = 'شما وارد سامانه نشده اید';
+      $data['text3'] = 'لطفا دوباره تلاش کنید';
+      $data['link'] = 'login';
+      $data['btnLable'] = 'تلاش مجدد';
+      message('fail', $data, true);
+    } else {
+        $response = [];
+        $response['Status'] = false;
+        $response['Error'] = [];
+        $response['ResultData'] = [];
+        $time = grtCurrentTime();
+        $user_id = $_SESSION['user_id'];
+        User3Model::insertWorkshop($user_id, $nameCourse, $nameTeacher, $location, $durationCourse, $feeCourse, $startRegisterTime, $startRegisterDate, $endRegisterTime, $endRegisterDate, $capacityCourse, $startTime, $startDate, $endTime, $endDate, $moreExplain, $active);
+        $response['Status'] = true;
+        $response['ResultData']['code'] = 200;
+        $response['ResultData']['message'] = [];
+        echo json_encode($response);
+        exit;
+      } 
+  }
+
 
   function registerFounder() {
     $response = [];
@@ -545,6 +595,8 @@ class User3Controller {
   }
 
   function registerCalender() {
+    print_r("ok");
+    exit;
     $response = [];
     $response['Status'] = false;
     $response['Error'] = [];
@@ -590,11 +642,7 @@ class User3Controller {
       $startDate = new DateTime($from); 
       $endDate = new DateTime($to);
       $intervalHour = 1;
-      // print('ali');
-      // exit;
-      //  explode(':', $duration)[0];
       $intervalMinute = 0; 
-      // explode(':', $duration)[1];
       while($startDate <= $endDate ){
         $startTime = new DateTime($seperatedStart[0]);
         $endTime = new DateTime($to.$seperatedEnd[0]);  
@@ -644,6 +692,13 @@ class User3Controller {
   function listRegPsychs($counsilingId){
     $record = User3Model::readRegPsychs($counsilingId);
     return $record;
+  }
+
+  function listWorkshops(){
+    $data = [];
+    $user_id = $_SESSION['user_id'];
+    $data['records'] = User3Model::listWorkshopsByUserId($user_id);
+    view::renderPanel('panel/user3/listWorkshops.php', $data);
   }
 
 }

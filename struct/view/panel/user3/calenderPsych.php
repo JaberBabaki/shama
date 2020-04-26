@@ -24,7 +24,7 @@
               </li>
               <li><a href="informationCenter"><i class="icon-people"></i> <span>اطلاعات مرکز</span></a>
               </li>
-              <li><a href="course"><i class="icon-stack2"></i> <span>تعریف دوره ها</span></a></li>
+              <li><a href="workshop"><i class="icon-stack2"></i> <span>تعریف دوره ها</span></a></li>
               <li class="active"><a href='/user3/registerPsych'><i class="icon-stack"></i> <span>ثبت  درمانگر</span></a>
               </li>
             </ul>
@@ -376,7 +376,7 @@ function registerCalender() {
   } else {
     okShenaseh = 0;
   }
-
+  alert(okShenaseh);
   if (okShenaseh == 0) {
     formData.append('shenaseh', psychShenaseh);
     formData.append('from', edtFrom);
@@ -401,6 +401,7 @@ function registerCalender() {
         if ((json.ResultData.code == 200)) {
           var msg = json.ResultData.message;
           showStackTopLeft('success', msg);
+          alert();
         } else {
           if ((json.Error.code == 402 || json.Error.code == 404)) {
             document.documentElement.scrollTop = 0.5;

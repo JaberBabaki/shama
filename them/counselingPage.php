@@ -113,7 +113,7 @@
               <!-- nav menu start-->
               <ul class="nav-menu nav-menu-centered">
                 <li class="active">
-                  <?php echo "<a href=".baseURL().'/mangeCounseling/homePageCounseling/>'.'خانه'.'</a>';?>
+                  <?php echo "<a href=".baseURL().'/mangeCounseling/homePageCounseling/'.$params.'>'.'خانه'.'</a>';?>
                 </li>
                 <li>
                 <?php echo "<a href=".baseURL().'/mangeCounseling/turns/'.$params.'>'.'مشاوران'.'</a>';?>
@@ -124,7 +124,7 @@
                   <?php echo "<a href=".baseURL().'/mangeCounseling/turns/'.$params.'>'.'نوبت دهی'.'</a>';?>
                 </li>
                 <li>
-                  <?php echo "<a href=".baseURL().'/mangeCounseling/homePageCounseling/'.$params.'>'.'کارگاه های آموزشی'.'</a>';?>
+                  <?php echo "<a href=".baseURL().'/mangeCounseling/workshops/'.$params.'>'.'کارگاه های آموزشی'.'</a>';?>
                 </li>
                 <li>
                   <?php echo "<a href=".baseURL().'/mangeCounseling/homePageCounseling/'.$params.'>'.'محصولات آموزشی'.'</a>';?>
