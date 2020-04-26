@@ -10,15 +10,17 @@ class User1Controller {
     $data = [];
     RQO('struct/controller/algorithms/user1.php');
     UserBase::LoginCheckPerTask();
-    $appointment = new Appointment($_SESSION['user_id']);
-    $allAvailable = $appointment->getAllAvailable();
-    $firstAvailable = $appointment->getFirstAvailable();
-    $canceled = $appointment->getCanceled();
-    $data['allAvailable'] = $allAvailable;
-    $data['firstAvailable'] = $firstAvailable;
-    $data['canceled'] = $canceled;
+
     view::render('panel/user1/main.php', $data);
   }
+
+  // $appointment = new Appointment($_SESSION['user_id']);
+  // $allAvailable = $appointment->getAllAvailable();
+  // $firstAvailable = $appointment->getFirstAvailable();
+  // $canceled = $appointment->getCanceled();
+  // $data['allAvailable'] = $allAvailable;
+  // $data['firstAvailable'] = $firstAvailable;
+  // $data['canceled'] = $canceled;
 
   public function showAllReserved(){
     $data = [];
@@ -84,14 +86,13 @@ class User1Controller {
     exit;
   }
   public static function bookAppointment(){
-    exit;
     $calendar_id = $_POST['calendar_id'];
     $paymentMode = $_POST['paymentMode'];
     $user_id = $_SESSION['user_id'];
     $date = getCurrentDate();
     $time = getCurrentTime();
-    print_r($date);
-    exit;
+    // print_r($date);
+    // exit;
     User1Model::bookAppointment($calendar_id, $paymentMode, $user_id, $date, $time);
     $response = [];
     $response['Status'] = true;
