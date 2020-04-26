@@ -9,6 +9,7 @@ class User1Controller {
   public function mainPage(){
     $data = [];
     RQO('struct/controller/algorithms/user1.php');
+    UserBase::LoginCheckPerTask();
     $appointment = new Appointment($_SESSION['user_id']);
     $allAvailable = $appointment->getAllAvailable();
     $firstAvailable = $appointment->getFirstAvailable();
@@ -19,9 +20,37 @@ class User1Controller {
     view::render('panel/user1/main.php', $data);
   }
 
-  public function showReserved(){
-    $response = [];
+  public function showAllReserved(){
+    $data = [];
+    UserBase::LoginCheckPerTask();
+    RQO('struct/controller/algorithms/user1.php');
+    $appointment = new Appointment($_SESSION['user_id']);
+    $allAvailable = $appointment->getAllAvailable();
+    $data['allAvailable'] = $allAvailable;
+    view::render('panel/user1/showAllReserved.php', $data);
+  }
 
+  public function showNotCompleted(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showCompleted(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showAllCanceled(){
+    $response = [];
+    
+    view::render('panel/user1/showReserved.php', $response);
+  }
+
+  public function showPassed(){
+    $response = [];
+    
     view::render('panel/user1/showReserved.php', $response);
   }
 

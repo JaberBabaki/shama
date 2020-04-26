@@ -595,6 +595,8 @@ class User3Controller {
   }
 
   function registerCalender() {
+    print_r("ok");
+    exit;
     $response = [];
     $response['Status'] = false;
     $response['Error'] = [];
@@ -640,11 +642,7 @@ class User3Controller {
       $startDate = new DateTime($from); 
       $endDate = new DateTime($to);
       $intervalHour = 1;
-      // print('ali');
-      // exit;
-      //  explode(':', $duration)[0];
       $intervalMinute = 0; 
-      // explode(':', $duration)[1];
       while($startDate <= $endDate ){
         $startTime = new DateTime($seperatedStart[0]);
         $endTime = new DateTime($to.$seperatedEnd[0]);  
