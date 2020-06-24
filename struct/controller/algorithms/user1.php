@@ -2,18 +2,64 @@
 class Appointment{
 
     function __construct($user_id){
-        $this->user_id = $user_id;
-        $this->record = User1Model::getBookedAppointmentByUserId($user_id);  
-            
+        $this->user_id = $user_id;            
     }
 
-    function getAllAvailable(){
+    function getCanceledAppointments(){
+        $canceledAppointment = User1Model::getCanceledAppointmentByUserId($this->user_id); 
+        if ($canceledAppointment==null){
+            return null;
+        }else{
+            return $canceledAppointment;
+        }
+    }  
+
+    function getAllAppoin‍‍‍‍‍‍‍‍‍‍‍‍‍‍tments(){
+        $this->record = User1Model::getBookedAppointmentByUserId($this->user_id);  
         if($this->record==null){
             return null;
         }else{
-            return $this->record;
+            $canceled = $this->getCanceledAppointments();
+            if ($canceled == null){
+                return $this->record;
+            }else{
+                $result = array_merge($canceled, $this->record);
+                return $result;
+            }
+            
+        }
+    }  
+
+    function getNotCompletedAppointments(){
+        $date = getCurrentDate();
+        $time = getCurrentTime();
+        $record = User1Model::getNotCompletedAppointmentByUserId($this->user_id, $date, $time);  
+        if($record==null){
+            return null;
+        }else{
+            return $record;
         }
     }   
+
+    function getCompletedAppointments(){
+        $record = User1Model::getCompletedAppointmentByUserId($this->user_id);  
+        if($record==null){
+            return null;
+        }else{
+            return $record;
+        }
+    }  
+
+    function getPassedAppointments(){
+        $date = getCurrentDate();
+        $time = getCurrentTime();
+        $record = User1Model::getPassedAppointmentByUserId($this->user_id, $date, $time);  
+        if($record==null){
+            return null;
+        }else{
+            return $record;
+        }
+    }  
 
     function getFirstAvailable(){
         if ($this->record==null){
@@ -23,14 +69,7 @@ class Appointment{
         }
     }     
     
-    function getCanceled(){
-        $canceledAppointment = User1Model::getCanceledAppointmentByUserId($this->user_id); 
-        if ($canceledAppointment==null){
-            return null;
-        }else{
-            return $canceledAppointment;
-        }
-    }    
+  
 
     // function secondAvailable(){
     //     if (!array_key_exists(1, $this->recordPsychList)){

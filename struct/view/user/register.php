@@ -12,6 +12,7 @@
             <option value="2">مربیان</option>
             <option value="3">مراکز مشاوره</option>
             <option value="4">درمانگر</option>
+            <option value="5">مدیر</option>
           </select>
         </div>
         <div class="wrap-input100 validate-input">

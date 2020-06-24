@@ -20,15 +20,43 @@
             </span>
         </div>
         <span style="display: none; text-align: center;" class="form-validation" id="textSessionSize"></span>
-        <span style="margin: 66px" class="p h4">شیوه درمان</span>
+        
+        <span style="margin: 66px" class="p h4">موضوع مشاوره</span>
         <div class="wrap-input100 validate-input" data-validate="شیوه درمان" style="right: 9%">
-            <input class="input100" type="text" id="treatmentApproach" placeholder="شیوه درمان" style="width: 400px" value="">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-            </span>
+          <select id="counselingCategories" class="input100" style="width: 400px" style="height: 37px;padding-right: 3px;width: 100%">
+            <option value="0" selected disabled>موضوع مشاوره را وارد کنید</option>
+            <?php foreach(UserCommonController::listCounselingCategories() as $item): ?>
+              <option value=<?=$item['value']?>><?=$item['name']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <span style="display: none; text-align: center;" class="form-validation" id="textcounselingCategories"></span>
+        
+        <span style="margin: 66px" class="p h4">رویکرد درمانی</span>
+        <div class="wrap-input100 validate-input" data-validate="شیوه درمان" style="right: 9%">
+          <select id="treatmentApproach" class="input100" style="width: 400px" style="height: 37px;padding-right: 3px;width: 100%">
+            <option value="0" selected disabled>رویکرد درمانی را وارد کنید</option>
+            <?php foreach(UserCommonController::listTreatmentApproach() as $item): ?>
+              <option value=<?=$item['value']?>><?=$item['name']?></option>
+            <?php endforeach; ?>
+          </select>
         </div>
         <span style="display: none; text-align: center;" class="form-validation" id="textTreatmentApproach"></span>
+
+
+
+        <span style="margin: 66px" class="p h4">موضوع فرعی</span>
+        <div class="wrap-input100 validate-input" data-validate="شیوه درمان" style="right: 9%">
+          <select id="subTopic" class="input100" style="width: 400px" style="height: 37px;padding-right: 3px;width: 100%">
+            <option value="0" selected disabled>موضوع فرعی را وارد کنید</option>
+            <?php foreach(UserCommonController::listSubTopic() as $item): ?>
+              <option value=<?=$item['value']?>><?=$item['name']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <span style="display: none; text-align: center;" class="form-validation" id="textTreatmentApproach"></span>
+        
+        
         <span style="margin: 66px" class="p h4">نتیجه درمان</span>
         <div class="wrap-input100 validate-input" data-validate="نتیجه درمان" style="right: 9%">
             <input class="input100" type="text" id="treatmentResult" placeholder="نتیجه درمان" style="width: 400px" value="">
@@ -37,6 +65,7 @@
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </span>
         </div>
+
         <span style="display: none; text-align: center;" class="form-validation" id="textDiagnosis"></span>
         <span style="margin: 66px" class="p h4">تشخیص</span>
         <div class="wrap-input100 validate-input" data-validate="تشخیص" style="right: 9%">
@@ -336,6 +365,8 @@ $("#btnFinishWithEndAppointmentNumberCancel").click(function(){
 $("#btnModify").click(function(){
   $("#sessionSize").prop('disabled', false);
   $("#treatmentApproach").prop('disabled', false);
+  $("#subTopic").prop('disabled', false);
+  $("#counselingCategories").prop('disabled', false);
   $("#treatmentResult").prop('disabled', false);
   $("#diagnosis").prop('disabled', false);
 });
@@ -343,6 +374,8 @@ $("#btnModify").click(function(){
 $("#btnStartModify").click(function(){
   $("#sessionSize").prop('disabled', false);
   $("#treatmentApproach").prop('disabled', false);
+  $("#subTopic").prop('disabled', false);
+  $("#counselingCategories").prop('disabled', false);
   $("#treatmentResult").prop('disabled', false);
   $("#diagnosis").prop('disabled', false);
 });
@@ -350,6 +383,8 @@ $("#btnStartModify").click(function(){
 $("#btnٰFinishWithoutFillInfoModify").click(function(){
   $("#sessionSize").prop('disabled', false);
   $("#treatmentApproach").prop('disabled', false);
+  $("#subTopic").prop('disabled', false);
+  $("#counselingCategories").prop('disabled', false);
   $("#treatmentResult").prop('disabled', false);
   $("#diagnosis").prop('disabled', false);
 });
@@ -357,6 +392,8 @@ $("#btnٰFinishWithoutFillInfoModify").click(function(){
 $("#btnFinishWithEndAppointmentNumberModify").click(function(){
   $("#sessionSize").prop('disabled', false);
   $("#treatmentApproach").prop('disabled', false);
+  $("#subTopic").prop('disabled', false);
+  $("#counselingCategories").prop('disabled', false);
   $("#treatmentResult").prop('disabled', false);
   $("#diagnosis").prop('disabled', false);
 });
@@ -377,6 +414,8 @@ $("#btnٰFinishWithFillInfoVerify").click(function(){
       sessionSize = parseInt(sessionSize);
       var treatmentResult = $("#treatmentResult").val();
       var treatmentApproach = $("#treatmentApproach").val();
+      var subTopic = $("#subTopic").val();
+      var counselingCategories = $("#counselingCategories").val();
       var diagnosis = $("#diagnosis").val();
       status1 = checkSessionSize(sessionSize);
       status2 = checkTreatmentApproach(treatmentApproach);
@@ -387,6 +426,8 @@ $("#btnٰFinishWithFillInfoVerify").click(function(){
         formData.append('treatment_result', treatmentResult);
         formData.append('session_size', sessionSize );
         formData.append('treatment_approach', treatmentApproach);
+        formData.append('sub_topic', subTopic);
+        formData.append('counseling_category', counselingCategories);
         formData.append('diagnosis', diagnosis);
         sendEndAppointment(formData, className, sessionNumber, sessionSize);            
       }     
@@ -400,6 +441,8 @@ $("#btnٰFinishhWithoutFillInfoVerify").click(function(){
   sessionSize = parseInt(sessionSize);
   var treatmentResult = $("#treatmentResult").val();
   var treatmentApproach = $("#treatmentApproach").val();
+  var subTopic = $("#subTopic").val();
+  var counselingCategories = $("#counselingCategories").val();
   var diagnosis = $("#diagnosis").val();
   status1 = checkSessionSize(sessionSize);
   status2 = checkTreatmentApproach(treatmentApproach);
@@ -410,6 +453,8 @@ $("#btnٰFinishhWithoutFillInfoVerify").click(function(){
     formData.append('treatment_result', treatmentResult);
     formData.append('session_size', sessionSize );
     formData.append('treatment_approach', treatmentApproach);
+    formData.append('sub_topic', subTopic);
+    formData.append('counseling_category', counselingCategories);
     formData.append('diagnosis', diagnosis);
     sendEndAppointment(formData, className, sessionNumber, sessionSize);            
   }     
@@ -495,6 +540,7 @@ function runAppointmenInfo(ـcalendar_id, className){
             $("#packageInfo").show();
             $("#sessionSize").val(jsonData.ResultData.sessionSize);
             $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            
             $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
             $("#diagnosis").val(jsonData.ResultData.diagnosis);
             $("#sessionSize").prop('disabled', true);
@@ -555,10 +601,16 @@ function runStartAppointmentDialog(_calendar_id, _className){
             $("#btnBoxFinishWithoutFillInfo").hide();
             $("#sessionSize").val(jsonData.ResultData.sessionSize);
             $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#subTopic").val(jsonData.ResultData.subTopic);
+            $("#counselingCategories").val(jsonData.ResultData.counselingCategories);
+
             $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
             $("#diagnosis").val(jsonData.ResultData.diagnosis);
             $("#sessionSize").prop('disabled', true);
             $("#treatmentApproach").prop('disabled', true);
+            $("#subTopic").prop('disabled', true);
+            $("#counselingCategories").prop('disabled', true);
+            
             $("#treatmentResult").prop('disabled', true);
             $("#diagnosis").prop('disabled', true);
           }else{
@@ -568,10 +620,16 @@ function runStartAppointmentDialog(_calendar_id, _className){
             $("#packageInfo").show();
             $("#sessionSize").val(jsonData.ResultData.sessionSize);
             $("#treatmentApproach").val(jsonData.ResultData.treatmentApproach);
+            $("#subTopic").val(jsonData.ResultData.subTopic);
+            $("#counselingCategories").val(jsonData.ResultData.counselingCategories);
+            
             $("#treatmentResult").val(jsonData.ResultData.treatmentResult);
             $("#diagnosis").val(jsonData.ResultData.diagnosis);
             $("#sessionSize").prop('disabled', true);
             $("#treatmentApproach").prop('disabled', true);
+            $("#subTopic").prop('disabled', true);
+            $("#counselingCategories").prop('disabled', true);
+            
             $("#treatmentResult").prop('disabled', true);
             $("#diagnosis").prop('disabled', true);
           }
@@ -595,16 +653,23 @@ function sendStart(calendar_id, className, sessionNumber, startNewPackage){
     sessionSize = parseInt(sessionSize);
     var treatmentResult = $("#treatmentResult").val();
     var treatmentApproach = $("#treatmentApproach").val();
+    var subTopic = $("#subTopic").val();
+    var counselingCategories = $("#counselingCategories").val();
+
     var diagnosis = $("#diagnosis").val();
     status1 = checkSessionSize(sessionSize);
     status2 = checkTreatmentApproach(treatmentApproach);
-    status3 = checkTreatmentResult(treatmentResult);
-    status3 = checkDiagnosis(diagnosis);
-    if (status1 == true && status2 == true && status3 == true){
+    status3 = checkSubTopic(subTopic);
+    status4 = checkCounselingCategories(counselingCategories);
+    status5 = checkTreatmentResult(treatmentResult);
+    status6 = checkDiagnosis(diagnosis);
+    if (status1 == true && status2 == true && status3 == true && status4 == true && status5 == true && status6 == true){
       formData.append('startNewPackage', startNewPackage);
       formData.append('treatment_result', treatmentResult);
       formData.append('session_size', sessionSize );
       formData.append('treatment_approach', treatmentApproach);
+      formData.append('sub_topic', subTopic);
+      formData.append('counseling_category', counselingCategories);
       formData.append('diagnosis', diagnosis);
       sendStartAjax(formData, className, sessionNumber);
     }     
@@ -808,6 +873,32 @@ function checkTreatmentApproach(treatmentApproach){
   } else {    
     $("#textTreatmentApproach").css({"display": "none"});
     $("#textTreatmentApproach").text("");
+  }
+  return status;
+}
+
+function checkSubTopic(subTopic){
+  var status = true;
+  if (subTopic.length == 0) {
+    $("#textSubTopic").css({"display": "block", "color": "red"});
+    $("#textSubTopic").text("لطفا شیوه درمان را وارد کنید");
+    status = false;
+  } else {    
+    $("#textSubTopic").css({"display": "none"});
+    $("#textSubTopic").text("");
+  }
+  return status;
+}
+
+function checkCounselingCategories(counselingCategories){
+  var status = true;
+  if (counselingCategories.length == 0) {
+    $("#textCounselingCategories").css({"display": "block", "color": "red"});
+    $("#textCounselingCategories").text("لطفا شیوه درمان را وارد کنید");
+    status = false;
+  } else {    
+    $("#textCounselingCategories").css({"display": "none"});
+    $("#textCounselingCategories").text("");
   }
   return status;
 }

@@ -1,0 +1,61 @@
+.animated {
+    width: 389px;
+    margin-right: 61px;
+    height: 88px;
+    background-color: lightgray;
+    font-size: 15px;
+}
+
+.line {
+    height: 3px;
+    width: 250px;
+    background-color: #3A6D88;
+    position: absolute;
+    margin-top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.emoji {
+    list-style: none;
+    position: absolute;
+    right: -12%;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+    padding: 0px;
+    z-index: 99
+}
+
+.note {
+    list-style: none;
+    position: absolute;
+    right: -9%;
+    transform: translate(-50%, -50%);
+    margin-top: 30px;
+    padding: 0px;
+    z-index: 99
+}
+
+.emoji li {
+    display: inline-block;
+    margin-left: 12px;
+    margin-right: 12px
+}
+
+.note li {
+    width: 38px;
+    font-family: 'Vazir';
+    font-size: 13px;
+    color: #3A6D88;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+    transition: all .3s
+}
+
+.dot {
+    height: 3px;
+    width: 3px;
+    background-color: #FFEB66;
+    transition: all .3s
+}
