@@ -67,6 +67,30 @@ function isUser4(){
   return false;
 }
 
+function isAdmin(){
+  if (isGuest()) { return false; }
+
+  $access = $_SESSION["access"];
+
+  if ($access== '50'){
+    return true;
+  }
+
+  return false;
+}
+
+function isMainAdmin(){
+  if (isGuest()) { return false; }
+
+  $access = $_SESSION["access"];
+
+  if ($access== '60'){
+    return true;
+  }
+
+  return false;
+}
+
 function isGuest(){
   return !isset($_SESSION["access"]) ? true : false;
 }
@@ -106,7 +130,9 @@ function grantUser2(){
     message('fail', $data, true);
     exit;
   }
-}function grantUser1(){
+}
+
+function grantUser1(){
   if(!isUser1()){
     $data[] = array();
     $data['text1']='خطا';
@@ -117,9 +143,32 @@ function grantUser2(){
     message('fail', $data, true);
     exit;
   }
+}
 
+function grantAdmins(){
+  if(!isAdmin()){
+    $data[] = array();
+    $data['text1']='خطا';
+    $data['text2']='صفحه خواسته شده وجود ندارد';
+    $data['text3']=' ';
+    $data['link']=homePage(false);
+    $data['btnLable']='صفحه اصلی';
+    message('fail', $data, true);
+    exit;
+  }
+  
+}
 
-
-
-
+function grantMainAdmin(){
+  if(!isMainAdmin()){
+    $data[] = array();
+    $data['text1']='خطا';
+    $data['text2']='صفحه خواسته شده وجود ندارد';
+    $data['text3']=' ';
+    $data['link']=homePage(false);
+    $data['btnLable']='صفحه اصلی';
+    message('fail', $data, true);
+    exit;
+  }
+  
 }

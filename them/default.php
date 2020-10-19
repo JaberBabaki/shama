@@ -73,6 +73,12 @@
                 if (isUser4() == '40') {
                   echo "<a href='/user4/dashboard'><span class='p-3'><i class='fa fa-lock ml-2'></i>ورود به پنل</span></a>";
                 }
+                if (isAdmin() == '50') {
+                  echo "<a href='/admins/dashboard'><span class='p-3'><i class='fa fa-lock ml-2'></i>ورود به پنل</span></a>";
+                }
+                if (isMainAdmin() == '60') {
+                  echo "<a href='/mainAdmin/dashboard'><span class='p-3'><i class='fa fa-lock ml-2'></i>ورود به پنل</span></a>";
+                }
               }
             } else {
               echo "<a href='/userCommon/login'><span class='p-3'><i class='fa fa-lock ml-2'></i> ورود </span></a>";

@@ -1,68 +1,13 @@
-<!-- <style>
-  .navbar-inverse {
-    background: #00796B;
-    border-bottom-color: #004D40;
-  }
-
-  .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > .dropdown > a .caret {
-    color: #fff;
-  }
-
-  .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus,
-  .navbar-nav > li > .dropdown-menu {
-    background: #4DB6AC;
-  }
-
-  .nav-pills > li > a,
-  {
-    color: #303F9F;
-  }
-
-  .nav > li > a:hover, .nav > li > a:focus {
-    background-color: #EEEEEE;
-  }
-</style>
-
-<section class='block-wrapper pt-0'>
-  <div class='container'>
-    <div class="row" style="margin-right:  100px;margin-right: 100px;margin-bottom: 20px">
-      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12" style="margin-top: 100px">
-        <ul class="nav nav-pills nav-stacked" style="border-right:1px solid #E5E5E5">
-          <br>
-          <li style="margin-bottom: 20px"><a href="/user1/mainPage" style="color: #d71c33"><span><i class="fa fa-dashboard"></i> تکمیل اطلاعات</a></li></span>
-          <li style="margin-bottom: 20px"><a href="/user1/showReserved"><span><i class="fa fa-tags"></i>نوبت های رزرو شده </a></li></span>
-          <li style="margin-bottom: 20px"><a href="#"><i class="fa fa-history"></i> مراکز مشاوره</a></li>
-          <li style="margin-bottom: 20px"><a href="#"><i class="fa fa-lock"></i> تغییر رمز عبور</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12" style="text-align: right;">
-        <a href="#" style="color: #d71c33"><strong><span class="fa fa-dashboard"></span> تکمیل اطلاعات</strong></a>
-        <hr >
-
-      </div>
-    </div>
-  </div>
-</section> -->
-
-	<!-- Global stylesheets -->
-	<!-- <link href="/asset/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css"> -->
-	<!-- <link href="/asset/css/bootstrap.css" rel="stylesheet" type="text/css"> -->
-	<!-- <link href="/asset/css/core.css" rel="stylesheet" type="text/css"> -->
-	<link href="/asset/css/colors.css" rel="stylesheet" type="text/css">
-	<!-- /global stylesheets -->
-
+<link href="/asset/css/colors.css" rel="stylesheet" type="text/css">
 	<!-- Core JS files -->
 	<script type="text/javascript" src="/asset/js/plugins/loaders/pace.min.js"></script>
 	<script type="text/javascript" src="/asset/js/core/libraries/jquery.min.js"></script>
 	<script type="text/javascript" src="/asset/js/core/libraries/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/asset/js/plugins/loaders/blockui.min.js"></script>
 	<!-- /core JS files -->
-
 	<!-- Theme JS files -->
 	<script type="text/javascript" src="/asset/js/plugins/media/fancybox.min.js"></script>
-
 	<script type="text/javascript" src="/asset/js/core/app.js"></script>
-
 	<script type="text/javascript" src="/asset/js/plugins/ui/ripple.min.js"></script>
 	<!-- /theme JS files -->
   <style>
@@ -71,266 +16,120 @@
     }
   </style>
 	<!-- Page container -->
-	<div class="page-container">
-
-		<!-- Page content -->
-		<div class="page-content">
-
-			<!-- Main sidebar -->
-			<div class="sidebar sidebar-main sidebar-default" style="right: 43px; top: -39px; background-color: #E9E9E9 ">
+  <div class="page-container">
+    <div class="page-content">
+      <div class="row">
+      <div class="col-md-2">
+      <div class="sidebar sidebar-main sidebar-default" style="background-color: #C4C4C4 ">
 				<div class="sidebar-content">
 
 					<!-- User menu -->
-					<div class="sidebar-user-material" style="height: 511px;">
+					<div class="sidebar-user-material" style="height: 950px;">
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
-								<a href="<?php echo baseUrl(); ?>/user1/mainPage"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
-								<h5 style="text-align: center; margin-top: 19px;">zamaniali1995@gmail.com</h5>
+                <?php if($patient == 0): ?>
+                  <a href="<?php echo baseUrl(); ?>/user1/mainPage"><img src="/asset/image/avatar/avatar.jpg" class="img-circle img-responsive" alt=""></a>
+                  <h5 style="text-align: center; margin-top: 19px;"><?=$email?></h5>
+                <?php endif;?>
+                <?php if($patient == 1): ?>
+                  <a href="<?php echo baseUrl(); ?>/user1/mainPage"><img src="/asset/image/per-pic/user1/<?=$photo?>" class="img-circle img-responsive" alt=""></a>
+                  <h5 style="text-align: center; margin-top: 19px;"><?=$name?></h5>
+                <?php endif;?>
+                
 							</div>								
 						</div>
 						
-						<div class="navigation-wrapper" id="user-nav">
-							<ul class="navigation ">
-              <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="active text-right"><span>پروفایل من</span></a></li>
-              <li><a href="<?php echo baseUrl(); ?>/user1/showAllReserved" class="text-right"><span>کل نوبت های رزرو شده</span></a></li>
-              <li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>نوبت های انجام شده</span></a></li>
-              <li><a href="<?php echo baseUrl(); ?>/user1/workshop" class="text-right"><span>دوره های رزرو شده</span></a></li>
-              <li><a href="<?php echo baseUrl(); ?>/user1/workshop" class="text-right"><span>دوره های انجام شده</span></a></li>
-              <!-- <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-left">58</span> پیام ها</span></a></li> -->
-								<!-- <li class="divider"></li> -->
-								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
-								<li><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"></i> <span>خروج</span></a></li>
+						<!-- <div class="navigation-wrapper" id="user-nav"> -->
+		
+						<ul class="navigation ">
+							<li class="active" style="background-color: #C4C4C4"><a href="<?php echo baseUrl(); ?>/user1/mainPage" class="text-right"><span>پروفایل من</span></a></li>
+							<li class=""><a href="<?php echo baseUrl(); ?>/user1/completePersonalData" class="text-right"> <span>تکمیل اطلاعات کاربری</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/allAppointments" class="text-right"><span>کل نوبت های رزرو شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/notCompletedAppointments" class="text-right"><span>نوبت های آتی</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/completedAppointments" class="text-right"><span>نوبت های ویزیت شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/passedAppointments" class="text-right"><span>نوبت های حضور نیافته</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/canceledAppointments" class="text-right"><span>نوبت های لغو شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/allworkshops" class="text-right"><span>دوره های رزرو شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/notCompletedWorkshops" class="text-right"><span>دوره های آتی</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/completedWorkshops" class="text-right"><span>دوره های انجام شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/passedWorkshops" class="text-right"><span>دوره های حضور نیافته</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/canceledWorkshops" class="text-right"><span>دوره های لغو شده</span></a></li>
+							<li><a href="<?php echo baseUrl(); ?>/user1/logout" class="text-right"></i> <span>خروج</span></a></li>
 							</ul>
-						</div>
 					</div>
-					<!-- /user menu -->
-
-
-					
 				</div>
 			</div>
-			<!-- /main sidebar -->
+      </div>
+      <div class="col-md-5">
 
+	  <?php
+          if ($patient == 1) {
+            $photo='/asset/image/per-pic/user1/'.$photo;
+            echo "<div>
+															<div class='panel border-left-lg border-left-success invoice-grid timeline-content'>
+																<div class='panel-body'>
+																	<div class='row'>
+																							<div class='tac'>
+                                              <div>
+                                                <img src='$photo' id='preview' class='img-thumbnail'>
+                                              </div>
+                                              <br>
+                                               <span class='text-semibold no-margin-top' style='font-size:18px'>" . $name . "</span>
+                                              <br>
+                                    </div>
+                                              <br>
+																		<div class='col-sm-6'>
+																		<span class='status-mark border-success position-left'></span>
+																		<span class='text-semibold no-margin-top'>ایمیل: . $email</span>
+																		<br>
+																		<br>
+																		<span class='status-mark border-success position-left'></span>
+																		<span class='text-semibold no-margin-top'>شناسه : . $shenaseh .</span>
+																		<br>
+																		<br>
+																		</div>
+																	</div>
+																</div>
 
-			<!-- Main content -->
-			<div class="content-wrapper">
+																<div class='panel-footer panel-footer-condensed'><a class='heading-elements-toggle'><i class='icon-more'></i></a>
+																	<div class='heading-elements'>
+																		<span class='heading-text'>
+																			<span class='status-mark border-success position-left'></span>
+																			<span class='text-semibold' style='font-size:11px'>این اطلاعات در تاریخ </span>
+																			<span class='text-semibold' style='font-size:10px'>" . $registered_at . "</span>
+																			<span class='text-semibold' style='font-size:11px'> ایجاد و در تاریخ </span>
+																			<span class='text-semibold' style='font-size:10px'>" . $updated_at . " </span>
+																			<span class='text-semibold' style='font-size:11px'>بروزرسانی شد </span>
+																		</span>
 
-				
-
-				<!-- Content area -->
-				<div class="content" style="padding: 0 93px 60px 123px">
-
-          <!-- Dropdown menu -->
-          <div class="table-responsive">
-            <?php if($firstAvailable!=null): ?>
-              <table class="table text-nowrap table-striped border table-hover table-condensed">
-                <tbody>
-                  <tr class="active border-double">
-                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نزدیک ترین نوبت</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="media-right">
-                        <a href="#"><img src="/asset/image/per-pic/<?=$firstAvailable['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                      </div>
-                      <div class="media-left position">
-                        <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$firstAvailable['psychName']?></a></div>
-                        <div class="text-muted text-size-small">
-                        <?=stringConverter($firstAvailable['endTime'], 'enToFa')?> - <?=stringConverter($firstAvailable['startTime'], 'enToFa')?> 
-                        </div>
-                      </div>
-										</td>
-                    <td>
-                      <div class="text-default text-semibold position">درمانگاه <?=$firstAvailable['counselingName']?></div>
-                    </td>
-                    <td>
-                      <div class="media-left position">
-                        <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($firstAvailable['day']) ?></div>
-                        <div class="text-muted text-size-small">
-                          <?=dateConverter($firstAvailable['date'], 'enToFa') ?>
-                        </div>
-                      </div>
-								    </td>
-                    <td><div class="text-default text-semibold position">
-                      <?php if($firstAvailable['paymentMode']==1): ?>
-                        پرداخت در محل
-                      <?php endif; ?>
-                      <?php if($firstAvailable['paymentMode']==2): ?>
-                        پرداخت آنلاین
-                      <?php endif; ?>
-                    </div></td>
-                    <td ><div id="nearest-appointment" onclick="runCancelDialog(<?=$firstAvailable['appointment_id']?>)" class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-												<!-- <td class="text-center">
-													<ul class="icons-list">
-														<li class="dropdown">
-															<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-																<li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-																<li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-																<li class="divider"></li>
-																<li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-															</ul>
-														</li>
-													</ul>
-												</td> -->
-                  </tr>
-                </tbody>
-              </table>
-            <?php endif; ?>
-            
-            <br>
-            <br>
-
-            <?php if($allAvailable!=null): ?>
-              <table class="table text-nowrap table-striped border table-hover table-condensed">
-                <tbody>
-                  <tr class="active border-double">
-                    <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های آتی</td>
-                  </tr>
-                  <?php for ($i=0; $i<count($allAvailable); $i++): ?>
-                    <tr>
-                      <td>
-                        <div class="media-right">
-                          <a href="#"><img src="/asset/image/per-pic/<?=$allAvailable[$i]['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                        </div>
-                        <div class="media-left position">
-                          <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$allAvailable[$i]['psychName']?></a></div>
-                          <div class="text-muted text-size-small">
-                          <?=stringConverter($allAvailable[$i]['endTime'], 'enToFa')?> - <?=stringConverter($allAvailable[$i]['startTime'], 'enToFa')?> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-default text-semibold position">درمانگاه <?=$allAvailable[$i]['counselingName']?></div>
-                      </td>
-                      <td>
-                        <div class="media-left position">
-                          <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($allAvailable[$i]['day']) ?></div>
-                          <div class="text-muted text-size-small">
-                            <?=dateConverter($allAvailable[$i]['date'], 'enToFa') ?>
-                          </div>
-                        </div>
-                      </td>
-                      <td><div class="text-default text-semibold position">
-                        <?php if($allAvailable[$i]['paymentMode']==1): ?>
-                          پرداخت در محل
-                        <?php endif; ?>
-                        <?php if($allAvailable[$i]['paymentMode']==2): ?>
-                          پرداخت آنلاین
-                        <?php endif; ?>
-                      </div></td>
-                      <td ><div id="nearest-appointment" onclick="runCancelDialog(<?=$allAvailable[$i]['appointment_id'] ?>)"  class="position shadow-lg"><button type="button" class="btn-lg btn-danger">لغو نوبت</button></div></td>
-                          <!-- <td class="text-center">
-                            <ul class="icons-list">
-                              <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-                                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-                                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </td> -->
-                    </tr>
-                  <?php endfor; ?>    
-                </tbody>
-              </table>
-            <?php endif; ?>
-          </table>
-          
-          <br>
-          <br>
-          <?php if($canceled!=null): ?>
-            <table class="table text-nowrap table-striped border table-hover table-condensed">
-            <tbody>
-              <tr class="active border-double">
-                <td colspan="6" class="text-center" style="font-size: 18px; background: #E4CDCD; color: black;">نوبت های لغو شده</td>
-              </tr>
-              <?php for($i=0; $i<count($canceled); $i++): ?>
-                    <tr style="background-color:  #f25555 ">
-                      <td>
-                        <div class="media-right">
-                          <a href="#"><img src="/asset/image/per-pic/<?=$canceled[$i]['psychPhoto']?>" class="img-circle" alt="" style="height: 80px; width: 80px"></a>
-                        </div>
-                        <div class="media-left position">
-                          <div class=""><a href="#" class="text-default text-semibold">دکتر <?=$canceled[$i]['psychName']?></a></div>
-                          <div class="text-default text-size-small">
-                          <?=stringConverter($canceled[$i]['endTime'], 'enToFa')?> - <?=stringConverter($canceled[$i]['startTime'], 'enToFa')?> 
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-default text-semibold position">درمانگاه <?=$canceled[$i]['counselingName']?></div>
-                      </td>
-                      <td>
-                        <div class="media-left position">
-                          <div class="text-default text-semibold text-center"><?=dayNumToDayNameConverter($canceled[$i]['day']) ?></div>
-                          <div class="text-default text-size-small">
-                            <?=dateConverter($canceled[$i]['date'], 'enToFa') ?>
-                          </div>
-                        </div>
-                      </td>
-                      <td ><div class="text-default text-semibold position" >
-                        <?php if($canceled[$i]['paymentMode']==1): ?>
-                          پرداخت در محل
-                        <?php endif; ?>
-                        <?php if($canceled[$i]['paymentMode']==2): ?>
-                         پرداخت آنلاین - در انتظار بازگشتن مبلغ
-                        
-                          <?php endif; ?>
-                      </div></td>
-                          <!-- <td class="text-center">
-                            <ul class="icons-list">
-                              <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                  <li><a href="#"><i class="icon-file-stats"></i> View statement</a></li>
-                                  <li><a href="#"><i class="icon-file-text2"></i> Edit campaign</a></li>
-                                  <li><a href="#"><i class="icon-file-locked"></i> Disable campaign</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </td> -->
-                    </tr>
-              <?php endfor; ?>              
-          </tbody>
-          </table>
-        <?php endif; ?>
-        </div>
-          
-					<!-- /dropdown menu -->
-
-
-
-
-				</div>
-				<!-- /content area -->
-
-			</div>
-			<!-- /main content -->
+																	</div>
+																</div>
+															</div>
+														</div>";
+          } else if ($patient == 0) {
+            echo "<div class='alert alert-primary alert-bordered tac'>
+                        <button type='button' class='close' data-dismiss='alert'><span class='sr-only'>Close</span></button>
+                        <span class='text-semibold'> باسلام  </span>
+                        <br>
+                        <br>
+                        <span class='text-semibold'> به پنل مدیریت خوش آمدید</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class='text-semibold'>لطفا برای ادامه فعالیت از بخش اطلاعات کاربری اقدام به تکمیل اطلاعات بفرمایید</span>
+                        </div>";
+          }
+          ?>
 
 		</div>
-		<!-- /page content -->
+  
+      </div>
 
+    </div>
+
+  </div>
+
+		</div>  
 	</div>
-  <!-- /page container -->
 
-<?php
-$doc_root = $_SERVER["DOCUMENT_ROOT"]; 
-include "$doc_root/struct/view/dialog/user1/cancelAppointment.php";  
-?>
-
-  <!-- <script>
-    $(document).ready(function(){
-      $('#nearest-appointment').click(function(){
-      var calendar_id = document.getElementById('nearest-appointment').getAttribute('value');
-      $('#cancelDialog').modal('show');
-      });
-    });
-  </script> -->
+  

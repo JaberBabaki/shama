@@ -48,7 +48,7 @@ class User4Controller {
     $response['ResultData']['sessionNumber'] = $result['session_number'];
     $response['ResultData']['sessionSize'] = $result['session_size'];
     if ($result['session_number']!=0){
-      $response['ResultData']['treatmentApproach'] = $result['treatment_approach'];
+      $response['ResultData']['treatmentApproach'] = $result['treatment_approach_id'];
       $response['ResultData']['treatmentResult'] = $result['treatment_result'];
       $response['ResultData']['diagnosis'] = $result['diagnosis'];  
     }
@@ -65,10 +65,12 @@ class User4Controller {
     $result = $this->getUserIdAndCounselingIdAndPsychIdentityByCalendarId($calendar_id);
     if($sessionNumber!=0 && $startNewPackage == "false"){
       $treatmentResult = $_POST['treatment_result'];
-      $treatmentApproach = $_POST['treatment_approach'];
+      $treatmentApproach_id = $_POST['treatment_approach'];
+      $subTopic_id = $_POST['sub_topic'];
+      $counselingCategories_id = $_POST['counseling_category'];
       $sessionSize = $_POST['session_size'];  
       $diagnosis = $_POST['diagnosis']; 
-      User4Model::updatePackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize);
+      User4Model::updatePackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach_id, $counselingCategories_id, $subTopic_id, $treatmentResult, $diagnosis, $sessionSize);
     }
 
     if ($startNewPackage == "true"){
@@ -111,16 +113,20 @@ class User4Controller {
     $startNewPackage = $_POST['startNewPackage'];
     if ($startNewPackage=='true'){
       $treatmentResult = $_POST['treatment_result'];
-      $treatmentApproach = $_POST['treatment_approach'];
+      $treatmentApproach_id = $_POST['treatment_approach'];
+      $subTopic_id = $_POST['sub_topic'];
+      $counselingCategories_id = $_POST['counseling_category'];
       $sessionSize = $_POST['session_size'];  
       $diagnosis = $_POST['diagnosis'];  
-      $package_id = User4Model::startPackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize); 
+      $package_id = User4Model::startPackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach_id, $counselingCategories_id, $subTopic_id, $treatmentResult, $diagnosis, $sessionSize); 
     }else{
       $treatmentResult = $_POST['treatment_result'];
-      $treatmentApproach = $_POST['treatment_approach'];
+      $treatmentApproach_id = $_POST['treatment_approach'];
+      $subTopic_id = $_POST['sub_topic'];
+      $counselingCategories_id = $_POST['counseling_category'];
       $sessionSize = $_POST['session_size'];  
       $diagnosis = $_POST['diagnosis']; 
-      User4Model::updatePackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach, $treatmentResult, $diagnosis, $sessionSize);
+      User4Model::updatePackage($result['user_id'], $result['counseling_id'], $result['psychIdentity'], $treatmentApproach_id, $counselingCategories_id, $subTopic_id, $treatmentResult, $diagnosis, $sessionSize);
     }
     $tmp = User4Model::getPackageIdAndInfoId($calendar_id, $result['user_id'], $result['counseling_id'], $result['psychIdentity']);
     // print_r($tmp);
@@ -321,7 +327,6 @@ class User4Controller {
     } else {
       $CVname = '--';
     }
-
     $namePsych = $_POST['namePsych'];
     $license = $_POST['license'];
     $emailPsych = $_POST['emailPsych'];
@@ -330,6 +335,7 @@ class User4Controller {
     $city = $_POST['city'];
     $location = $ostan . "|" . $city;
     $gender = $_POST['gender'];
+    $teacher = $_POST['teacher'];
     $karshenasi = $_POST['karshenasi'];
     $arshad = $_POST['arshad'];
     $doctora = $_POST['doctora'];
@@ -381,14 +387,14 @@ class User4Controller {
     }
     $recordPsychInCenter = User4Model::checkExistPsych($_SESSION['email']);
     if ($recordPsychInCenter == null) {
-      User4Model::insertPsych($namePsych,$recordUser['user_id'], $nationalCode, $gender, $emailPsych, $photoName, $fileNameCV, $license, $phonePsych, $location, $karshenasi, $arshad, $doctora, $workshop1, $workshop2, $workshop3, $workshop4, $workshop5, $article1, $article2, $article3, $article4, $article5, $book1, $book2, $book3, $book4, $book5, $conferance1, $conferance2, $conferance3, $conferance4, $conferance5, $awardsHonor1, $awardsHonor2, $awardsHonor3, $awardsHonor4, $awardsHonor5, $time, $shenaseh);
+      User4Model::insertPsych($namePsych,$recordUser['user_id'], $nationalCode, $gender, $teacher, $emailPsych, $photoName, $fileNameCV, $license, $phonePsych, $location, $karshenasi, $arshad, $doctora, $workshop1, $workshop2, $workshop3, $workshop4, $workshop5, $article1, $article2, $article3, $article4, $article5, $book1, $book2, $book3, $book4, $book5, $conferance1, $conferance2, $conferance3, $conferance4, $conferance5, $awardsHonor1, $awardsHonor2, $awardsHonor3, $awardsHonor4, $awardsHonor5, $time, $shenaseh);
       $response['Status'] = true;
       $response['ResultData']['code'] = 200;
       $response['ResultData']['message'] = $shenaseh;
       echo json_encode($response);
       exit;
     }else{
-      User4Model::updatePsych($namePsych,$recordPsychInCenter['psych_id'],$nationalCode,$gender,$emailPsych, $photoName,$fileNameCV,$license,$phonePsych,$location,$karshenasi, $arshad, $doctora, $workshop1, $workshop2, $workshop3, $workshop4, $workshop5, $article1, $article2, $article3, $article4, $article5, $book1, $book2, $book3, $book4, $book5, $conferance1, $conferance2, $conferance3, $conferance4, $conferance5, $awardsHonor1, $awardsHonor2, $awardsHonor3, $awardsHonor4, $awardsHonor5, $time);
+      User4Model::updatePsych($namePsych,$recordPsychInCenter['psych_id'],$nationalCode,$gender, $teacher, $emailPsych, $photoName,$fileNameCV,$license,$phonePsych,$location,$karshenasi, $arshad, $doctora, $workshop1, $workshop2, $workshop3, $workshop4, $workshop5, $article1, $article2, $article3, $article4, $article5, $book1, $book2, $book3, $book4, $book5, $conferance1, $conferance2, $conferance3, $conferance4, $conferance5, $awardsHonor1, $awardsHonor2, $awardsHonor3, $awardsHonor4, $awardsHonor5, $time);
       $response['Status'] = true;
       $response['ResultData']['code'] = 201;
       $response['ResultData']['message'] =$recordPsychInCenter['shenaseh'];

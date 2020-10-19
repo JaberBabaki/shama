@@ -5,7 +5,7 @@ class UploadFile {
 
   private $extensionImage = array(".jpg", ".jpeg", ".png");
   private $extensionPdf = array(".pdf");
-  private $maxImageSize = 100;
+  private $maxImageSize = 400;
   private $maxPdfsize = 2000;
 
   function isFileUploading($fileName) {
@@ -55,6 +55,6 @@ class UploadFile {
     return $ext;
   }
   function getFileName($fileName){
-    return $_FILES[$fileName]['tmp_name'];;
+    return $_FILES[$fileName]['tmp_name'];
   }
 }
